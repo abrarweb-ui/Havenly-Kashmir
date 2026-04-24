@@ -425,6 +425,129 @@
 @media(max-width:900px){.ab-grid{grid-template-columns:1fr;gap:32px}.ab-acc{display:none}.dst-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.dc.big{grid-column:span 2;grid-row:span 1}}
 @media(max-width:768px){.pg-grid{grid-template-columns:1fr}.sv-grid{grid-template-columns:1fr}.wy-grid{grid-template-columns:1fr 1fr}.cta-in{flex-direction:column;text-align:center}.cta-btns{justify-content:center}.dst-grid{grid-template-columns:1fr}.dc.big{grid-column:span 1}.ig-grid{grid-template-columns:repeat(3,1fr)}.cg{grid-template-columns:1fr 1fr}}
 @media(max-width:580px){.wy-grid{grid-template-columns:1fr}.ig-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* STATS STRIP */
+.stats-strip{background:var(--navy);padding:clamp(18px,4vw,32px) 0}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:960px;margin:0 auto}
+.stat-box{text-align:center;padding:clamp(14px,3vw,26px) 12px;border-right:1px solid rgba(255,255,255,.1);position:relative}
+.stat-box:last-child{border:none}
+.stat-box::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--gold);transition:.4s}
+.stat-box:hover::after{width:60%}
+.stat-num{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,40px);font-weight:700;color:var(--gold-light);display:block;line-height:1}
+.stat-lbl{font-size:clamp(9px,1.6vw,11px);color:rgba(255,255,255,.52);letter-spacing:1.5px;text-transform:uppercase;margin-top:5px;display:block}
+.stat-icon{font-size:clamp(16px,2.5vw,20px);color:var(--gold);margin-bottom:6px;display:block}
+
+/* SERVICE sub-cards */
+.sv-mini{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:10px 0}
+.sv-mc{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-md);padding:9px 11px;display:flex;align-items:center;gap:7px;cursor:pointer;transition:var(--ease);text-decoration:none}
+.sv-mc:hover{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.3);transform:translateY(-2px)}
+.sv-mc i{font-size:15px;color:var(--gold);flex-shrink:0}
+.sv-mc span{font-size:10px;color:rgba(255,255,255,.75);font-weight:600;line-height:1.3}
+.sv-mc-arrow{margin-left:auto;font-size:9px;color:var(--gold-light);flex-shrink:0}
+.hotel-cards{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.hotel-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-md);padding:8px 11px;display:flex;align-items:center;gap:9px}
+.hotel-card img{width:34px;height:34px;border-radius:6px;object-fit:cover;flex-shrink:0}
+.hotel-card-info span{display:block;font-size:11px;color:rgba(255,255,255,.75);font-weight:600}
+.hotel-stars{color:var(--gold);font-size:9px;letter-spacing:1px}
+.sv-lnk,
+.sv-mc {
+  pointer-events: auto !important;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  z-index: 5;
+}
+
+.sv,
+.sv-mini,
+.hotel-cards {
+  position: relative;
+  z-index: 2;
+}
+
+.svc-bg::before,
+.svc-bg::after {
+  pointer-events: none !important;
+}
+/* DESTINATION TABS */
+.dest-tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px;justify-content:center}
+.dest-tab{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 17px;border-radius:99px;border:1.5px solid var(--border2);color:var(--text2);background:var(--white);cursor:pointer;transition:var(--ease);font-family:'Raleway',sans-serif}
+.dest-tab:hover,.dest-tab.on{background:var(--navy);color:var(--gold-light);border-color:var(--navy);box-shadow:var(--sh-md)}
+.dest-detail{display:none}
+.dest-detail.on{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(20px,4vw,44px);align-items:start}
+.dest-hero-img{border-radius:var(--r-xl);overflow:hidden;height:clamp(230px,38vw,400px);box-shadow:var(--sh-lg);position:relative}
+.dest-hero-img img{width:100%;height:100%;object-fit:cover;filter:none !important}
+.dest-badge-wrap{position:absolute;top:14px;left:14px;display:flex;gap:7px;flex-wrap:wrap}
+.dest-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.35);color:var(--gold-light);font-size:9px;font-weight:700;padding:5px 11px;border-radius:99px;letter-spacing:1px;text-transform:uppercase}
+.dest-info h2{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,32px);color:var(--navy);margin-bottom:9px}
+.dest-info h2 em{font-style:italic;color:var(--gold)}
+.dest-overview{font-size:clamp(12px,1.8vw,14px);color:var(--text2);line-height:1.9;margin-bottom:15px}
+.dest-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:15px}
+.dest-meta-item{background:var(--mist);border-radius:var(--r-md);padding:10px 13px;border-left:3px solid var(--gold)}
+.dest-meta-item strong{display:block;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:3px}
+.dest-meta-item span{font-size:12px;color:var(--text);font-weight:600}
+.dest-acts h4{font-family:'Playfair Display',serif;font-size:14px;color:var(--navy);margin-bottom:8px}
+.dest-act-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:15px}
+.dest-act-tags span{font-size:11px;background:var(--white);border:1px solid var(--border2);color:var(--text2);padding:4px 11px;border-radius:99px;display:flex;align-items:center;gap:5px}
+.dest-act-tags span i{color:var(--gold);font-size:10px}
+.dest-ctas{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ENQUIRY FORM */
+.enq-section{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);position:relative;overflow:hidden}
+.enq-section::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=1200&q=20') center/cover;opacity:.05;filter:none}
+.enq-inner{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(24px,5vw,56px);align-items:center;position:relative}
+.enq-left{color:var(--white)}
+.enq-left p{font-size:13px;color:rgba(255,255,255,.6);line-height:1.9;margin-bottom:22px}
+.enq-contact{display:flex;flex-direction:column;gap:11px}
+.enq-ci{display:flex;align-items:center;gap:11px;color:rgba(255,255,255,.72);font-size:13px}
+.enq-ci i{width:34px;height:34px;border-radius:50%;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:13px;flex-shrink:0}
+.enq-ci a{color:rgba(255,255,255,.72);transition:var(--ease)}
+.enq-ci a:hover{color:var(--gold-light)}
+.enq-card{background:var(--white);border-radius:var(--r-xl);padding:clamp(22px,3.2vw,34px);box-shadow:var(--sh-xl)}
+.ef-row{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.ef-group{margin-bottom:11px}
+.ef-group label{display:block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:5px}
+.ef-group input,.ef-group select,.ef-group textarea{width:100%;padding:10px 13px;border:1.5px solid rgba(11,31,58,.12);border-radius:var(--r-md);font-size:13px;color:var(--text);background:var(--mist);transition:var(--ease);outline:none;-webkit-appearance:none;appearance:none;font-family:'Raleway',sans-serif}
+.ef-group input:focus,.ef-group select:focus,.ef-group textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.1);background:var(--white)}
+.ef-group textarea{resize:vertical}
+
+/* MOMENTS GALLERY */
+.moments-grid{columns:3;gap:10px;column-fill:balance}
+.moment-item{break-inside:avoid;margin-bottom:10px;border-radius:var(--r-md);overflow:hidden;position:relative;cursor:pointer;display:block}
+.moment-item img{width:100%;display:block;transition:transform .5s;filter:none !important}
+.moment-item:hover img{transform:scale(1.06)}
+.moment-ov{position:absolute;inset:0;background:rgba(11,31,58,0);display:flex;align-items:center;justify-content:center;transition:var(--ease)}
+.moment-ov i{font-size:22px;color:var(--white);opacity:0;transform:scale(.5);transition:var(--ease)}
+.moment-item:hover .moment-ov{background:rgba(11,31,58,.55)}
+.moment-item:hover .moment-ov i{opacity:1;transform:scale(1)}
+
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.team-card{background:var(--white);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-md);transition:var(--ease);text-align:center}
+.team-card:hover{transform:translateY(-6px);box-shadow:var(--sh-xl)}
+.team-img{height:clamp(170px,20vw,210px);overflow:hidden;background:var(--navy-light)}
+.team-img img{width:100%;height:100%;object-fit:cover;filter:none !important;transition:transform .5s}
+.team-card:hover .team-img img{transform:scale(1.05)}
+.team-body{padding:clamp(14px,2.2vw,20px)}
+.team-body h3{font-family:'Playfair Display',serif;font-size:clamp(14px,1.9vw,17px);color:var(--navy);margin-bottom:2px}
+.team-role{font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:9px;display:block}
+.team-body p{font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:12px}
+.team-contact{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+
+/* CALL FLOAT */
+.call-float{position:fixed;bottom:92px;right:24px;z-index:991;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--navy),#163357);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 22px rgba(11,31,58,.45);text-decoration:none;transition:var(--ease);border:2px solid rgba(201,168,76,.35)}
+.call-float:hover{transform:scale(1.1);background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.call-tip{position:absolute;right:66px;top:50%;transform:translateY(-50%);background:var(--navy);color:var(--white);font-size:11px;font-weight:600;padding:6px 12px;border-radius:99px;white-space:nowrap;opacity:0;pointer-events:none;transition:var(--ease);border:1px solid var(--border)}
+.call-float:hover .call-tip{opacity:1}
+
+/* Responsive for new sections */
+@media(max-width:1200px){.team-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1024px){.stats-inner{grid-template-columns:repeat(2,1fr)}.stat-box{border-bottom:1px solid rgba(255,255,255,.08)}.stat-box:nth-child(2){border-right:none}.stat-box:nth-child(3){border-bottom:none}.stat-box:nth-child(4){border-bottom:none}}
+@media(max-width:900px){.enq-inner{grid-template-columns:1fr}.enq-left{display:none}.dest-detail.on{grid-template-columns:1fr}.dest-meta-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.moments-grid{columns:2}.ef-row{grid-template-columns:1fr}.team-grid{grid-template-columns:1fr 1fr}.dest-tab{font-size:10px;padding:7px 12px}.sv-mini{grid-template-columns:1fr}.call-float{width:50px;height:50px;font-size:19px;bottom:80px;right:18px}.call-tip{display:none}.stats-inner{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.dest-meta-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.team-grid{grid-template-columns:1fr}.moments-grid{columns:1}.stats-inner{grid-template-columns:1fr 1fr}.call-float{bottom:78px;right:14px}}
+
 </style>
 </head>
 <body>
@@ -433,7 +556,7 @@
 
 <nav id="nav">
   <div class="nav-in">
-    <a href="index.html" class="brand"><div class="brand-name">Heavenly <span>Horizon</span></div><div class="brand-sub">Tours &amp; Travels</div></a>
+    <a href="index.html" class="brand"><div class="brand-name">Heavenly <span>Horizon</span> Tours</div><div class="brand-sub">Explore Kashmir With Heavenly Horizon Tours</div></a>
     <ul class="nav-links" id="nl">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="tours.html">Tours</a></li>
@@ -453,17 +576,28 @@
   <div class="hcnt">
     <div class="h-ey"><i class="fas fa-star"></i> Welcome to Kashmir's Finest <i class="fas fa-star"></i></div>
     <h1 class="htitle">Explore Paradise<em>with Heavenly Horizon</em></h1>
+    <p style="font-size:clamp(14px,2.5vw,18px);color:rgba(255,255,255,.92);font-weight:600;letter-spacing:.3px;margin-bottom:10px;text-shadow:0 2px 8px rgba(0,0,0,.3)">Comprehensive Travel Solution for Your Perfect Kashmir Journey.</p>
     <p class="hsub">Crafting unforgettable journeys across Kashmir with elegance, comfort and authenticity — because every traveller deserves a truly extraordinary experience.</p>
     <div class="hctas">
       <a href="book-now.html" class="btn btn-gold"><i class="fas fa-paper-plane"></i> Book Now</a>
       <a href="tours.html" class="btn btn-out"><i class="fas fa-compass"></i> Explore Packages</a>
-      <a href="https://wa.me/919103269575?text=Hi%20Heavenly%20Horizon%20Tours!%20I%20want%20to%20enquire%20about%20a%20Kashmir%20trip." target="_blank" class="btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp Inquiry</a>
+      <a href="#services" class="btn btn-out" id="heroServicesBtn"><i class="fas fa-th-large"></i> Our Services</a>
     </div>
 
   </div>
   <div class="hsdots" id="hsdots"></div>
   <div class="scroll-m"><span>Scroll</span><div class="sm-b"><div class="sm-d"></div></div></div>
 </section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner" id="statsStrip">
+    <div class="stat-box"><i class="fas fa-users stat-icon"></i><span class="stat-num count" data-to="500">0</span><span class="stat-lbl">Happy Travellers</span></div>
+    <div class="stat-box"><i class="fas fa-suitcase-rolling stat-icon"></i><span class="stat-num count" data-to="150">0</span><span class="stat-lbl">Packages Completed</span></div>
+    <div class="stat-box"><i class="fas fa-star stat-icon"></i><span class="stat-num">4.9★</span><span class="stat-lbl">Customer Rating</span></div>
+    <div class="stat-box"><i class="fas fa-headset stat-icon"></i><span class="stat-num">24/7</span><span class="stat-lbl">Support Available</span></div>
+  </div>
+</div>
 
 <!-- ABOUT -->
 <section class="sec" id="about">
@@ -512,38 +646,95 @@
 <!-- DESTINATIONS -->
 <section class="sec" id="destinations">
   <div class="wrap">
-    <div class="sh c rv"><div class="lbl">Kashmir's Jewels</div><h2 class="ttl">Iconic <em>Destinations</em></h2><p class="sub">From mystical valleys to snow-capped peaks — every corner of Kashmir tells a timeless story</p></div>
-    <div class="dst-grid rv">
-      <a href="tours.html?dest=srinagar" class="dc big"><img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=900&q=85" alt="Srinagar" loading="lazy"/><div class="dc-ov"><div class="d-pill"><i class="fas fa-star"></i> Featured</div><h3>Srinagar</h3><p>Dal Lake · Mughal Gardens · Houseboats</p></div><div class="d-ico"><i class="fas fa-crown"></i></div></a>
-      <a href="tours.html?dest=gulmarg" class="dc"><img src="https://images.unsplash.com/photo-1584732200355-486a95263014?w=700&q=85" alt="Gulmarg" loading="lazy"/><div class="dc-ov"><h3>Gulmarg</h3><p>Ski Resort &amp; Gondola Ride</p></div><div class="d-ico"><i class="fas fa-mountain"></i></div></a>
-      <a href="tours.html?dest=pahalgam" class="dc"><img src="https://images.unsplash.com/photo-1623996732821-66f739df7280?w=700&q=85" alt="Pahalgam" loading="lazy"/><div class="dc-ov"><h3>Pahalgam</h3><p>Valley of Shepherds</p></div><div class="d-ico"><i class="fas fa-leaf"></i></div></a>
-      <a href="tours.html?dest=sonamarg" class="dc"><img src="https://images.unsplash.com/photo-1593417376544-4c4201061e22?w=700&q=85" alt="Sonamarg" loading="lazy"/><div class="dc-ov"><h3>Sonamarg</h3><p>Meadow of Gold</p></div><div class="d-ico"><i class="fas fa-snowflake"></i></div></a>
-      <a href="tours.html?dest=doodhpathri" class="dc"><img src="https://images.unsplash.com/photo-1692287731328-58f55e8950cd?w=700&q=85" alt="Doodhpathri" loading="lazy"/><div class="dc-ov"><h3>Doodhpathri</h3><p>The Valley of Milk</p></div><div class="d-ico"><i class="fas fa-cloud"></i></div></a>
+    <div class="sh c rv"><div class="lbl">Iconic Places</div><h2 class="ttl">Explore <em>Destinations</em></h2><p class="sub">Click any destination for full details, best time to visit, activities &amp; packages</p></div>
+    <div class="dest-tabs rv" id="destTabs">
+      <button class="dest-tab on" data-d="srinagar"><i class="fas fa-crown" style="font-size:10px;margin-right:4px"></i>Srinagar</button>
+      <button class="dest-tab" data-d="gulmarg"><i class="fas fa-mountain" style="font-size:10px;margin-right:4px"></i>Gulmarg</button>
+      <button class="dest-tab" data-d="pahalgam"><i class="fas fa-leaf" style="font-size:10px;margin-right:4px"></i>Pahalgam</button>
+      <button class="dest-tab" data-d="sonamarg"><i class="fas fa-snowflake" style="font-size:10px;margin-right:4px"></i>Sonamarg</button>
+      <button class="dest-tab" data-d="doodhpathri"><i class="fas fa-cloud" style="font-size:10px;margin-right:4px"></i>Doodhpathri</button>
+    </div>
+    <div class="dest-detail on" id="d-srinagar">
+      <div><div class="dest-hero-img rv"><img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=900&q=85" alt="Srinagar" loading="lazy"/><div class="dest-badge-wrap"><span class="dest-badge"><i class="fas fa-crown"></i> Summer Capital</span><span class="dest-badge"><i class="fas fa-star"></i> Must Visit</span></div></div></div>
+      <div class="dest-info rv"><div class="lbl">Srinagar, J&amp;K</div><h2>The Crown of <em>Kashmir</em></h2><p class="dest-overview">Srinagar, the summer capital of Jammu &amp; Kashmir, is home to the iconic Dal Lake with floating houseboats, shikara rides and vibrant markets. Surrounded by snow-capped peaks and Mughal gardens, it is Kashmir's cultural and geographical heart.</p>
+      <div class="dest-meta-grid"><div class="dest-meta-item"><strong>Best Season</strong><span>March – October</span></div><div class="dest-meta-item"><strong>Altitude</strong><span>1,585 metres</span></div><div class="dest-meta-item"><strong>From Airport</strong><span>~15 km · 20 mins</span></div><div class="dest-meta-item"><strong>Stay Options</strong><span>Houseboat &amp; Hotels</span></div></div>
+      <div class="dest-acts"><h4>Top Activities &amp; Travel Highlights</h4><div class="dest-act-tags"><span><i class="fas fa-ship"></i>Shikara Ride</span><span><i class="fas fa-tree"></i>Mughal Gardens</span><span><i class="fas fa-camera"></i>Sightseeing</span><span><i class="fas fa-shopping-bag"></i>Local Markets</span><span><i class="fas fa-mountain"></i>Shankaracharya Temple</span><span><i class="fas fa-water"></i>Houseboat Stay</span><span><i class="fas fa-leaf"></i>Nishat Bagh</span><span><i class="fas fa-mosque"></i>Hazratbal Shrine</span></div></div>
+      <div class="dest-ctas"><a href="book-now.html?pkg=Srinagar+Tour" class="btn btn-gold btn-sm"><i class="fas fa-paper-plane"></i> Book Srinagar Trip</a><a href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20enquire%20about%20Srinagar%20tour%20packages." target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a></div></div>
+    </div>
+    <div class="dest-detail" id="d-gulmarg">
+      <div><div class="dest-hero-img rv"><img src="https://images.unsplash.com/photo-1584732200355-486a95263014?w=900&q=85" alt="Gulmarg" loading="lazy"/><div class="dest-badge-wrap"><span class="dest-badge"><i class="fas fa-skiing"></i>Ski Resort</span><span class="dest-badge"><i class="fas fa-tram"></i>Gondola Ride</span></div></div></div>
+      <div class="dest-info rv"><div class="lbl">Gulmarg, J&amp;K</div><h2>Meadow of <em>Flowers</em></h2><p class="dest-overview">Gulmarg is one of Asia's premier ski destinations, famous for the Gulmarg Gondola — one of the world's highest cable cars. In summer it transforms into a lush meadow with breathtaking Himalayan views. Its legendary slopes attract skiers from across the globe in winter.</p>
+      <div class="dest-meta-grid"><div class="dest-meta-item"><strong>Best Season</strong><span>Dec–Feb &amp; Apr–Oct</span></div><div class="dest-meta-item"><strong>Altitude</strong><span>2,650 metres</span></div><div class="dest-meta-item"><strong>From Srinagar</strong><span>~52 km · 1.5 hrs</span></div><div class="dest-meta-item"><strong>Famous For</strong><span>Gondola, Skiing, Snow</span></div></div>
+      <div class="dest-acts"><h4>Top Activities &amp; Travel Highlights</h4><div class="dest-act-tags"><span><i class="fas fa-skiing"></i>Skiing</span><span><i class="fas fa-tram"></i>Gondola Phase 1 &amp; 2</span><span><i class="fas fa-snowflake"></i>Snow Activities</span><span><i class="fas fa-binoculars"></i>Himalayan Views</span><span><i class="fas fa-hiking"></i>Nature Walks</span><span><i class="fas fa-campground"></i>Alpine Meadows</span></div></div>
+      <div class="dest-ctas"><a href="book-now.html?pkg=Gulmarg+Tour" class="btn btn-gold btn-sm"><i class="fas fa-paper-plane"></i> Book Gulmarg Trip</a><a href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20enquire%20about%20Gulmarg%20packages." target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a></div></div>
+    </div>
+    <div class="dest-detail" id="d-pahalgam">
+      <div><div class="dest-hero-img rv"><img src="https://images.unsplash.com/photo-1623996732821-66f739df7280?w=900&q=85" alt="Pahalgam" loading="lazy"/><div class="dest-badge-wrap"><span class="dest-badge"><i class="fas fa-leaf"></i>Valley of Shepherds</span></div></div></div>
+      <div class="dest-info rv"><div class="lbl">Pahalgam, J&amp;K</div><h2>Valley of <em>Shepherds</em></h2><p class="dest-overview">Pahalgam is a scenic hill resort known for lush meadows, Betaab Valley, Aru Valley and the origin point of the Amarnath Yatra. The Lidder River flows through this picturesque valley, offering excellent trout fishing and horse riding opportunities.</p>
+      <div class="dest-meta-grid"><div class="dest-meta-item"><strong>Best Season</strong><span>April – November</span></div><div class="dest-meta-item"><strong>Altitude</strong><span>2,130 metres</span></div><div class="dest-meta-item"><strong>From Srinagar</strong><span>~95 km · 2.5 hrs</span></div><div class="dest-meta-item"><strong>Famous For</strong><span>Betaab Valley, Baisaran</span></div></div>
+      <div class="dest-acts"><h4>Top Activities &amp; Travel Highlights</h4><div class="dest-act-tags"><span><i class="fas fa-tree"></i>Betaab Valley</span><span><i class="fas fa-mountain"></i>Aru Valley</span><span><i class="fas fa-fish"></i>Trout Fishing</span><span><i class="fas fa-horse"></i>Horse Riding</span><span><i class="fas fa-campground"></i>Baisaran Meadow</span><span><i class="fas fa-water"></i>Lidder River</span></div></div>
+      <div class="dest-ctas"><a href="book-now.html?pkg=Pahalgam+Tour" class="btn btn-gold btn-sm"><i class="fas fa-paper-plane"></i> Book Pahalgam Trip</a><a href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20enquire%20about%20Pahalgam%20packages." target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a></div></div>
+    </div>
+    <div class="dest-detail" id="d-sonamarg">
+      <div><div class="dest-hero-img rv"><img src="https://images.unsplash.com/photo-1593417376544-4c4201061e22?w=900&q=85" alt="Sonamarg" loading="lazy"/><div class="dest-badge-wrap"><span class="dest-badge"><i class="fas fa-snowflake"></i>Meadow of Gold</span></div></div></div>
+      <div class="dest-info rv"><div class="lbl">Sonamarg, J&amp;K</div><h2>Meadow of <em>Gold</em></h2><p class="dest-overview">Sonamarg is the gateway to the Himalayas and base for the Thajiwas Glacier trek. Surrounded by mountains with pristine alpine scenery and the Sindh River flowing through it — one of Kashmir's most spectacular destinations.</p>
+      <div class="dest-meta-grid"><div class="dest-meta-item"><strong>Best Season</strong><span>May – October</span></div><div class="dest-meta-item"><strong>Altitude</strong><span>2,740 metres</span></div><div class="dest-meta-item"><strong>From Srinagar</strong><span>~80 km · 2.5 hrs</span></div><div class="dest-meta-item"><strong>Famous For</strong><span>Glacier Trek, Camping</span></div></div>
+      <div class="dest-acts"><h4>Top Activities &amp; Travel Highlights</h4><div class="dest-act-tags"><span><i class="fas fa-mountain"></i>Thajiwas Glacier</span><span><i class="fas fa-hiking"></i>Alpine Trekking</span><span><i class="fas fa-fish"></i>Sindh River</span><span><i class="fas fa-campground"></i>Camping</span><span><i class="fas fa-camera"></i>Photography</span></div></div>
+      <div class="dest-ctas"><a href="book-now.html?pkg=Sonamarg+Tour" class="btn btn-gold btn-sm"><i class="fas fa-paper-plane"></i> Book Sonamarg Trip</a><a href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20enquire%20about%20Sonamarg." target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a></div></div>
+    </div>
+    <div class="dest-detail" id="d-doodhpathri">
+      <div><div class="dest-hero-img rv"><img src="https://images.unsplash.com/photo-1692287731328-58f55e8950cd?w=900&q=85" alt="Doodhpathri" loading="lazy"/><div class="dest-badge-wrap"><span class="dest-badge"><i class="fas fa-cloud"></i>Valley of Milk</span><span class="dest-badge"><i class="fas fa-gem"></i>Hidden Gem</span></div></div></div>
+      <div class="dest-info rv"><div class="lbl">Doodhpathri, J&amp;K</div><h2>The Hidden <em>Valley of Milk</em></h2><p class="dest-overview">Doodhpathri, meaning "Valley of Milk," is a pristine offbeat destination near Budgam with white milky streams, lush meadows and emerald forests. Far from crowds, it offers a raw, untouched Kashmir experience that few get to witness.</p>
+      <div class="dest-meta-grid"><div class="dest-meta-item"><strong>Best Season</strong><span>May – September</span></div><div class="dest-meta-item"><strong>Altitude</strong><span>2,730 metres</span></div><div class="dest-meta-item"><strong>From Srinagar</strong><span>~42 km · 1.5 hrs</span></div><div class="dest-meta-item"><strong>Famous For</strong><span>Milky Streams, Meadows</span></div></div>
+      <div class="dest-acts"><h4>Top Activities &amp; Travel Highlights</h4><div class="dest-act-tags"><span><i class="fas fa-water"></i>Milky Stream Walk</span><span><i class="fas fa-leaf"></i>Meadow Picnic</span><span><i class="fas fa-camera"></i>Photography</span><span><i class="fas fa-horse"></i>Pony Rides</span></div></div>
+      <div class="dest-ctas"><a href="book-now.html?pkg=Doodhpathri+Tour" class="btn btn-gold btn-sm"><i class="fas fa-paper-plane"></i> Book Doodhpathri Trip</a><a href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20enquire%20about%20Doodhpathri." target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a></div></div>
     </div>
   </div>
-</section>
-
-<!-- COUNTERS -->
-<section class="sec-sm cnt-bg">
-  <div class="wrap"><div class="cg">
-    <div class="ci rv"><span class="ci-n count" data-to="1500">0</span><span class="ci-l">Happy Travellers</span></div>
-    <div class="ci rv"><span class="ci-n count" data-to="120">0</span><span class="ci-l">Tour Packages</span></div>
-    <div class="ci rv"><span class="ci-n count" data-to="50">0</span><span class="ci-l">Destinations Covered</span></div>
-    <div class="ci rv"><span class="ci-n count" data-to="8">0</span><span class="ci-l">Years of Excellence</span></div>
-  </div></div>
 </section>
 
 <!-- SERVICES -->
 <section class="sec svc-bg" id="services">
   <div class="wrap">
-    <div class="sh c rv"><div class="lbl" style="color:var(--gold)">What We Offer</div><h2 class="ttl lt">Our Premium <em>Services</em></h2><p class="sub lt">Every service crafted with meticulous attention to detail for your perfect Kashmir journey</p></div>
+    <div class="sh c rv"><div class="lbl" style="color:var(--gold)">What We Offer</div><h2 class="ttl lt">Our Premium <em>Services</em></h2><p class="sub lt">One-stop comprehensive solution for your complete Kashmir travel experience</p></div>
     <div class="sv-grid">
-      <div class="sv rv"><div class="sv-ico"><i class="fas fa-hotel"></i></div><h3>Hotel Booking</h3><p>Curated selection of the finest hotels, luxury resorts and heritage houseboats across Kashmir.</p><a href="contact.html" class="sv-lnk">Enquire Now <i class="fas fa-arrow-right"></i></a></div>
-      <div class="sv rv"><div class="sv-ico"><i class="fas fa-car"></i></div><h3>Cab Services</h3><p>Comfortable, air-conditioned vehicles with experienced local drivers for all sightseeing routes.</p><a href="contact.html" class="sv-lnk">Enquire Now <i class="fas fa-arrow-right"></i></a></div>
-      <div class="sv rv"><div class="sv-ico"><i class="fas fa-heart"></i></div><h3>Honeymoon Planning</h3><p>Romantic packages with private shikara rides, candlelit dinners and exclusive couple experiences.</p><a href="tours.html" class="sv-lnk">View Packages <i class="fas fa-arrow-right"></i></a></div>
-      <div class="sv rv"><div class="sv-ico"><i class="fas fa-map-marked-alt"></i></div><h3>Customized Itineraries</h3><p>Bespoke travel plans designed around your preferences, budget, and travel style.</p><a href="contact.html" class="sv-lnk">Plan My Trip <i class="fas fa-arrow-right"></i></a></div>
-      <div class="sv rv"><div class="sv-ico"><i class="fas fa-plane-arrival"></i></div><h3>Airport Transfers</h3><p>Seamless pickup and drop services from Srinagar Airport to your accommodation.</p><a href="contact.html" class="sv-lnk">Enquire Now <i class="fas fa-arrow-right"></i></a></div>
-      <div class="sv rv"><div class="sv-ico"><i class="fas fa-users"></i></div><h3>Group Tours</h3><p>Expertly managed group expeditions for corporate retreats, school trips and large families.</p><a href="tours.html" class="sv-lnk">View Packages <i class="fas fa-arrow-right"></i></a></div>
+      <div class="sv rv"><div class="sv-ico"><i class="fas fa-compass"></i></div><h3>Tour Packages</h3><p>Fully curated Kashmir itineraries for honeymoons, families, groups and solo travellers.</p><a href="tours.html" class="sv-lnk">▶ Next Page → Tour Packages <i class="fas fa-arrow-right"></i></a></div>
+      <div class="sv rv"><div class="sv-ico"><i class="fas fa-gem"></i></div><h3>Kashmir Special Experience</h3><p>Exclusive houseboat stays, shikara sunsets, saffron farm visits and authentic Kashmiri cuisine.</p><a href="tours.html" class="sv-lnk">▶ Kashmir Tour Packages <i class="fas fa-arrow-right"></i></a></div>
+      <div class="sv rv">
+        <div class="sv-ico"><i class="fas fa-car"></i></div><h3>Transport Services</h3>
+        <p>Comfortable AC vehicles with experienced local drivers for all Kashmir routes.</p>
+        <div class="sv-mini">
+          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20a%20Sedan%20cab%20for%20Kashmir." target="_blank" class="sv-mc"><i class="fas fa-car-side"></i><span>Sedan</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
+          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20an%20Innova%20for%20Kashmir." target="_blank" class="sv-mc"><i class="fas fa-car"></i><span>Innova</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
+          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20a%20Tempo%20Traveller%20for%20Kashmir." target="_blank" class="sv-mc"><i class="fas fa-bus-alt"></i><span>Tempo Traveller</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
+          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20an%20SUV%20for%20Kashmir." target="_blank" class="sv-mc"><i class="fas fa-truck-monster"></i><span>SUV</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
+        </div>
+      </div>
+      <div class="sv rv">
+        <div class="sv-ico"><i class="fas fa-hotel"></i></div><h3>Hotel Booking</h3>
+        <p>Best-rate rooms at handpicked premium hotels, resorts and heritage houseboats.</p>
+        <div class="hotel-cards">
+          <div class="hotel-card"><img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=80&q=60" alt="Houseboat" onerror="this.style.display='none'"/><div class="hotel-card-info"><span>Luxury Houseboat — Dal Lake</span><div class="hotel-stars">★★★★★</div></div></div>
+          <div class="hotel-card"><img src="https://images.unsplash.com/photo-1584732200355-486a95263014?w=80&q=60" alt="Hotel" onerror="this.style.display='none'"/><div class="hotel-card-info"><span>Gulmarg Ski Resort Hotel</span><div class="hotel-stars">★★★★</div></div></div>
+          <div class="hotel-card"><img src="https://images.unsplash.com/photo-1623996732821-66f739df7280?w=80&q=60" alt="Resort" onerror="this.style.display='none'"/><div class="hotel-card-info"><span>Pahalgam Valley Resort</span><div class="hotel-stars">★★★★</div></div></div>
+        </div>
+        <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20hotel%20booking%20in%20Kashmir." target="_blank" class="sv-lnk">Enquire Hotels <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="sv rv">
+        <div class="sv-ico"><i class="fas fa-plane"></i></div><h3>Flight &amp; Train Assistance</h3>
+        <p>We help you book the best tickets to Srinagar at great prices with full support.</p>
+        <div class="sv-mini">
+          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20flight%20ticket%20assistance%20to%20Srinagar." target="_blank" class="sv-mc"><i class="fas fa-plane-departure"></i><span>Flight Ticket Assistance</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
+          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20train%20ticket%20assistance%20to%20Kashmir." target="_blank" class="sv-mc"><i class="fas fa-train"></i><span>Train Ticket Assistance</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
+        </div>
+      </div>
+      <div class="sv rv">
+        <div class="sv-ico"><i class="fas fa-headset"></i></div><h3>Customer &amp; Emergency Support</h3>
+        <p>Round-the-clock assistance — from enquiries to on-ground medical emergencies.</p>
+        <div class="sv-mini">
+          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20customer%20support." target="_blank" class="sv-mc"><i class="fas fa-comments"></i><span>Customer Support</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
+          <a href="https://wa.me/919103269575?text=EMERGENCY!%20I%20need%20medical%20help%20in%20Kashmir." target="_blank" class="sv-mc" style="border-color:rgba(239,68,68,.3)"><i class="fas fa-ambulance" style="color:#ef4444"></i><span style="color:rgba(255,255,255,.85)">Medical / Emergency</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -605,52 +796,91 @@
   </div></div>
 </div>
 
-<!-- CONTACT -->
-<section class="sec" id="contact">
+<!-- ENQUIRY FORM -->
+<section class="sec enq-section" id="enquiry">
   <div class="wrap">
-    <div class="sh c rv"><div class="lbl">Get In Touch</div><h2 class="ttl">Plan Your <em>Dream Journey</em></h2></div>
-    <div class="ct-grid">
-      <div>
-        <div class="ct-info rv">
-          <h3>Contact <em>Details</em></h3>
-          <div class="cti"><div class="cti-ico"><i class="fas fa-phone-alt"></i></div><div><strong>Call Us</strong><a href="tel:+918825034964">+91 88250 34964</a></div></div>
-          <div class="cti"><div class="cti-ico"><i class="fab fa-whatsapp"></i></div><div><strong>WhatsApp</strong><a href="https://wa.me/919103269575">+91 91032 69575</a></div></div>
-          <div class="cti"><div class="cti-ico"><i class="fas fa-envelope"></i></div><div><strong>Email</strong><a href="mailto:Sales.heavenlyhorizontours@gmail.com">Sales.heavenlyhorizontours@gmail.com</a></div></div>
-          <div class="cti"><div class="cti-ico"><i class="fas fa-map-marker-alt"></i></div><div><strong>Office</strong><span>Mehjoor Nagar, Srinagar, J&amp;K 190001</span></div></div>
-        </div>
-        <div class="map-w rv">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13201.416!2d74.797!3d34.090!2m3!1f0!2f0!3f0!3m2!1i1024!1i768!4f13.1!3m3!1m2!1s0x38e18b!2sMehjoor+Nagar+Srinagar!5e0!3m2!1sen!2sin!4v1" width="100%" height="230" style="border:0;display:block" allowfullscreen="" loading="lazy" title="Heavenly Horizon Tours Location"></iframe>
+    <div class="enq-inner">
+      <div class="enq-left rv">
+        <div class="lbl" style="color:var(--gold)">Quick Enquiry</div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(24px,3.8vw,40px);color:var(--white);margin-bottom:11px">Plan Your <em style="font-style:italic;color:var(--gold-light)">Kashmir Trip</em></h2>
+        <p style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.9;margin-bottom:22px">Fill in your details and our Kashmir travel expert will call you within 2 hours with a fully customised itinerary and transparent pricing.</p>
+        <div class="enq-contact">
+          <div class="enq-ci"><i class="fas fa-phone-alt"></i><a href="tel:+918825034964">+91 88250 34964</a></div>
+          <div class="enq-ci"><i class="fab fa-whatsapp"></i><a href="https://wa.me/919103269575">+91 91032 69575</a></div>
+          <div class="enq-ci"><i class="fas fa-envelope"></i><a href="mailto:Sales.heavenlyhorizontours@gmail.com">Sales.heavenlyhorizontours@gmail.com</a></div>
+          <div class="enq-ci"><i class="fas fa-map-marker-alt"></i><span>Mehjoor Nagar, Srinagar, J&amp;K 190001</span></div>
+          <div class="enq-ci"><i class="fas fa-clock"></i><span>Mon–Sun: 8:00 AM – 10:00 PM</span></div>
         </div>
       </div>
-      <div class="cf-card rv">
-        <h3>Quick <em>Enquiry</em></h3>
-        <p class="csub">Tell us about your Kashmir dream trip and we'll respond within 2 hours.</p>
-        <form id="qef">
-          <div class="fr">
-            <div class="fg"><label>Full Name *</label><input type="text" name="name" placeholder="Your name" required/></div>
-            <div class="fg"><label>Phone *</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required/></div>
+      <div class="enq-card rv">
+        <h3 style="font-family:'Playfair Display',serif;font-size:clamp(18px,2.5vw,24px);color:var(--navy);margin-bottom:4px">Get a Free <em style="font-style:italic;color:var(--gold)">Quote</em></h3>
+        <p style="font-size:12px;color:var(--text2);margin-bottom:18px">Respond within 2 hours · 100% free &amp; no obligation</p>
+        <form id="enqForm" novalidate>
+          <div class="ef-row">
+            <div class="ef-group"><label>Full Name *</label><input type="text" id="eName" name="name" placeholder="Your full name" required/></div>
+            <div class="ef-group"><label>Phone Number *</label><input type="tel" id="ePhone" name="phone" placeholder="+91 XXXXX XXXXX" required/></div>
           </div>
-          <div class="fg"><label>Email</label><input type="email" name="email" placeholder="you@example.com"/></div>
-          <div class="fr">
-            <div class="fg"><label>Travel Date</label><input type="date" name="date"/></div>
-            <div class="fg"><label>No. of Travellers</label><input type="number" name="travellers" placeholder="2" min="1"/></div>
+          <div class="ef-row">
+            <div class="ef-group"><label>Pickup Location</label><input type="text" name="pickup" placeholder="e.g. Srinagar Airport, Delhi"/></div>
+            <div class="ef-group"><label>Drop Location</label><input type="text" name="drop" placeholder="e.g. Dal Lake Houseboat"/></div>
           </div>
-          <div class="fg"><label>Package Interest</label>
-            <select name="package"><option value="">Select package type</option><option>Kashmir Honeymoon Package</option><option>Family Tour Package</option><option>Gulmarg Tour Package</option><option>Pahalgam Package</option><option>Sonamarg Trip</option><option>Luxury Kashmir Tour</option><option>Custom Itinerary</option></select>
+          <div class="ef-row">
+            <div class="ef-group"><label>Number of Persons</label><input type="number" name="persons" placeholder="2" min="1"/></div>
+            <div class="ef-group"><label>Travel Date</label><input type="date" name="travelDate"/></div>
           </div>
-          <div class="fg"><label>Message</label><textarea name="message" rows="3" placeholder="Tell us about your Kashmir dream…"></textarea></div>
-          <button type="submit" class="btn btn-gold" id="qefBtn" style="width:100%;justify-content:center"><i class="fas fa-paper-plane"></i> Send Enquiry</button>
-          <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:9px">We respond within 2 hours · Your details are private &amp; secure</p>
+          <div class="ef-group"><label>Package Interest</label>
+            <select name="package"><option value="">Select a package type</option><option>Kashmir Honeymoon Package</option><option>Family Tour Package</option><option>Gulmarg Tour Package</option><option>Pahalgam Package</option><option>Sonamarg Trip</option><option>Doodhpathri Tour</option><option>Luxury Kashmir Tour</option><option>Transport / Taxi Only</option><option>Hotel Booking Only</option><option>Custom Itinerary</option></select>
+          </div>
+          <div class="ef-group"><label>Your Message</label><textarea name="message" rows="3" placeholder="Tell us about your dream Kashmir trip…"></textarea></div>
+          <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:4px">
+            <button type="submit" class="btn btn-gold" id="enqSubmit" style="flex:1;justify-content:center"><i class="fas fa-paper-plane"></i> Send Enquiry</button>
+            <a href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20plan%20a%20Kashmir%20trip." target="_blank" class="btn btn-wa" style="flex:1;justify-content:center"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+          </div>
+          <p id="enqErr" style="color:#ef4444;font-size:12px;margin-top:6px;display:none">Please enter your name and phone number.</p>
+          <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:7px">Your details are 100% private &amp; secure</p>
         </form>
-        <div class="fs" id="qefOk" style="display:none">
-          <i class="fas fa-check-circle"></i><h3>Thank You!</h3>
-          <p>Your enquiry has been received. Our Kashmir expert will contact you within 2 hours.</p>
-          <div style="display:flex;gap:9px;justify-content:center;flex-wrap:wrap">
-            <a href="https://wa.me/919103269575" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
-            <a href="index.html" class="btn btn-og btn-sm">Back to Home</a>
+        <div style="display:none;text-align:center;padding:32px 16px" id="enqOk">
+          <i class="fas fa-check-circle" style="font-size:48px;color:#25D366;display:block;margin-bottom:12px"></i>
+          <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:8px">Enquiry Sent!</h3>
+          <p style="color:var(--text2);font-size:14px;margin-bottom:18px">Our Kashmir expert will call you within 2 hours.</p>
+          <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+            <a href="https://wa.me/919103269575" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
+            <a href="tours.html" class="btn btn-og btn-sm">View Packages</a>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAVEL MOMENTS -->
+<section class="sec" style="background:var(--navy)" id="moments">
+  <div class="wrap">
+    <div class="sh c rv"><div class="lbl" style="color:var(--gold)">Our Travel Moments</div><h2 class="ttl lt">Guest <em>Memories</em></h2><p class="sub lt">Real moments from our travellers across the paradise of Kashmir</p></div>
+    <div class="moments-grid rv">
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=600&q=80" alt="Dal Lake" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1692287731328-58f55e8950cd?w=600&q=80" alt="Doodhpathri" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1584732200355-486a95263014?w=600&q=80" alt="Gulmarg" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1623996732821-66f739df7280?w=600&q=80" alt="Pahalgam" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1593417376544-4c4201061e22?w=600&q=80" alt="Sonamarg" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://plus.unsplash.com/premium_photo-1697729439457-85d4b9d3a2cb?w=600&q=80" alt="Kashmir" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=600&q=70" alt="Kashmir" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1692287731328-58f55e8950cd?w=600&q=70" alt="Kashmir" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1584732200355-486a95263014?w=600&q=70" alt="Kashmir" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+    </div>
+    <div style="text-align:center;margin-top:24px" class="rv"><a href="gallery.html" class="btn btn-out" style="border-color:rgba(255,255,255,.35)"><i class="fas fa-images"></i> View Full Gallery</a></div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="sec" style="background:var(--mist)" id="team">
+  <div class="wrap">
+    <div class="sh c rv"><div class="lbl">Meet the Team</div><h2 class="ttl">Our Travel <em>Experts</em></h2><p class="sub">Passionate Kashmiris dedicated to making your trip unforgettable</p></div>
+    <div class="team-grid">
+      <div class="team-card rv"><div class="team-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Mohammad Zakir" loading="lazy" onerror="this.style.display='none'"/></div><div class="team-body"><h3>Mohammad Zakir</h3><span class="team-role">Founder &amp; CEO</span><p>8+ years crafting premium Kashmir journeys. Deep local expertise and genuine passion for hospitality.</p><div class="team-contact"><a href="tel:+918825034964" class="btn btn-og btn-sm"><i class="fas fa-phone-alt"></i> Call</a><a href="https://wa.me/919103269575" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a></div></div></div>
+      <div class="team-card rv"><div class="team-img"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" alt="Irfan Mir" loading="lazy" onerror="this.style.display='none'"/></div><div class="team-body"><h3>Irfan Mir</h3><span class="team-role">Head of Operations</span><p>Expert at crafting seamless itineraries. Ensures every detail of your trip is executed flawlessly.</p><div class="team-contact"><a href="https://wa.me/919103269575?text=Hi%20Irfan!" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> Contact</a></div></div></div>
+      <div class="team-card rv"><div class="team-img"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="Tariq Wani" loading="lazy" onerror="this.style.display='none'"/></div><div class="team-body"><h3>Tariq Wani</h3><span class="team-role">Senior Tour Guide</span><p>Trilingual guide with encyclopaedic knowledge of Kashmir's history, culture and every hidden scenic spot.</p><div class="team-contact"><a href="https://wa.me/919103269575?text=Hi%20Tariq!" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> Contact</a></div></div></div>
+      <div class="team-card rv"><div class="team-img"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80" alt="Bilal Shah" loading="lazy" onerror="this.style.display='none'"/></div><div class="team-body"><h3>Bilal Shah</h3><span class="team-role">Transport Manager</span><p>Oversees our entire fleet ensuring safe, comfortable and timely travel across all Kashmir routes.</p><div class="team-contact"><a href="https://wa.me/919103269575?text=Hi!%20I%20need%20cab%20service." target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> Contact</a></div></div></div>
     </div>
   </div>
 </section>
@@ -688,6 +918,8 @@
   <span class="call-tip">Call: +91 88250 34964</span>
 </a>
 <!-- WA FLOAT -->
+<!-- CALL FLOAT -->
+<a href="tel:+918825034964" class="call-float" aria-label="Call us"><i class="fas fa-phone-alt"></i><span class="call-tip">Call: +91 88250 34964</span></a>
 <a href="https://wa.me/919103269575?text=Hi%20Heavenly%20Horizon%20Tours!%20I%20want%20to%20enquire%20about%20a%20Kashmir%20tour." target="_blank" class="wa" aria-label="WhatsApp">
   <i class="fab fa-whatsapp"></i>
   <span class="wa-tip">Chat with us!</span>
@@ -753,6 +985,18 @@ document.getElementById('qef').addEventListener('submit',async e=>{
   e.target.style.display='none';document.getElementById('qefOk').style.display='block';
 });
 loadP();
+
+// Enquiry form Firebase submit
+document.getElementById('enqForm')?.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const nm=document.getElementById('eName').value.trim(),ph=document.getElementById('ePhone').value.trim();
+  if(!nm||!ph){document.getElementById('enqErr').style.display='block';return;}
+  document.getElementById('enqErr').style.display='none';
+  const btn=document.getElementById('enqSubmit');btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';
+  const data=Object.fromEntries(new FormData(e.target));
+  try{if(db)await addDoc(collection(db,'enquiries'),{...data,source:'homepage_enquiry_form',createdAt:serverTimestamp(),status:'new'});}catch(err){}
+  e.target.style.display='none';document.getElementById('enqOk').style.display='block';
+});
 </script>
 
 <script>
@@ -775,9 +1019,28 @@ loadP();
   // Reveal
   const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const sib=e.target.parentElement?.querySelectorAll('.rv,.rvl,.rvr')||[];let d=0;sib.forEach((el,i)=>{if(el===e.target)d=i*80;});setTimeout(()=>e.target.classList.add('in'),d);ro.unobserve(e.target);}});},{threshold:0.08});
   document.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>ro.observe(el));
-  // Counter
-  const co=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.count').forEach(el=>{const end=parseInt(el.dataset.to);let n=0;const step=Math.ceil(end/40);const t=setInterval(()=>{n=Math.min(n+step,end);el.textContent=n+(end>=100?'+':'');if(n>=end)clearInterval(t);},40);});co.unobserve(e.target);}});},{threshold:.5});
-  document.querySelectorAll('.cg').forEach(el=>co.observe(el));
+  // Counter (cg + statsStrip)
+  const co=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.count').forEach(el=>{const end=parseInt(el.dataset.to);let n=0;const step=Math.ceil(end/40);const t=setInterval(()=>{n=Math.min(n+step,end);el.textContent=n+(end>=100?'+':'');if(n>=end)clearInterval(t);},40);});co.unobserve(e.target);}});},{threshold:.4});
+  document.querySelectorAll('.cg,.stats-inner').forEach(el=>co.observe(el));
+
+  // "Our Services" hero button — smooth scroll
+  document.getElementById('heroServicesBtn')?.addEventListener('click',function(e){
+    e.preventDefault();
+    document.getElementById('services')?.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  // Destination tabs
+  document.getElementById('destTabs')?.addEventListener('click',e=>{
+    const tab=e.target.closest('.dest-tab');if(!tab)return;
+    document.querySelectorAll('.dest-tab').forEach(t=>t.classList.remove('on'));
+    document.querySelectorAll('.dest-detail').forEach(d=>d.classList.remove('on'));
+    tab.classList.add('on');
+    const dest=document.getElementById('d-'+tab.dataset.d);
+    if(dest){
+      dest.classList.add('on');
+      dest.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>{el.classList.remove('in');setTimeout(()=>el.classList.add('in'),80);});
+    }
+  });
   // Testimonials
   const ti=document.getElementById('ti'),cards=ti?.querySelectorAll('.tc'),td=document.getElementById('td');
   let tc2=0,tmt;
