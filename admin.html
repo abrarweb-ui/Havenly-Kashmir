@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Admin Panel – Heavenly Horizon Tours</title>
+<meta name="robots" content="noindex,nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root{
+  --navy:#0B1F3A; --navy2:#0E2847; --gold:#C9A84C; --gold2:#E8C97A;
+  --white:#fff; --bg:#F0F4F8; --mist:#EEF2F7;
+  --red:#ef4444; --green:#22c55e; --sky:#3b82f6;
+  --text:#1e293b; --t2:#64748b; --t3:#94a3b8;
+  --r:12px; --sh:0 4px 20px rgba(0,0,0,.08); --shm:0 8px 32px rgba(0,0,0,.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Raleway',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+
+/* LOGIN */
+.login-wrap{position:fixed;inset:0;background:linear-gradient(135deg,var(--navy),#0d3460);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s,visibility .5s}
+.login-wrap.out{opacity:0;visibility:hidden;pointer-events:none}
+.login-card{background:var(--white);border-radius:20px;padding:48px 40px;width:100%;max-width:420px;box-shadow:0 30px 80px rgba(0,0,0,.3);text-align:center}
+.login-logo{font-family:'Playfair Display',serif;font-size:46px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:4px}
+.login-brand{font-family:'Playfair Display',serif;font-size:18px;color:var(--navy);font-weight:700;margin-bottom:4px}
+.login-sub{font-size:12px;color:var(--t2);margin-bottom:28px;letter-spacing:.5px}
+.lf{margin-bottom:16px;text-align:left}
+.lf label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--t2);margin-bottom:5px}
+.lf input{width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;font-family:'Raleway',sans-serif;outline:none;transition:.25s;color:var(--text)}
+.lf input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.12)}
+.login-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--gold),#b8922e);color:var(--navy);font-weight:700;font-size:14px;border-radius:99px;border:none;cursor:pointer;transition:.3s;margin-top:4px;font-family:'Raleway',sans-serif;letter-spacing:.5px}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.4)}
+.login-err{color:var(--red);font-size:12px;margin-top:8px;min-height:16px}
+
+/* LAYOUT */
+.admin-layout{display:flex;min-height:100vh}
+.sidebar{width:252px;background:var(--navy);color:#fff;flex-shrink:0;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;transition:transform .3s}
+.sidebar.off{transform:translateX(-252px)}
+.sb-head{padding:22px 20px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-logo{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--white);display:flex;align-items:center;gap:7px}
+.sb-logo span{color:var(--gold)}
+.sb-tag{font-size:9px;color:rgba(255,255,255,.32);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.sb-nav{flex:1;padding:10px 0;overflow-y:auto}
+.nav-sec{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.28);padding:10px 18px 4px}
+.ni{display:flex;align-items:center;gap:9px;padding:10px 18px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);cursor:pointer;transition:.2s;border-left:3px solid transparent;user-select:none;letter-spacing:.3px}
+.ni:hover{background:rgba(255,255,255,.06);color:#fff}
+.ni.on{background:rgba(255,255,255,.08);color:#fff;border-left-color:var(--gold)}
+.ni i{width:16px;font-size:13px;text-align:center;flex-shrink:0}
+.sb-foot{padding:14px 18px;border-top:1px solid rgba(255,255,255,.08)}
+.logout-btn{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.4);cursor:pointer;transition:.2s;font-family:'Raleway',sans-serif;letter-spacing:.3px}
+.logout-btn:hover{color:#fff}
+
+/* MAIN */
+.main{margin-left:252px;flex:1;transition:margin .3s;min-height:100vh}
+.main.full{margin-left:0}
+.topbar{background:var(--white);padding:0 22px;height:60px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--sh);position:sticky;top:0;z-index:50}
+.tb-l{display:flex;align-items:center;gap:9px}
+.tog{width:32px;height:32px;border-radius:7px;background:var(--bg);border:none;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;transition:.2s;color:var(--text)}
+.tog:hover{background:#e2e8f0}
+.pg-title{font-size:15px;font-weight:700;color:var(--text)}
+.tb-r{display:flex;align-items:center;gap:9px}
+.admin-badge{font-size:11px;font-weight:600;color:var(--sky);background:rgba(59,130,246,.1);padding:4px 11px;border-radius:99px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.view-site{font-size:12px;color:var(--t2);display:flex;align-items:center;gap:4px;transition:.2s}
+.view-site:hover{color:var(--gold)}
+.content{padding:22px}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}
+.sc{background:var(--white);border-radius:var(--r);padding:18px;box-shadow:var(--sh);display:flex;align-items:center;gap:11px}
+.sc-ico{width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.sc-info strong{display:block;font-size:24px;font-weight:700;color:var(--text);line-height:1}
+.sc-info span{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.5px}
+
+/* PANELS */
+.panel{display:none}
+.panel.on{display:block}
+.panel-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:9px}
+.panel-title{font-size:17px;font-weight:700;color:var(--text)}
+.panel-title small{font-size:11px;font-weight:400;color:var(--t2);margin-left:5px}
+
+/* TABLE */
+.tw{background:var(--white);border-radius:var(--r);box-shadow:var(--sh);overflow:auto}
+.at{width:100%;border-collapse:collapse;font-size:13px;min-width:600px}
+.at th{background:#f8fafc;padding:10px 13px;text-align:left;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--t2);border-bottom:1px solid #e2e8f0;white-space:nowrap}
+.at td{padding:11px 13px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+.at tr:last-child td{border:none}
+.at tr:hover td{background:#fafbfc}
+.thumb{width:50px;height:36px;border-radius:6px;object-fit:cover;border:2px solid #e2e8f0}
+
+/* BADGES */
+.bdg{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;text-transform:uppercase;letter-spacing:.4px}
+.bdg-new{background:rgba(59,130,246,.12);color:#1d4ed8}
+.bdg-pending{background:rgba(201,168,76,.14);color:#92400e}
+.bdg-confirmed{background:rgba(34,197,94,.12);color:#166534}
+.bdg-cancelled{background:rgba(239,68,68,.12);color:#991b1b}
+.bdg-done{background:rgba(34,197,94,.12);color:#166534}
+.bdg-honeymoon{background:rgba(236,72,153,.12);color:#be185d}
+.bdg-family{background:rgba(34,197,94,.12);color:#166534}
+.bdg-gulmarg{background:rgba(59,130,246,.12);color:#1d4ed8}
+.bdg-pahalgam{background:rgba(168,85,247,.12);color:#7e22ce}
+.bdg-luxury{background:rgba(201,168,76,.14);color:#92400e}
+
+/* ACTION BTNS */
+.acts{display:flex;gap:5px;flex-wrap:wrap}
+.ab{width:27px;height:27px;border-radius:6px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:.2s}
+.ab-e{background:rgba(59,130,246,.1);color:var(--sky)}.ab-e:hover{background:var(--sky);color:#fff}
+.ab-d{background:rgba(239,68,68,.1);color:var(--red)}.ab-d:hover{background:var(--red);color:#fff}
+.ab-v{background:rgba(11,31,58,.08);color:var(--navy)}.ab-v:hover{background:var(--navy);color:#fff}
+.ab-a{background:rgba(34,197,94,.1);color:var(--green)}.ab-a:hover{background:var(--green);color:#fff}
+.ab-w{background:rgba(37,211,102,.1);color:#25D366}.ab-w:hover{background:#25D366;color:#fff}
+
+/* BTNS */
+.btn-add{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:8px 17px;border-radius:99px;border:none;cursor:pointer;transition:.2s;font-family:'Raleway',sans-serif;letter-spacing:.5px}
+.btn-add:hover{background:#163357;transform:translateY(-1px)}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#b8922e);color:var(--navy);font-size:12px;font-weight:700;padding:8px 18px;border-radius:99px;border:none;cursor:pointer;transition:.2s;font-family:'Raleway',sans-serif;letter-spacing:.5px}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(201,168,76,.35)}
+.btn-cancel{background:#f1f5f9;color:var(--t2);font-size:12px;font-weight:600;padding:8px 18px;border-radius:99px;border:none;cursor:pointer;transition:.2s;font-family:'Raleway',sans-serif}
+.btn-cancel:hover{background:#e2e8f0}
+
+/* MODAL */
+.mov{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
+.mov.open{display:flex}
+.mbox{background:var(--white);border-radius:16px;max-width:640px;width:100%;max-height:92vh;overflow-y:auto;padding:26px 30px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.22)}
+.mbox h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);margin-bottom:16px;font-weight:600}
+.mc{position:absolute;top:13px;right:13px;width:30px;height:30px;border-radius:50%;background:#f1f5f9;color:var(--t2);font-size:12px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
+.mc:hover{background:#e2e8f0}
+.mf{margin-bottom:12px}
+.mf label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--t2);margin-bottom:5px}
+.mf input,.mf select,.mf textarea{width:100%;padding:9px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:13px;font-family:'Raleway',sans-serif;outline:none;transition:.2s;color:var(--text);-webkit-appearance:none}
+.mf input:focus,.mf select:focus,.mf textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.1)}
+.mf textarea{resize:vertical}
+.mfr{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.mfoot{display:flex;gap:9px;justify-content:flex-end;margin-top:16px;padding-top:13px;border-top:1px solid #f1f5f9}
+.img-prev{width:100%;height:140px;object-fit:cover;border-radius:8px;border:2px solid #e2e8f0;display:none;margin-top:7px}
+.img-prev.show{display:block}
+.img-hint{font-size:10px;color:var(--t3);margin-top:4px;line-height:1.6}
+
+/* GALLERY GRID */
+.ag{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.ag-item{position:relative;border-radius:9px;overflow:hidden;aspect-ratio:4/3;background:#e2e8f0;cursor:pointer}
+.ag-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+.ag-item:hover img{transform:scale(1.06)}
+.ag-acts{position:absolute;inset:0;background:rgba(11,31,58,.68);display:none;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.ag-item:hover .ag-acts{display:flex}
+.ag-cap{position:absolute;bottom:0;left:0;right:0;background:rgba(11,31,58,.78);color:#fff;font-size:10px;padding:4px 7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* SEARCH */
+.tsearch{padding:7px 13px 7px 34px;border:1.5px solid #e2e8f0;border-radius:99px;font-size:12px;font-family:'Raleway',sans-serif;outline:none;background:#f8fafc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E") 9px 50%/14px no-repeat;transition:.2s;width:210px}
+.tsearch:focus{border-color:var(--gold);background-color:#fff}
+.ssel{border:1.5px solid #e2e8f0;border-radius:6px;padding:4px 8px;font-size:11px;font-family:'Raleway',sans-serif;outline:none;background:#fff;cursor:pointer}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--navy);color:#fff;padding:9px 22px;border-radius:99px;font-size:12px;font-weight:500;z-index:9999;opacity:0;pointer-events:none;transition:all .32s;box-shadow:var(--shm)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.ok{background:#14532d}.toast.err{background:#7f1d1d}
+
+/* DASH */
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.dc{background:var(--white);border-radius:var(--r);padding:18px;box-shadow:var(--sh)}
+.dc h4{font-size:12px;font-weight:700;color:var(--text);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid #f1f5f9;letter-spacing:.5px}
+.dr{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #f8fafc;font-size:12px}
+.dr:last-child{border:none}
+.qa{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.qa-btn{display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1.5px solid #e2e8f0;color:var(--text);font-size:11px;font-weight:600;padding:6px 13px;border-radius:99px;cursor:pointer;transition:.2s;font-family:'Raleway',sans-serif}
+.qa-btn:hover{border-color:var(--gold);color:var(--gold)}
+.empty-row{text-align:center;padding:36px;color:var(--t2);font-size:12px}
+.empty-row i{font-size:30px;display:block;margin-bottom:9px;color:#cbd5e1}
+.loading-row{text-align:center;padding:32px;color:var(--t2);font-size:12px}
+
+/* SETTINGS */
+.set-card{background:var(--white);border-radius:var(--r);padding:26px;box-shadow:var(--sh);max-width:560px}
+.set-note{background:#fef9ec;border:1.5px solid #fde68a;border-radius:var(--r);padding:16px;font-size:12px;color:#92400e;margin-top:18px;line-height:1.7}
+.set-note code{background:#fff;padding:2px 5px;border-radius:4px;font-size:11px}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:900px){
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .ag{grid-template-columns:repeat(3,1fr)}
+  .mfr{grid-template-columns:1fr}
+  .dash-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-252px)}
+  .sidebar.mob{transform:translateX(0)!important}
+  .main{margin-left:0!important}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .ag{grid-template-columns:repeat(2,1fr)}
+  .content{padding:14px}
+  .mbox{padding:20px 18px}
+  .topbar{padding:0 14px}
+  .pg-title{font-size:13px}
+  .at{font-size:12px}
+  .at th{padding:8px 10px;font-size:8px}
+  .at td{padding:9px 10px}
+  .panel-hd{flex-direction:column;align-items:flex-start}
+  .tsearch{width:100%}
+}
+@media(max-width:580px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .ag{grid-template-columns:repeat(2,1fr)}
+  .sc{padding:14px;gap:9px}
+  .sc-ico{width:38px;height:38px;font-size:15px}
+  .sc-info strong{font-size:20px}
+}
+@media(max-width:400px){
+  .stats-row{grid-template-columns:1fr}
+  .ag{grid-template-columns:1fr 1fr}
+  .content{padding:10px}
+  .login-card{padding:32px 22px}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-card">
+    <div class="login-logo">H</div>
+    <div class="login-brand">Heavenly Horizon Tours</div>
+    <p class="login-sub">Admin Panel — Secure Access Only</p>
+    <div class="lf"><label>Email Address</label><input type="email" id="lemail" placeholder="admin@heavenlyhorizonstours.com" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+    <div class="lf"><label>Password</label><input type="password" id="lpass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+    <button class="login-btn" id="loginBtn" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Sign In to Dashboard</button>
+    <p class="login-err" id="loginErr"></p>
+    <p style="font-size:10px;color:var(--t3);margin-top:13px">🔒 Unauthorised access is strictly prohibited.</p>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sb-head">
+    <div class="sb-logo"><span>H</span>eavenly Horizon</div>
+    <div class="sb-tag">Tour Management System</div>
+  </div>
+  <nav class="sb-nav">
+    <div class="nav-sec">Overview</div>
+    <div class="ni on" data-sec="dashboard"><i class="fas fa-tachometer-alt"></i>Dashboard</div>
+    <div class="nav-sec">Content</div>
+    <div class="ni" data-sec="packages"><i class="fas fa-compass"></i>Tour Packages</div>
+    <div class="ni" data-sec="gallery"><i class="fas fa-images"></i>Gallery Images</div>
+    <div class="ni" data-sec="vehicles"><i class="fas fa-car"></i>Vehicles / Fleet</div>
+    <div class="ni" data-sec="testimonials"><i class="fas fa-star"></i>Testimonials</div>
+    <div class="nav-sec">Leads</div>
+    <div class="ni" data-sec="bookings"><i class="fas fa-calendar-check"></i>Bookings</div>
+    <div class="ni" data-sec="enquiries"><i class="fas fa-envelope"></i>Enquiries</div>
+    <div class="nav-sec">System</div>
+    <div class="ni" data-sec="settings"><i class="fas fa-cog"></i>Settings</div>
+  </nav>
+  <div class="sb-foot">
+    <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="main">
+  <div class="topbar">
+    <div class="tb-l">
+      <button class="tog" id="togBtn"><i class="fas fa-bars"></i></button>
+      <span class="pg-title" id="pgTitle">Dashboard</span>
+    </div>
+    <div class="tb-r">
+      <span class="admin-badge" id="adminEmail">admin</span>
+      <a href="index.html" target="_blank" class="view-site"><i class="fas fa-external-link-alt"></i> View Site</a>
+    </div>
+  </div>
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div class="panel on" id="sec-dashboard">
+      <div class="stats-row">
+        <div class="sc"><div class="sc-ico" style="background:rgba(201,168,76,.12)"><i class="fas fa-calendar-check" style="color:var(--gold)"></i></div><div class="sc-info"><strong id="cB">—</strong><span>Bookings</span></div></div>
+        <div class="sc"><div class="sc-ico" style="background:rgba(59,130,246,.1)"><i class="fas fa-envelope" style="color:var(--sky)"></i></div><div class="sc-info"><strong id="cE">—</strong><span>Enquiries</span></div></div>
+        <div class="sc"><div class="sc-ico" style="background:rgba(34,197,94,.1)"><i class="fas fa-compass" style="color:var(--green)"></i></div><div class="sc-info"><strong id="cP">—</strong><span>Packages</span></div></div>
+        <div class="sc"><div class="sc-ico" style="background:rgba(239,68,68,.1)"><i class="fas fa-images" style="color:var(--red)"></i></div><div class="sc-info"><strong id="cG">—</strong><span>Gallery Items</span></div></div>
+      </div>
+      <div class="qa">
+        <button class="qa-btn" onclick="sw('packages')"><i class="fas fa-plus"></i> Add Package</button>
+        <button class="qa-btn" onclick="sw('gallery')"><i class="fas fa-images"></i> Add Gallery Image</button>
+        <button class="qa-btn" onclick="sw('bookings')"><i class="fas fa-calendar-check"></i> View Bookings</button>
+        <button class="qa-btn" onclick="sw('enquiries')"><i class="fas fa-envelope"></i> View Enquiries</button>
+        <a class="qa-btn" href="index.html" target="_blank"><i class="fas fa-eye"></i> View Website</a>
+      </div>
+      <div class="dash-grid">
+        <div class="dc"><h4><i class="fas fa-calendar-check" style="color:var(--gold);margin-right:5px"></i>Recent Bookings</h4><div id="dB"><p style="font-size:12px;color:var(--t2)">Loading...</p></div></div>
+        <div class="dc"><h4><i class="fas fa-envelope" style="color:var(--sky);margin-right:5px"></i>Recent Enquiries</h4><div id="dE"><p style="font-size:12px;color:var(--t2)">Loading...</p></div></div>
+      </div>
+    </div>
+
+    <!-- PACKAGES -->
+    <div class="panel" id="sec-packages">
+      <div class="panel-hd"><span class="panel-title">Tour Packages <small id="pkgCnt"></small></span><button class="btn-add" onclick="openPkgModal(null)"><i class="fas fa-plus"></i> Add Package</button></div>
+      <div class="tw"><table class="at"><thead><tr><th>Image</th><th>Title</th><th>Category</th><th>Duration</th><th>Price</th><th>Order</th><th>Actions</th></tr></thead><tbody id="pkgBody"><tr><td colspan="7" class="loading-row"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr></tbody></table></div>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="panel" id="sec-gallery">
+      <div class="panel-hd"><span class="panel-title">Gallery Images <small id="galCnt"></small></span><button class="btn-add" onclick="openGalModal(null)"><i class="fas fa-plus"></i> Add Image</button></div>
+      <div class="ag" id="agrid"><p style="padding:20px;color:var(--t2);font-size:12px"><i class="fas fa-spinner fa-spin"></i> Loading...</p></div>
+    </div>
+
+    <!-- VEHICLES -->
+    <div class="panel" id="sec-vehicles">
+      <div class="panel-hd"><span class="panel-title">Vehicles / Fleet</span><button class="btn-add" onclick="openVehModal(null)"><i class="fas fa-plus"></i> Add Vehicle</button></div>
+      <div class="tw"><table class="at"><thead><tr><th>Image</th><th>Name</th><th>Subtitle</th><th>Price</th><th>Featured</th><th>Order</th><th>Actions</th></tr></thead><tbody id="vehBody"><tr><td colspan="7" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr></tbody></table></div>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <div class="panel" id="sec-testimonials">
+      <div class="panel-hd"><span class="panel-title">Testimonials</span><button class="btn-add" onclick="openTstModal(null)"><i class="fas fa-plus"></i> Add Review</button></div>
+      <div class="tw"><table class="at"><thead><tr><th>Name</th><th>Location</th><th>Rating</th><th>Message</th><th>Status</th><th>Actions</th></tr></thead><tbody id="tstBody"><tr><td colspan="6" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr></tbody></table></div>
+    </div>
+
+    <!-- BOOKINGS -->
+    <div class="panel" id="sec-bookings">
+      <div class="panel-hd"><span class="panel-title">Bookings <small id="bkCnt"></small></span><input class="tsearch" id="bkSearch" placeholder="Search name, phone..."/></div>
+      <div class="tw"><table class="at"><thead><tr><th>Name</th><th>Phone</th><th>Package</th><th>Date</th><th>Travellers</th><th>City</th><th>Status</th><th>Actions</th></tr></thead><tbody id="bkBody"><tr><td colspan="8" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr></tbody></table></div>
+    </div>
+
+    <!-- ENQUIRIES -->
+    <div class="panel" id="sec-enquiries">
+      <div class="panel-hd"><span class="panel-title">Enquiries <small id="enCnt"></small></span><input class="tsearch" id="enSearch" placeholder="Search name, phone..."/></div>
+      <div class="tw"><table class="at"><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Package</th><th>Travel Date</th><th>Status</th><th>Actions</th></tr></thead><tbody id="enBody"><tr><td colspan="7" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr></tbody></table></div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="panel" id="sec-settings">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px">Site Settings</h3>
+      <div class="set-card">
+        <div class="mf"><label>Business Name</label><input id="sBiz" value="Heavenly Horizon Tours"/></div>
+        <div class="mfr">
+          <div class="mf"><label>Primary Phone</label><input id="sP1" value="+91 88250 34964"/></div>
+          <div class="mf"><label>WhatsApp Number</label><input id="sWA" value="+91 91032 69575"/></div>
+        </div>
+        <div class="mf"><label>Email</label><input id="sEmail" value="Sales.heavenlyhorizontours@gmail.com"/></div>
+        <div class="mf"><label>Office Address</label><textarea id="sAddr" rows="2">Mehjoor Nagar, Srinagar, Jammu &amp; Kashmir 190001</textarea></div>
+        <div class="mfr">
+          <div class="mf"><label>Instagram URL</label><input id="sIG" value="https://www.instagram.com/heavenlyhorizontours"/></div>
+          <div class="mf"><label>MakeMeTop Profile URL</label><input id="sMMT" value="https://makemetop.in/?biz=C8Q3SOtAhD1ukPq1UX9Y"/></div>
+        </div>
+        <div class="mf"><label>Website URL</label><input id="sURL" value="https://heavenlyhorizonstours.com"/></div>
+        <button class="btn-gold" onclick="saveSettings()"><i class="fas fa-save"></i> Save Settings</button>
+      </div>
+      <div class="set-note">
+        <strong><i class="fas fa-info-circle"></i> Firebase Configuration</strong><br/><br/>
+        Firebase Project: <strong>insta-web-upload</strong> is already configured in all pages.<br/><br/>
+        Required Firestore collections: <code>bookings</code>, <code>enquiries</code>, <code>packages</code>, <code>gallery</code>, <code>vehicles</code>, <code>testimonials</code>, <code>settings</code><br/><br/>
+        Firestore Security Rules: <code>allow read: if true; allow write: if request.auth != null;</code><br/><br/>
+        Admin Setup: Go to Firebase Console → Authentication → Sign-in method → Enable Email/Password → Add Users → create your admin account, then use those credentials to login here.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODALS -->
+
+<!-- Package Modal -->
+<div class="mov" id="pkgMov">
+  <div class="mbox">
+    <button class="mc" onclick="closeMov('pkgMov')"><i class="fas fa-times"></i></button>
+    <h3 id="pkgMTitle">Add Tour Package</h3>
+    <input type="hidden" id="pkgId"/>
+    <div class="mfr"><div class="mf"><label>Title *</label><input id="pkgTitle" placeholder="e.g. Romantic Kashmir Honeymoon"/></div><div class="mf"><label>Category</label><select id="pkgCat"><option value="honeymoon">Honeymoon</option><option value="family">Family</option><option value="gulmarg">Gulmarg</option><option value="pahalgam">Pahalgam</option><option value="luxury">Luxury</option><option value="sonamarg">Sonamarg</option></select></div></div>
+    <div class="mfr"><div class="mf"><label>Duration</label><input id="pkgDur" placeholder="6N/7D"/></div><div class="mf"><label>Group Size</label><input id="pkgGrp" placeholder="Couples / Families / Any"/></div></div>
+    <div class="mfr"><div class="mf"><label>Price</label><input id="pkgPrice" placeholder="₹24,999"/></div><div class="mf"><label>Old Price (strike-through)</label><input id="pkgOld" placeholder="₹32,000"/></div></div>
+    <div class="mfr"><div class="mf"><label>Badge Style</label><select id="pkgBadge"><option value="">No badge</option><option value="bdg-red">Red — Best Seller</option><option value="bdg-gold">Gold — Premium</option><option value="bdg-blue">Blue — New</option></select></div><div class="mf"><label>Badge Text</label><input id="pkgBdgTxt" placeholder="Best Seller"/></div></div>
+    <div class="mf">
+      <label>Image URL</label>
+      <input id="pkgImg" placeholder="https://images.unsplash.com/photo-..." oninput="prevImg('pkgImg','pkgImgP')"/>
+      <img id="pkgImgP" class="img-prev" src="" alt="Preview"/>
+      <p class="img-hint">💡 Unsplash: open photo → right-click → Copy image address. Or paste any direct .jpg/.webp URL.</p>
+    </div>
+    <div class="mf"><label>Description</label><textarea id="pkgDesc" rows="3" placeholder="Brief package description..."></textarea></div>
+    <div class="mf"><label>Includes (comma separated)</label><input id="pkgInc" placeholder="Luxury Houseboat, All Meals, Cab Services, Tour Guide"/></div>
+    <div class="mf"><label>Itinerary (one day per line)</label><textarea id="pkgItin" rows="5" placeholder="Arrival Srinagar, houseboat check-in, shikara ride&#10;Mughal Gardens, Shankaracharya Temple..."></textarea></div>
+    <div class="mf"><label>Display Order</label><input type="number" id="pkgOrder" placeholder="1" min="1"/></div>
+    <div class="mfoot"><button class="btn-cancel" onclick="closeMov('pkgMov')">Cancel</button><button class="btn-gold" onclick="savePkg()"><i class="fas fa-save"></i> Save Package</button></div>
+  </div>
+</div>
+
+<!-- Gallery Modal -->
+<div class="mov" id="galMov">
+  <div class="mbox">
+    <button class="mc" onclick="closeMov('galMov')"><i class="fas fa-times"></i></button>
+    <h3 id="galMTitle">Add Gallery Image</h3>
+    <input type="hidden" id="galId"/>
+    <div class="mf">
+      <label>Image URL *</label>
+      <input id="galUrl" placeholder="https://images.unsplash.com/photo-..." oninput="prevImg('galUrl','galImgP')"/>
+      <img id="galImgP" class="img-prev" src="" alt="Preview"/>
+      <p class="img-hint">💡 Go to unsplash.com → search Kashmir → open photo → right-click → Copy image address → paste here.</p>
+    </div>
+    <div class="mf"><label>Caption / Description</label><input id="galCap" placeholder="e.g. Dal Lake at Sunrise, Srinagar"/></div>
+    <div class="mfr">
+      <div class="mf"><label>Category</label><select id="galCat"><option value="srinagar">Srinagar</option><option value="gulmarg">Gulmarg</option><option value="pahalgam">Pahalgam</option><option value="sonamarg">Sonamarg</option><option value="doodhpathri">Doodhpathri</option><option value="luxury">Luxury</option><option value="other">Other</option></select></div>
+      <div class="mf"><label>Display Order</label><input type="number" id="galOrder" placeholder="1" min="1"/></div>
+    </div>
+    <div class="mfoot"><button class="btn-cancel" onclick="closeMov('galMov')">Cancel</button><button class="btn-gold" onclick="saveGal()"><i class="fas fa-save"></i> Save Image</button></div>
+  </div>
+</div>
+
+<!-- Vehicle Modal -->
+<div class="mov" id="vehMov">
+  <div class="mbox">
+    <button class="mc" onclick="closeMov('vehMov')"><i class="fas fa-times"></i></button>
+    <h3 id="vehMTitle">Add Vehicle</h3>
+    <input type="hidden" id="vehId"/>
+    <div class="mfr"><div class="mf"><label>Vehicle Name *</label><input id="vehName" placeholder="SUV / Innova Crysta"/></div><div class="mf"><label>Subtitle</label><input id="vehSub" placeholder="Toyota Innova / Ertiga"/></div></div>
+    <div class="mf"><label>Image URL</label><input id="vehImg" placeholder="https://images.unsplash.com/..." oninput="prevImg('vehImg','vehImgP')"/><img id="vehImgP" class="img-prev" src="" alt="Preview"/></div>
+    <div class="mf"><label>Font Awesome Icon Class</label><input id="vehIco" placeholder="fas fa-shuttle-van"/></div>
+    <div class="mf"><label>Specs (comma separated)</label><input id="vehSpecs" placeholder="6-7 Passengers, 4 Bags, AC + Heater, GPS Tracked"/></div>
+    <div class="mfr"><div class="mf"><label>Price</label><input id="vehPrice" placeholder="₹3,800"/></div><div class="mf"><label>Price Note</label><input id="vehNote" placeholder="/day"/></div></div>
+    <div class="mfr"><div class="mf"><label>Featured / Most Popular?</label><select id="vehFeat"><option value="false">No</option><option value="true">Yes — Show as Featured</option></select></div><div class="mf"><label>Display Order</label><input type="number" id="vehOrder" placeholder="1" min="1"/></div></div>
+    <div class="mfoot"><button class="btn-cancel" onclick="closeMov('vehMov')">Cancel</button><button class="btn-gold" onclick="saveVeh()"><i class="fas fa-save"></i> Save Vehicle</button></div>
+  </div>
+</div>
+
+<!-- Testimonial Modal -->
+<div class="mov" id="tstMov">
+  <div class="mbox">
+    <button class="mc" onclick="closeMov('tstMov')"><i class="fas fa-times"></i></button>
+    <h3 id="tstMTitle">Add Testimonial</h3>
+    <input type="hidden" id="tstId"/>
+    <div class="mfr"><div class="mf"><label>Guest Name *</label><input id="tstName" placeholder="Rahul & Priya Kapoor"/></div><div class="mf"><label>Location</label><input id="tstLoc" placeholder="Mumbai — Honeymoon Package"/></div></div>
+    <div class="mf"><label>Star Rating (1–5)</label><input type="number" id="tstRat" min="1" max="5" value="5"/></div>
+    <div class="mf"><label>Review Message *</label><textarea id="tstMsg" rows="4" placeholder="Guest review text..."></textarea></div>
+    <div class="mf"><label>Show on Website?</label><select id="tstAppr"><option value="true">Yes — Published</option><option value="false">No — Hidden</option></select></div>
+    <div class="mfoot"><button class="btn-cancel" onclick="closeMov('tstMov')">Cancel</button><button class="btn-gold" onclick="saveTst()"><i class="fas fa-save"></i> Save Review</button></div>
+  </div>
+</div>
+
+<!-- View Detail Modal -->
+<div class="mov" id="viewMov">
+  <div class="mbox" style="max-width:560px">
+    <button class="mc" onclick="closeMov('viewMov')"><i class="fas fa-times"></i></button>
+    <h3>Record Details</h3>
+    <div id="viewBody" style="font-size:13px;color:var(--t2);line-height:2"></div>
+    <div class="mfoot"><button class="btn-cancel" onclick="closeMov('viewMov')">Close</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore,collection,addDoc,getDocs,doc,updateDoc,deleteDoc,query,orderBy,serverTimestamp,limit }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const fbCfg = {
+  apiKey: "AIzaSyADiBZe0V5gTnB89Ik1Bby2NDo-9nRxAHc",
+  authDomain: "insta-web-upload.firebaseapp.com",
+  databaseURL: "https://insta-web-upload-default-rtdb.firebaseio.com",
+  projectId: "insta-web-upload",
+  storageBucket: "insta-web-upload.firebasestorage.app",
+  messagingSenderId: "1092302887537",
+  appId: "1:1092302887537:web:a1bb7595868c84c30999d0"
+};
+const app = initializeApp(fbCfg);
+const db  = getFirestore(app);
+const auth = getAuth(app);
+
+// ── TOAST ─────────────────────────────────────────────────
+function toast(msg,type='info'){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast '+type;
+  requestAnimationFrame(()=>t.classList.add('show'));
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// ── AUTH ──────────────────────────────────────────────────
+onAuthStateChanged(auth,user=>{
+  if(user){
+    document.getElementById('loginWrap').classList.add('out');
+    document.getElementById('adminEmail').textContent=user.email;
+    loadDash();
+  } else {
+    document.getElementById('loginWrap').classList.remove('out');
+  }
+});
+window.doLogin=async function(){
+  const btn=document.getElementById('loginBtn'),err=document.getElementById('loginErr');
+  const email=document.getElementById('lemail').value.trim(),pass=document.getElementById('lpass').value;
+  err.textContent=''; btn.textContent='Signing in...'; btn.disabled=true;
+  try{ await signInWithEmailAndPassword(auth,email,pass); }
+  catch(e){
+    err.textContent='Invalid email or password. Please try again.';
+    btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Sign In to Dashboard';
+    btn.disabled=false;
+  }
+};
+document.getElementById('logoutBtn').addEventListener('click',()=>signOut(auth));
+
+// ── NAV ───────────────────────────────────────────────────
+document.querySelectorAll('.ni').forEach(item=>{
+  item.addEventListener('click',()=>sw(item.dataset.sec));
+});
+window.sw=function(sec){
+  document.querySelectorAll('.ni').forEach(n=>n.classList.toggle('on',n.dataset.sec===sec));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  const panel=document.getElementById('sec-'+sec);
+  if(panel) panel.classList.add('on');
+  document.getElementById('pgTitle').textContent=
+    document.querySelector('.ni[data-sec="'+sec+'"]')?.textContent.trim()||sec;
+  loadSec(sec);
+};
+document.getElementById('togBtn').addEventListener('click',()=>{
+  const sb=document.getElementById('sidebar'),mn=document.getElementById('main');
+  if(window.innerWidth<=768){ sb.classList.toggle('mob'); }
+  else { sb.classList.toggle('off'); mn.classList.toggle('full'); }
+});
+
+// ── MODALS ─────────────────────────────────────────────────
+window.closeMov=id=>document.getElementById(id).classList.remove('open');
+function openMov(id){document.getElementById(id).classList.add('open');}
+document.querySelectorAll('.mov').forEach(m=>{
+  m.addEventListener('click',e=>{ if(e.target===m) m.classList.remove('open'); });
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape') document.querySelectorAll('.mov.open').forEach(m=>m.classList.remove('open'));
+});
+
+// ── IMAGE PREVIEW ──────────────────────────────────────────
+window.prevImg=function(inputId,prevId){
+  const url=document.getElementById(inputId).value.trim();
+  const prev=document.getElementById(prevId);
+  if(url){ prev.src=url; prev.classList.add('show'); prev.onerror=()=>prev.classList.remove('show'); }
+  else prev.classList.remove('show');
+};
+
+// ── HELPERS ────────────────────────────────────────────────
+function v(id){return document.getElementById(id)?.value?.trim()||'';}
+function sv(id,val){const el=document.getElementById(id);if(el)el.value=val||'';}
+function clr(ids){ids.forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});}
+function fmtDate(ts){if(!ts)return '';try{const d=ts.toDate?ts.toDate():new Date(ts);return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});}catch(e){return String(ts);}}
+
+// ── SECTION ROUTER ─────────────────────────────────────────
+function loadSec(sec){
+  const m={dashboard:loadDash,packages:loadPkgs,gallery:loadGal,vehicles:loadVeh,testimonials:loadTst,bookings:loadBk,enquiries:loadEn};
+  m[sec]?.();
+}
+
+// ── DASHBOARD ──────────────────────────────────────────────
+async function loadDash(){
+  const cols=[['bookings','cB'],['enquiries','cE'],['packages','cP'],['gallery','cG']];
+  for(const [col,el] of cols){
+    try{const s=await getDocs(collection(db,col));document.getElementById(el).textContent=s.size;}
+    catch{document.getElementById(el).textContent='—';}
+  }
+  const db_el=document.getElementById('dB');
+  try{
+    const s=await getDocs(query(collection(db,'bookings'),orderBy('createdAt','desc'),limit(6)));
+    if(s.empty){db_el.innerHTML='<p style="font-size:12px;color:var(--t2)">No bookings yet.</p>';}
+    else{db_el.innerHTML=s.docs.map(d=>{const b=d.data();return`<div class="dr"><span style="font-weight:600">${b.name||'—'}</span><span style="color:var(--t2);font-size:11px">${b.packageType?.split(' — ')[0]||'—'}</span><span class="bdg bdg-${b.status||'pending'}">${b.status||'pending'}</span></div>`;}).join('');}
+  }catch{db_el.innerHTML='<p style="font-size:12px;color:var(--t2)">Connect Firebase to see data.</p>';}
+  const de_el=document.getElementById('dE');
+  try{
+    const s=await getDocs(query(collection(db,'enquiries'),orderBy('createdAt','desc'),limit(6)));
+    if(s.empty){de_el.innerHTML='<p style="font-size:12px;color:var(--t2)">No enquiries yet.</p>';}
+    else{de_el.innerHTML=s.docs.map(d=>{const e=d.data();return`<div class="dr"><span style="font-weight:600">${e.name||'—'}</span><span style="color:var(--t2);font-size:11px">${e.phone||'—'}</span><span class="bdg bdg-${e.status==='contacted'?'confirmed':'new'}">${e.status||'new'}</span></div>`;}).join('');}
+  }catch{de_el.innerHTML='<p style="font-size:12px;color:var(--t2)">Connect Firebase to see data.</p>';}
+}
+
+// ── PACKAGES ───────────────────────────────────────────────
+let pkgCache=[];
+async function loadPkgs(){
+  const tb=document.getElementById('pkgBody');
+  tb.innerHTML='<tr><td colspan="7" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr>';
+  try{const s=await getDocs(query(collection(db,'packages'),orderBy('order','asc')));pkgCache=[];s.forEach(d=>pkgCache.push({id:d.id,...d.data()}));}
+  catch(e){pkgCache=[];}
+  document.getElementById('pkgCnt').textContent='('+pkgCache.length+')';
+  if(!pkgCache.length){tb.innerHTML='<tr><td colspan="7" class="empty-row"><i class="fas fa-compass"></i>No packages yet. Add your first tour!</td></tr>';return;}
+  tb.innerHTML=pkgCache.map(p=>`<tr>
+    <td>${p.image?`<img src="${p.image}" class="thumb" onerror="this.style.display='none'" alt=""/>`:'—'}</td>
+    <td style="font-weight:600;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.title||'—'}</td>
+    <td><span class="bdg bdg-${p.category||'luxury'}">${p.category||'—'}</span></td>
+    <td style="color:var(--t2);white-space:nowrap">${p.duration||'—'}</td>
+    <td style="font-weight:600;color:var(--navy)">${p.price||'—'}</td>
+    <td style="color:var(--t2)">${p.order||1}</td>
+    <td><div class="acts">
+      <button class="ab ab-e" onclick="openPkgModal('${p.id}')" title="Edit"><i class="fas fa-edit"></i></button>
+      <button class="ab ab-d" onclick="delRec('packages','${p.id}',loadPkgs)" title="Delete"><i class="fas fa-trash"></i></button>
+    </div></td>
+  </tr>`).join('');
+}
+window.openPkgModal=function(id){
+  clr(['pkgId','pkgTitle','pkgDur','pkgGrp','pkgPrice','pkgOld','pkgBdgTxt','pkgImg','pkgDesc','pkgInc','pkgItin','pkgOrder']);
+  document.getElementById('pkgImgP').classList.remove('show');
+  if(id){
+    const p=pkgCache.find(x=>x.id===id);if(!p)return;
+    sv('pkgId',id);sv('pkgTitle',p.title);sv('pkgCat',p.category);sv('pkgDur',p.duration);
+    sv('pkgGrp',p.groupSize);sv('pkgPrice',p.price);sv('pkgOld',p.oldPrice);
+    sv('pkgBadge',p.badge||'');sv('pkgBdgTxt',p.bdgText);sv('pkgImg',p.image);sv('pkgDesc',p.description);
+    sv('pkgInc',(p.includes||[]).join(', '));sv('pkgItin',(p.itinerary||[]).join('\n'));sv('pkgOrder',p.order||1);
+    if(p.image){const pr=document.getElementById('pkgImgP');pr.src=p.image;pr.classList.add('show');}
+    document.getElementById('pkgMTitle').textContent='Edit Package';
+  } else { document.getElementById('pkgMTitle').textContent='Add Tour Package'; }
+  openMov('pkgMov');
+};
+window.savePkg=async function(){
+  if(!v('pkgTitle')){toast('Package title is required','err');return;}
+  const id=v('pkgId');
+  const data={title:v('pkgTitle'),category:v('pkgCat'),duration:v('pkgDur'),groupSize:v('pkgGrp'),
+    price:v('pkgPrice'),oldPrice:v('pkgOld'),badge:v('pkgBadge'),bdgText:v('pkgBdgTxt'),
+    image:v('pkgImg'),description:v('pkgDesc'),
+    includes:v('pkgInc').split(',').map(s=>s.trim()).filter(Boolean),
+    itinerary:v('pkgItin').split('\n').map(s=>s.trim()).filter(Boolean),
+    order:parseInt(v('pkgOrder'))||1,updatedAt:serverTimestamp()};
+  try{
+    if(id) await updateDoc(doc(db,'packages',id),data);
+    else{data.createdAt=serverTimestamp();await addDoc(collection(db,'packages'),data);}
+    toast(id?'Package updated!':'Package added!','ok');closeMov('pkgMov');loadPkgs();
+  }catch(e){toast('Error: '+e.message,'err');}
+};
+
+// ── GALLERY ────────────────────────────────────────────────
+let galCache=[];
+async function loadGal(){
+  const grid=document.getElementById('agrid');
+  grid.innerHTML='<p style="padding:18px;color:var(--t2);font-size:12px"><i class="fas fa-spinner fa-spin"></i> Loading...</p>';
+  try{const s=await getDocs(query(collection(db,'gallery'),orderBy('order','asc')));galCache=[];s.forEach(d=>galCache.push({id:d.id,...d.data()}));}
+  catch(e){galCache=[];}
+  document.getElementById('galCnt').textContent='('+galCache.length+')';
+  if(!galCache.length){grid.innerHTML='<p style="padding:18px;color:var(--t2);font-size:12px">No images yet. Click "Add Image" to get started.</p>';return;}
+  grid.innerHTML=galCache.map(img=>`
+    <div class="ag-item">
+      <img src="${img.url||''}" alt="${img.caption||''}" onerror="this.src='https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=400'"/>
+      <div class="ag-acts">
+        <button class="ab ab-e" onclick="openGalModal('${img.id}')" title="Edit"><i class="fas fa-edit"></i></button>
+        <button class="ab ab-d" onclick="delRec('gallery','${img.id}',loadGal)" title="Delete"><i class="fas fa-trash"></i></button>
+      </div>
+      <div class="ag-cap">${img.caption||'No caption'} [${img.category||''}]</div>
+    </div>`).join('');
+}
+window.openGalModal=function(id){
+  clr(['galId','galUrl','galCap','galOrder']);document.getElementById('galImgP').classList.remove('show');
+  if(id){
+    const img=galCache.find(x=>x.id===id);if(!img)return;
+    sv('galId',id);sv('galUrl',img.url);sv('galCap',img.caption);sv('galCat',img.category);sv('galOrder',img.order||1);
+    if(img.url){const p=document.getElementById('galImgP');p.src=img.url;p.classList.add('show');}
+    document.getElementById('galMTitle').textContent='Edit Gallery Image';
+  } else { document.getElementById('galMTitle').textContent='Add Gallery Image'; }
+  openMov('galMov');
+};
+window.saveGal=async function(){
+  if(!v('galUrl')){toast('Image URL is required','err');return;}
+  const id=v('galId');
+  const data={url:v('galUrl'),caption:v('galCap'),category:v('galCat'),order:parseInt(v('galOrder'))||1,updatedAt:serverTimestamp()};
+  try{
+    if(id) await updateDoc(doc(db,'gallery',id),data);
+    else{data.createdAt=serverTimestamp();await addDoc(collection(db,'gallery'),data);}
+    toast(id?'Image updated!':'Image added!','ok');closeMov('galMov');loadGal();
+  }catch(e){toast('Error: '+e.message,'err');}
+};
+
+// ── VEHICLES ───────────────────────────────────────────────
+let vehCache=[];
+async function loadVeh(){
+  const tb=document.getElementById('vehBody');
+  tb.innerHTML='<tr><td colspan="7" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr>';
+  try{const s=await getDocs(query(collection(db,'vehicles'),orderBy('order','asc')));vehCache=[];s.forEach(d=>vehCache.push({id:d.id,...d.data()}));}
+  catch(e){vehCache=[];}
+  if(!vehCache.length){tb.innerHTML='<tr><td colspan="7" class="empty-row"><i class="fas fa-car"></i>No vehicles yet.</td></tr>';return;}
+  tb.innerHTML=vehCache.map(v2=>`<tr>
+    <td>${v2.image?`<img src="${v2.image}" class="thumb" onerror="this.style.display='none'" alt=""/>`:'—'}</td>
+    <td style="font-weight:600">${v2.name||'—'}</td>
+    <td style="color:var(--t2)">${v2.sub||'—'}</td>
+    <td style="font-weight:600;color:var(--navy)">${v2.price||'—'}</td>
+    <td>${v2.featured?'<span class="bdg bdg-confirmed">Yes</span>':'<span class="bdg">No</span>'}</td>
+    <td style="color:var(--t2)">${v2.order||1}</td>
+    <td><div class="acts"><button class="ab ab-e" onclick="openVehModal('${v2.id}')"><i class="fas fa-edit"></i></button><button class="ab ab-d" onclick="delRec('vehicles','${v2.id}',loadVeh)"><i class="fas fa-trash"></i></button></div></td>
+  </tr>`).join('');
+}
+window.openVehModal=function(id){
+  clr(['vehId','vehName','vehSub','vehImg','vehIco','vehSpecs','vehPrice','vehNote','vehOrder']);
+  document.getElementById('vehImgP').classList.remove('show');
+  if(id){
+    const v2=vehCache.find(x=>x.id===id);if(!v2)return;
+    sv('vehId',id);sv('vehName',v2.name);sv('vehSub',v2.sub);sv('vehImg',v2.image);sv('vehIco',v2.icon);
+    sv('vehSpecs',(v2.specs||[]).join(', '));sv('vehPrice',v2.price);sv('vehNote',v2.priceNote);
+    sv('vehFeat',String(!!v2.featured));sv('vehOrder',v2.order||1);
+    if(v2.image){const p=document.getElementById('vehImgP');p.src=v2.image;p.classList.add('show');}
+    document.getElementById('vehMTitle').textContent='Edit Vehicle';
+  } else { document.getElementById('vehMTitle').textContent='Add Vehicle'; }
+  openMov('vehMov');
+};
+window.saveVeh=async function(){
+  if(!v('vehName')){toast('Vehicle name required','err');return;}
+  const id=v('vehId');
+  const data={name:v('vehName'),sub:v('vehSub'),image:v('vehImg'),icon:v('vehIco'),
+    specs:v('vehSpecs').split(',').map(s=>s.trim()).filter(Boolean),
+    price:v('vehPrice'),priceNote:v('vehNote'),
+    featured:v('vehFeat')==='true',order:parseInt(v('vehOrder'))||1,updatedAt:serverTimestamp()};
+  try{
+    if(id) await updateDoc(doc(db,'vehicles',id),data);
+    else{data.createdAt=serverTimestamp();await addDoc(collection(db,'vehicles'),data);}
+    toast('Vehicle saved!','ok');closeMov('vehMov');loadVeh();
+  }catch(e){toast('Error: '+e.message,'err');}
+};
+
+// ── TESTIMONIALS ───────────────────────────────────────────
+let tstCache=[];
+async function loadTst(){
+  const tb=document.getElementById('tstBody');
+  tb.innerHTML='<tr><td colspan="6" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr>';
+  try{const s=await getDocs(query(collection(db,'testimonials'),orderBy('createdAt','desc')));tstCache=[];s.forEach(d=>tstCache.push({id:d.id,...d.data()}));}
+  catch(e){tstCache=[];}
+  if(!tstCache.length){tb.innerHTML='<tr><td colspan="6" class="empty-row"><i class="fas fa-star"></i>No reviews yet.</td></tr>';return;}
+  tb.innerHTML=tstCache.map(t=>`<tr>
+    <td style="font-weight:600">${t.name||'—'}</td>
+    <td style="color:var(--t2)">${t.location||'—'}</td>
+    <td style="color:#f59e0b;letter-spacing:1px">${'★'.repeat(parseInt(t.rating)||5)}</td>
+    <td style="color:var(--t2);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.message||'—'}</td>
+    <td>${t.approved!==false?'<span class="bdg bdg-confirmed">Visible</span>':'<span class="bdg bdg-pending">Hidden</span>'}</td>
+    <td><div class="acts">
+      <button class="ab ab-a" onclick="toggleApprove('${t.id}',${t.approved===false})" title="${t.approved!==false?'Hide':'Show'}"><i class="fas ${t.approved!==false?'fa-eye-slash':'fa-eye'}"></i></button>
+      <button class="ab ab-e" onclick="openTstModal('${t.id}')"><i class="fas fa-edit"></i></button>
+      <button class="ab ab-d" onclick="delRec('testimonials','${t.id}',loadTst)"><i class="fas fa-trash"></i></button>
+    </div></td>
+  </tr>`).join('');
+}
+window.openTstModal=function(id){
+  clr(['tstId','tstName','tstLoc','tstMsg']);sv('tstRat','5');sv('tstAppr','true');
+  if(id){
+    const t=tstCache.find(x=>x.id===id);if(!t)return;
+    sv('tstId',id);sv('tstName',t.name);sv('tstLoc',t.location);sv('tstRat',t.rating||5);
+    sv('tstMsg',t.message);sv('tstAppr',String(t.approved!==false));
+    document.getElementById('tstMTitle').textContent='Edit Testimonial';
+  } else { document.getElementById('tstMTitle').textContent='Add Testimonial'; }
+  openMov('tstMov');
+};
+window.saveTst=async function(){
+  if(!v('tstName')||!v('tstMsg')){toast('Name and message required','err');return;}
+  const id=v('tstId');
+  const data={name:v('tstName'),location:v('tstLoc'),rating:parseInt(v('tstRat'))||5,
+    message:v('tstMsg'),approved:v('tstAppr')==='true',updatedAt:serverTimestamp()};
+  try{
+    if(id) await updateDoc(doc(db,'testimonials',id),data);
+    else{data.createdAt=serverTimestamp();await addDoc(collection(db,'testimonials'),data);}
+    toast('Review saved!','ok');closeMov('tstMov');loadTst();
+  }catch(e){toast('Error: '+e.message,'err');}
+};
+window.toggleApprove=async function(id,val){
+  try{await updateDoc(doc(db,'testimonials',id),{approved:val});toast(val?'Review published!':'Review hidden.');loadTst();}
+  catch(e){toast('Error','err');}
+};
+
+// ── BOOKINGS ───────────────────────────────────────────────
+let bkCache=[];
+async function loadBk(){
+  const tb=document.getElementById('bkBody');
+  tb.innerHTML='<tr><td colspan="8" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr>';
+  try{const s=await getDocs(query(collection(db,'bookings'),orderBy('createdAt','desc')));bkCache=[];s.forEach(d=>bkCache.push({id:d.id,...d.data()}));}
+  catch(e){bkCache=[];}
+  document.getElementById('bkCnt').textContent='('+bkCache.length+')';
+  renderBk(bkCache);
+}
+function renderBk(data){
+  const tb=document.getElementById('bkBody');
+  if(!data.length){tb.innerHTML='<tr><td colspan="8" class="empty-row"><i class="fas fa-calendar"></i>No bookings yet.</td></tr>';return;}
+  tb.innerHTML=data.map(b=>`<tr>
+    <td style="font-weight:600">${b.name||'—'}</td>
+    <td><a href="tel:${b.phone}" style="color:var(--sky)">${b.phone||'—'}</a></td>
+    <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px">${(b.packageType||'—').split(' — ')[0]}</td>
+    <td style="color:var(--t2);white-space:nowrap">${b.travelDate||'—'}</td>
+    <td style="color:var(--t2)">${b.adults||'1'} Adt${b.children>0?', '+b.children+' Ch':''}</td>
+    <td style="color:var(--t2)">${b.city||'—'}</td>
+    <td><select class="ssel" onchange="updStatus('bookings','${b.id}',this.value)">
+      <option value="pending" ${b.status==='pending'?'selected':''}>Pending</option>
+      <option value="confirmed" ${b.status==='confirmed'?'selected':''}>Confirmed</option>
+      <option value="cancelled" ${b.status==='cancelled'?'selected':''}>Cancelled</option>
+    </select></td>
+    <td><div class="acts">
+      <button class="ab ab-v" onclick="viewRec(${JSON.stringify(b).replace(/'/g,'\\&apos;')})" title="View"><i class="fas fa-eye"></i></button>
+      <a class="ab ab-w" href="https://wa.me/${(b.phone||'').replace(/[^0-9]/g,'')}?text=Hi%20${encodeURIComponent(b.name||'')}!%20Your%20Kashmir%20trip%20with%20Heavenly%20Horizon%20Tours%20is%20confirmed." target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <button class="ab ab-d" onclick="delRec('bookings','${b.id}',loadBk)" title="Delete"><i class="fas fa-trash"></i></button>
+    </div></td>
+  </tr>`).join('');
+}
+document.getElementById('bkSearch').addEventListener('input',function(){
+  const q=this.value.toLowerCase();
+  renderBk(bkCache.filter(b=>`${b.name}${b.phone}${b.packageType}`.toLowerCase().includes(q)));
+});
+
+// ── ENQUIRIES ──────────────────────────────────────────────
+let enCache=[];
+async function loadEn(){
+  const tb=document.getElementById('enBody');
+  tb.innerHTML='<tr><td colspan="7" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr>';
+  try{const s=await getDocs(query(collection(db,'enquiries'),orderBy('createdAt','desc')));enCache=[];s.forEach(d=>enCache.push({id:d.id,...d.data()}));}
+  catch(e){enCache=[];}
+  document.getElementById('enCnt').textContent='('+enCache.length+')';
+  renderEn(enCache);
+}
+function renderEn(data){
+  const tb=document.getElementById('enBody');
+  if(!data.length){tb.innerHTML='<tr><td colspan="7" class="empty-row"><i class="fas fa-envelope"></i>No enquiries yet.</td></tr>';return;}
+  tb.innerHTML=data.map(e=>`<tr>
+    <td style="font-weight:600">${e.name||'—'}</td>
+    <td><a href="tel:${e.phone}" style="color:var(--sky)">${e.phone||'—'}</a></td>
+    <td style="color:var(--t2);font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.email||'—'}</td>
+    <td style="font-size:12px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.package||e['package']||'—'}</td>
+    <td style="color:var(--t2);white-space:nowrap">${e.date||'—'}</td>
+    <td><select class="ssel" onchange="updStatus('enquiries','${e.id}',this.value)">
+      <option value="new" ${e.status==='new'?'selected':''}>New</option>
+      <option value="contacted" ${e.status==='contacted'?'selected':''}>Contacted</option>
+      <option value="done" ${e.status==='done'?'selected':''}>Done</option>
+    </select></td>
+    <td><div class="acts">
+      <a class="ab ab-w" href="https://wa.me/${(e.phone||'').replace(/[^0-9]/g,'')}?text=Hi%20${encodeURIComponent(e.name||'')}!%20Thank%20you%20for%20your%20enquiry%20at%20Heavenly%20Horizon%20Tours." target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <button class="ab ab-v" onclick="viewRec(${JSON.stringify(e).replace(/'/g,'\\&apos;')})" title="View"><i class="fas fa-eye"></i></button>
+      <button class="ab ab-d" onclick="delRec('enquiries','${e.id}',loadEn)" title="Delete"><i class="fas fa-trash"></i></button>
+    </div></td>
+  </tr>`).join('');
+}
+document.getElementById('enSearch').addEventListener('input',function(){
+  const q=this.value.toLowerCase();
+  renderEn(enCache.filter(e=>`${e.name}${e.phone}${e.email}`.toLowerCase().includes(q)));
+});
+
+// ── SHARED CRUD ────────────────────────────────────────────
+window.updStatus=async function(col,id,status){
+  try{await updateDoc(doc(db,col,id),{status,updatedAt:serverTimestamp()});toast('Status updated','ok');}
+  catch(e){toast('Error: '+e.message,'err');}
+};
+window.delRec=async function(col,id,reload){
+  if(!confirm('Delete this record permanently?')) return;
+  try{await deleteDoc(doc(db,col,id));toast('Deleted','ok');reload?.();}
+  catch(e){toast('Error: '+e.message,'err');}
+};
+window.viewRec=function(rec){
+  const skip=['id'];
+  document.getElementById('viewBody').innerHTML='<table style="width:100%;border-collapse:collapse">'+
+    Object.entries(rec).filter(([k])=>!skip.includes(k)).map(([k,val])=>
+      `<tr style="border-bottom:1px solid #f1f5f9"><td style="padding:6px 0;font-weight:600;color:var(--text);width:140px;text-transform:capitalize;font-size:11px;letter-spacing:.5px">${k.replace(/([A-Z])/g,' $1').replace(/^./,s=>s.toUpperCase())}</td><td style="padding:6px 0;color:var(--t2)">${val?.toDate?val.toDate().toLocaleDateString('en-IN'):Array.isArray(val)?val.join(', '):(String(val||'—'))}</td></tr>`
+    ).join('')+'</table>';
+  openMov('viewMov');
+};
+
+// ── SETTINGS ───────────────────────────────────────────────
+window.saveSettings=async function(){
+  const data={bizName:document.getElementById('sBiz').value.trim(),phone1:document.getElementById('sP1').value.trim(),whatsapp:document.getElementById('sWA').value.trim(),email:document.getElementById('sEmail').value.trim(),address:document.getElementById('sAddr').value.trim(),instagram:document.getElementById('sIG').value.trim(),makemetop:document.getElementById('sMMT').value.trim(),website:document.getElementById('sURL').value.trim(),updatedAt:serverTimestamp()};
+  try{
+    const snap=await getDocs(collection(db,'settings'));
+    if(!snap.empty) await updateDoc(doc(db,'settings',snap.docs[0].id),data);
+    else{data.createdAt=serverTimestamp();await addDoc(collection(db,'settings'),data);}
+    toast('Settings saved!','ok');
+  }catch(e){toast('Error: '+e.message,'err');}
+};
+</script>
+</body>
+</html>

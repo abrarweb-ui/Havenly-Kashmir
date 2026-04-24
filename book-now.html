@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<title>Book Now – Heavenly Horizon Tours Kashmir</title>
+<meta name="description" content="Book your Kashmir tour with Heavenly Horizon Tours. 3-step booking wizard. Confirm your Kashmir trip in minutes."/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B1F3A'/><text y='.85em' font-size='60' x='10' fill='%23C9A84C'>H</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+.bl{display:grid;grid-template-columns:1fr 340px;gap:36px;align-items:start}
+.bcard{background:var(--white);border-radius:var(--r-xl);padding:36px;box-shadow:var(--sh-md)}
+.bcard h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:22px}
+.bcard h2 em{font-style:italic;color:var(--gold)}
+.steps{display:flex;margin-bottom:28px;position:relative}
+.steps::before{content:'';position:absolute;top:16px;left:16px;right:16px;height:2px;background:var(--mist);z-index:0}
+.bstep{flex:1;text-align:center;position:relative;z-index:1}
+.bstep-n{width:32px;height:32px;border-radius:50%;background:var(--mist);color:var(--text3);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 5px;transition:var(--ease);border:2px solid transparent}
+.bstep.on .bstep-n{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.bstep.done .bstep-n{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.bstep-l{font-size:10px;color:var(--text3);font-weight:600;display:block}
+.bstep.on .bstep-l{color:var(--navy);font-weight:700}
+.ssec{display:none}
+.ssec.on{display:block}
+.snav{display:flex;gap:9px;justify-content:flex-end;margin-top:20px}
+.sb{display:flex;flex-direction:column;gap:16px;position:sticky;top:82px}
+.sb-info{background:var(--navy);border-radius:var(--r-xl);padding:24px;color:var(--white)}
+.sb-info h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:14px}
+.sb-info h3 em{font-style:italic;color:var(--gold-light)}
+.sb-item{display:flex;gap:8px;margin-bottom:9px;font-size:13px;color:rgba(255,255,255,.6)}
+.sb-item i{color:var(--gold);width:14px;flex-shrink:0;margin-top:2px}
+.sum{background:var(--white);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-md)}
+.sum h4{font-size:11px;font-weight:700;color:var(--navy);margin-bottom:12px;letter-spacing:1.5px;text-transform:uppercase}
+.sum-r{display:flex;justify-content:space-between;font-size:13px;color:var(--text2);padding:5px 0;border-bottom:1px solid var(--mist)}
+.sum-r:last-of-type{border:none;font-weight:700;color:var(--navy)}
+.rev-box{background:var(--mist);border-radius:var(--r-md);padding:18px;font-size:13px;color:var(--text2);line-height:2;margin-bottom:14px}
+.rev-box b{color:var(--navy)}
+.sw{text-align:center;padding:44px 20px}
+.sw i{font-size:60px;color:#25D366;display:block;margin-bottom:16px;animation:popI .5s ease}
+@keyframes popI{0%{transform:scale(.3);opacity:0}100%{transform:scale(1);opacity:1}}
+.sw h2{font-family:'Playfair Display',serif;font-size:32px;color:var(--navy);margin-bottom:10px}
+.sw p{color:var(--text2);max-width:380px;margin:0 auto 22px}
+.fg-dark input,.fg-dark select,.fg-dark textarea{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15);color:var(--white)}
+.fg-dark input::placeholder,.fg-dark textarea::placeholder{color:rgba(255,255,255,.35)}
+.fg-dark input:focus,.fg-dark select:focus,.fg-dark textarea:focus{border-color:var(--gold);background:rgba(255,255,255,.1)}
+.fg-dark select option{background:var(--navy);color:var(--white)}
+.fg-dark label{color:rgba(255,255,255,.5)}
+@media(max-width:960px){
+  .bl{grid-template-columns:1fr}
+  .sb{position:static}
+}
+@media(max-width:768px){
+  .bcard{padding:22px}
+  .bcard h2{font-size:20px}
+  .sw h2{font-size:24px}
+  .sb-info{padding:18px}
+}
+@media(max-width:480px){
+  .bstep-l{display:none}
+  .steps{margin-bottom:20px}
+  .snav{flex-direction:column}
+  .snav .btn{width:100%;justify-content:center}
+}
+</style>
+</head><body>
+<div id="ldr"><div class="ldr-name">Heavenly <span>Horizon</span> Tours</div><div class="ldr-tag">Crafting Unforgettable Journeys</div><div class="ldr-bar"><div class="ldr-fill"></div></div></div>
+<nav id="nav" class="solid"><div class="nav-in">
+  <a href="index.html" class="brand"><div class="brand-name">Heavenly <span>Horizon</span></div><div class="brand-sub">Tours &amp; Travels</div></a>
+  <ul class="nav-links" id="nl"><li><a href="index.html">Home</a></li>
+    <li><a href="tours.html">Tours</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="book-now.html" class="nav-cta">Book Now</a></li>
+  </ul>
+  <button class="hbg" id="hbg" aria-label="Menu"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="ph">
+  <img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=1600&q=85" alt="Book Kashmir Tour" class="ph-bg"/>
+  <div class="ph-ov"></div>
+  <div class="ph-cnt">
+    <div class="bc"><a href="index.html">Home</a><i class="fas fa-chevron-right"></i><span>Book Now</span></div>
+    <div class="lbl" style="justify-content:center">Start Your Journey</div>
+    <h1>Book Your <em>Kashmir Trip</em></h1>
+    <p>Fill in details and our expert confirms within 2 hours</p>
+  </div>
+</div>
+<section class="sec">
+  <div class="wrap">
+    <div class="bl" id="bl">
+      <div class="bcard rv">
+        <h2>Your <em>Booking Details</em></h2>
+        <div class="steps">
+          <div class="bstep on" id="bs1"><div class="bstep-n">1</div><span class="bstep-l">Personal Info</span></div>
+          <div class="bstep" id="bs2"><div class="bstep-n">2</div><span class="bstep-l">Trip Details</span></div>
+          <div class="bstep" id="bs3"><div class="bstep-n">3</div><span class="bstep-l">Confirm</span></div>
+        </div>
+        <form id="bform" novalidate>
+          <!-- STEP 1 -->
+          <div class="ssec on" data-s="1">
+            <div class="fr">
+              <div class="fg"><label>Full Name *</label><input type="text" id="bname" name="name" placeholder="Your full name" required/></div>
+              <div class="fg"><label>Phone Number *</label><input type="tel" id="bphone" name="phone" placeholder="+91 XXXXX XXXXX" required/></div>
+            </div>
+            <div class="fg"><label>Email Address</label><input type="email" id="bemail" name="email" placeholder="you@example.com"/></div>
+            <div class="fg"><label>City / State</label><input type="text" id="bcity" name="city" placeholder="Where are you travelling from?"/></div>
+            <p id="e1" style="color:#e74c3c;font-size:12px;display:none;margin-bottom:8px">Please enter your name and phone number.</p>
+            <div class="snav"><button type="button" class="btn btn-gold" id="next1">Next Step <i class="fas fa-arrow-right"></i></button></div>
+          </div>
+          <!-- STEP 2 -->
+          <div class="ssec" data-s="2">
+            <div class="fr">
+              <div class="fg"><label>Travel Date *</label><input type="date" id="bdate" name="travelDate" required/></div>
+              <div class="fg"><label>Return Date</label><input type="date" id="breturn" name="returnDate"/></div>
+            </div>
+            <div class="fr">
+              <div class="fg"><label>No. of Adults</label><input type="number" id="badults" name="adults" placeholder="2" min="1" value="2"/></div>
+              <div class="fg"><label>No. of Children</label><input type="number" id="bkids" name="children" placeholder="0" min="0" value="0"/></div>
+            </div>
+            <div class="fg"><label>Package Type *</label>
+              <select id="bpkg" name="packageType" required>
+                <option value="">Select a package</option>
+                <option>Romantic Kashmir Honeymoon — 6N/7D — &#8377;24,999/person</option>
+                <option>Family Kashmir Adventure — 7N/8D — &#8377;18,999/person</option>
+                <option>Gulmarg Premium Package — 4N/5D — &#8377;14,999/person</option>
+                <option>Pahalgam Valley Escape — 4N/5D — &#8377;12,999/person</option>
+                <option>Luxury Kashmir Experience — 8N/9D — &#8377;49,999/person</option>
+                <option>Sonamarg Glacier Trek — 3N/4D — &#8377;9,999/person</option>
+                <option>Custom Itinerary — Price on request</option>
+              </select>
+            </div>
+            <div class="fg"><label>Accommodation Preference</label>
+              <select id="baccm" name="accommodation">
+                <option value="No preference">No preference</option>
+                <option>Luxury Houseboat on Dal Lake</option>
+                <option>5-Star Hotel / Resort</option>
+                <option>4-Star Hotel</option>
+                <option>3-Star Hotel</option>
+                <option>Budget Guesthouse</option>
+              </select>
+            </div>
+            <div class="fg"><label>Special Requests</label>
+              <textarea id="breq" name="requests" rows="3" placeholder="Anniversary arrangements, dietary needs, specific destinations..."></textarea>
+            </div>
+            <p id="e2" style="color:#e74c3c;font-size:12px;display:none;margin-bottom:8px">Please select a package and travel date.</p>
+            <div class="snav">
+              <button type="button" class="btn btn-og" id="back2"><i class="fas fa-arrow-left"></i> Back</button>
+              <button type="button" class="btn btn-gold" id="next2">Review Booking <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+          <!-- STEP 3 -->
+          <div class="ssec" data-s="3">
+            <div class="rev-box" id="revbox"></div>
+            <div style="background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.22);border-radius:var(--r-sm);padding:14px;font-size:13px;color:var(--text2);margin-bottom:14px">
+              <i class="fas fa-info-circle" style="color:var(--gold);margin-right:6px"></i>
+              By confirming, you agree our team will contact you within 2 hours to confirm details and payment options.
+            </div>
+            <div class="snav">
+              <button type="button" class="btn btn-og" id="back3"><i class="fas fa-arrow-left"></i> Back</button>
+              <button type="submit" class="btn btn-gold" id="confbtn"><i class="fas fa-paper-plane"></i> Confirm Booking</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- SIDEBAR -->
+      <div class="sb">
+        <div class="sb-info rv">
+          <h3>Why Book With <em>Us?</em></h3>
+          <div class="sb-item"><i class="fas fa-shield-alt"></i><span>Government recognized &amp; licensed agency</span></div>
+          <div class="sb-item"><i class="fas fa-tag"></i><span>Best price guarantee, no hidden fees</span></div>
+          <div class="sb-item"><i class="fas fa-headset"></i><span>24/7 support throughout your trip</span></div>
+          <div class="sb-item"><i class="fas fa-map-pin"></i><span>Local experts with 8+ years experience</span></div>
+          <div class="sb-item"><i class="fas fa-ban"></i><span>Free cancellation up to 48 hours before</span></div>
+          <a href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20book%20a%20Kashmir%20trip." target="_blank" class="btn btn-wa" style="width:100%;justify-content:center;margin-top:12px">
+            <i class="fab fa-whatsapp"></i> Quick WhatsApp Booking
+          </a>
+        </div>
+        <div class="sum rv">
+          <h4>Booking Summary</h4>
+          <div class="sum-r"><span>Package</span><span id="spkg">Not selected</span></div>
+          <div class="sum-r"><span>Travel Date</span><span id="sdate">Not set</span></div>
+          <div class="sum-r"><span>Travellers</span><span id="strav">—</span></div>
+          <div class="sum-r"><span>Status</span><span style="color:var(--gold);font-weight:600">Pending</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="footer"><div class="ft"><div class="wrap"><div class="fg4">
+  <div><div class="f-name">Heavenly <span>Horizon</span></div><div class="f-sub">Tours &amp; Travels</div>
+  <p class="f-about">Crafting unforgettable journeys across Kashmir with elegance, comfort and authenticity since 2016.</p>
+  <a href="https://makemetop.in/?biz=C8Q3SOtAhD1ukPq1UX9Y" target="_blank" class="mmt"><i class="fas fa-certificate"></i> Verified on MakeMeTop</a>
+  <div class="f-soc"><a href="https://www.instagram.com/heavenlyhorizontours" target="_blank"><i class="fab fa-instagram"></i></a><a href="https://wa.me/919103269575" target="_blank"><i class="fab fa-whatsapp"></i></a><a href="tel:+918825034964"><i class="fas fa-phone-alt"></i></a><a href="mailto:Sales.heavenlyhorizontours@gmail.com"><i class="fas fa-envelope"></i></a></div></div>
+  <div class="f-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="tours.html">Tour Packages</a></li><li><a href="about.html">About Us</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="book-now.html">Book Now</a></li></ul></div>
+  <div class="f-col"><h4>Our Tours</h4><ul><li><a href="tours.html">Honeymoon Packages</a></li><li><a href="tours.html">Family Tours</a></li><li><a href="tours.html">Gulmarg Tours</a></li><li><a href="tours.html">Pahalgam Packages</a></li><li><a href="tours.html">Sonamarg Trips</a></li><li><a href="tours.html">Luxury Kashmir Tours</a></li></ul></div>
+  <div class="f-col"><h4>Contact Us</h4>
+    <div class="fc-item"><i class="fas fa-phone-alt"></i><a href="tel:+918825034964">+91 88250 34964</a></div>
+    <div class="fc-item"><i class="fab fa-whatsapp"></i><a href="https://wa.me/919103269575">+91 91032 69575</a></div>
+    <div class="fc-item"><i class="fas fa-envelope"></i><a href="mailto:Sales.heavenlyhorizontours@gmail.com">Sales.heavenlyhorizontours@gmail.com</a></div>
+    <div class="fc-item"><i class="fas fa-map-marker-alt"></i><span>Mehjoor Nagar, Srinagar, J&amp;K 190001</span></div>
+  </div>
+</div></div></div><div class="fb"><div class="wrap">&copy; 2025 Heavenly Horizon Tours. All Rights Reserved. | <a href="https://makemetop.in" target="_blank">Powered by MakeMeTop</a></div></div></footer>
+<a href="https://wa.me/919103269575?text=Hi%20Heavenly%20Horizon%20Tours!" target="_blank" class="wa"><i class="fab fa-whatsapp"></i><span class="wa-tip">Chat with us!</span></a>
+<button class="sct" id="sct"><i class="fas fa-chevron-up"></i></button>
+<div class="toast" id="toast"></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore,collection,addDoc,serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+const fbCfg={apiKey:"AIzaSyADiBZe0V5gTnB89Ik1Bby2NDo-9nRxAHc",authDomain:"insta-web-upload.firebaseapp.com",databaseURL:"https://insta-web-upload-default-rtdb.firebaseio.com",projectId:"insta-web-upload",storageBucket:"insta-web-upload.firebasestorage.app",messagingSenderId:"1092302887537",appId:"1:1092302887537:web:a1bb7595868c84c30999d0"};
+let db=null;try{const app=initializeApp(fbCfg);db=getFirestore(app);}catch(e){}
+
+// Pre-fill from URL
+var urlP=new URLSearchParams(location.search),urlPkg=urlP.get('pkg');
+if(urlPkg){var sel=document.getElementById('bpkg');if(sel){for(var o of sel.options){if(o.value.startsWith(urlPkg)){sel.value=o.value;break;}}}}
+
+function goStep(n){
+  if(n>=2){
+    var nm=document.getElementById('bname').value.trim(),ph=document.getElementById('bphone').value.trim();
+    if(!nm||!ph){document.getElementById('e1').style.display='block';return;}
+    document.getElementById('e1').style.display='none';
+  }
+  if(n===3){
+    var pkg=document.getElementById('bpkg').value,dt=document.getElementById('bdate').value;
+    if(!pkg||!dt){document.getElementById('e2').style.display='block';return;}
+    document.getElementById('e2').style.display='none';
+    var nm=document.getElementById('bname').value.trim(),ph=document.getElementById('bphone').value.trim(),em=document.getElementById('bemail').value.trim(),ct=document.getElementById('bcity').value.trim(),ad=document.getElementById('badults').value,ch=document.getElementById('bkids').value,ac=document.getElementById('baccm').value,rq=document.getElementById('breq').value.trim();
+    document.getElementById('revbox').innerHTML='<b>Name:</b> '+nm+'<br/><b>Phone:</b> '+ph+(em?'<br/><b>Email:</b> '+em:'')+(ct?'<br/><b>City:</b> '+ct:'')+'<br/><b>Package:</b> '+pkg+'<br/><b>Travel Date:</b> '+dt+'<br/><b>Adults:</b> '+ad+' | <b>Children:</b> '+ch+'<br/><b>Accommodation:</b> '+ac+(rq?'<br/><b>Special Requests:</b> '+rq:'');
+    document.getElementById('spkg').textContent=pkg.split(' — ')[0];
+    document.getElementById('sdate').textContent=dt;
+    document.getElementById('strav').textContent=ad+' Adult'+(ad>1?'s':'')+(ch>0?', '+ch+' Child'+(ch>1?'ren':''):'');
+  }
+  document.querySelectorAll('.ssec').forEach(function(s,i){s.classList.toggle('on',i+1===n);});
+  document.querySelectorAll('.bstep').forEach(function(s,i){s.classList.remove('on','done');if(i+1===n)s.classList.add('on');if(i+1<n)s.classList.add('done');});
+  window.scrollTo({top:document.querySelector('.bcard').offsetTop-85,behavior:'smooth'});
+}
+document.getElementById('next1').addEventListener('click',function(){goStep(2);});
+document.getElementById('back2').addEventListener('click',function(){goStep(1);});
+document.getElementById('next2').addEventListener('click',function(){goStep(3);});
+document.getElementById('back3').addEventListener('click',function(){goStep(2);});
+
+document.getElementById('bform').addEventListener('submit',async function(e){
+  e.preventDefault();
+  var btn=document.getElementById('confbtn');btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Confirming...';
+  var data={name:document.getElementById('bname').value.trim(),phone:document.getElementById('bphone').value.trim(),email:document.getElementById('bemail').value.trim()||'',city:document.getElementById('bcity').value.trim()||'',travelDate:document.getElementById('bdate').value||'',returnDate:document.getElementById('breturn').value||'',adults:document.getElementById('badults').value||'2',children:document.getElementById('bkids').value||'0',packageType:document.getElementById('bpkg').value||'',accommodation:document.getElementById('baccm').value||'',requests:document.getElementById('breq').value.trim()||'',source:'book_now',status:'pending',createdAt:serverTimestamp()};
+  try{if(db)await addDoc(collection(db,'bookings'),data);}catch(err){console.error('Booking error:',err);}
+  document.getElementById('bl').innerHTML='<div style="grid-column:span 2"><div class="sw"><i class="fas fa-check-circle"></i><h2>Booking Confirmed!</h2><p>Your booking request has been received. Our team will call you at <strong>'+data.phone+'</strong> within 2 hours to confirm all details.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px"><a href="https://wa.me/919103269575?text=Hi!%20My%20booking%20for%20'+encodeURIComponent(data.packageType)+'%20is%20confirmed." target="_blank" class="btn btn-wa"><i class="fab fa-whatsapp"></i> Confirm on WhatsApp</a><a href="tours.html" class="btn btn-og">View More Packages</a></div></div></div>';
+});
+</script>
+<script>
+(function(){
+  window.addEventListener('load',function(){setTimeout(function(){var l=document.getElementById('ldr');if(l)l.classList.add('out');},1200);});
+  var nav=document.getElementById('nav'),hbg=document.getElementById('hbg'),nl=document.getElementById('nl'),sct=document.getElementById('sct'),sbb=document.getElementById('sbb');
+  window.addEventListener('scroll',function(){var sy=window.scrollY;if(nav)nav.classList.toggle('sc',sy>80);if(sct)sct.classList.toggle('show',sy>500);if(sbb)sbb.classList.toggle('show',sy>600);},{passive:true});
+  if(hbg&&nl){hbg.addEventListener('click',function(e){e.stopPropagation();var o=hbg.classList.toggle('open');nl.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){hbg.classList.remove('open');nl.classList.remove('open');document.body.style.overflow='';});});document.addEventListener('click',function(e){if(nl.classList.contains('open')&&!nl.contains(e.target)&&!hbg.contains(e.target)){hbg.classList.remove('open');nl.classList.remove('open');document.body.style.overflow='';}});document.addEventListener('keydown',function(e){if(e.key==='Escape'){hbg.classList.remove('open');nl.classList.remove('open');document.body.style.overflow='';}});}
+  if(sct)sct.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var sib=e.target.parentElement?e.target.parentElement.querySelectorAll('.rv,.rvl,.rvr'):[];var d=0;sib.forEach(function(el,i){if(el===e.target)d=i*80;});setTimeout(function(el){return function(){el.classList.add('in');};}(e.target),d);ro.unobserve(e.target);}});},{threshold:0.08});
+  document.querySelectorAll('.rv,.rvl,.rvr').forEach(function(el){ro.observe(el);});
+})();
+</script></body></html>

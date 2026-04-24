@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<title>Kashmir Tour Packages – Heavenly Horizon Tours</title>
+<meta name="description" content="Explore premium Kashmir tour packages by Heavenly Horizon Tours. Honeymoon, family, Gulmarg, Pahalgam, Sonamarg and luxury Kashmir tours."/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B1F3A'/><text y='.85em' font-size='60' x='10' fill='%23C9A84C'>H</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+/* reuse pc styles from index */
+.pc{background:var(--white);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-md);transition:var(--ease)}
+.pc:hover{transform:translateY(-8px);box-shadow:var(--sh-xl)}
+.pc-img{height:230px;overflow:hidden;position:relative}
+.pc-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.pc:hover .pc-img img{transform:scale(1.08)}
+.pc-bdg{position:absolute;top:13px;left:13px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 11px;border-radius:99px}
+.bdg-gold{background:var(--gold);color:var(--navy)}.bdg-red{background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff}.bdg-blue{background:linear-gradient(135deg,#2980b9,#1a6091);color:#fff}
+.pc-body{padding:22px}
+.pc-cat{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.pc-body h3{font-family:'Playfair Display',serif;font-size:19px;color:var(--navy);margin-bottom:9px;line-height:1.3}
+.pc-meta{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.pc-meta span{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:4px}
+.pc-meta i{color:var(--gold);font-size:10px}
+.pc-desc{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pc-foot{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(11,31,58,.07)}
+.pc-price{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--navy)}
+.pc-price small{font-size:12px;font-weight:400;color:var(--text3);font-family:'Raleway',sans-serif}
+.pc-price .op{text-decoration:line-through;color:var(--text3);font-size:13px;margin-right:3px}
+.pc-acts{display:flex;gap:7px;margin-top:10px}
+.pc-acts .btn{flex:1;justify-content:center;padding:9px 14px;font-size:10px}
+.pmo{position:fixed;inset:0;z-index:8000;background:rgba(11,31,58,.9);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:18px;overflow-y:auto}
+.pmo.open{display:flex}
+.pmb{background:var(--white);border-radius:var(--r-xl);max-width:700px;width:100%;margin:0 auto;max-height:90vh;overflow-y:auto;position:relative}
+.pmb-img{height:272px;overflow:hidden;border-radius:var(--r-xl) var(--r-xl) 0 0}
+.pmb-img img{width:100%;height:100%;object-fit:cover}
+.pm-close{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--navy);font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;border:none;transition:var(--ease)}
+.pm-close:hover{background:var(--navy);color:var(--white)}
+.pm-body{padding:28px}
+.pm-body h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--navy);margin-bottom:10px}
+.itin-d{display:flex;gap:10px;margin-bottom:9px}
+.itin-n{width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--white);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.itin-d p{font-size:13px;color:var(--text2);line-height:1.7;padding-top:4px}
+.inc-tags{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}
+.inc-tag{font-size:11px;background:var(--mist);color:var(--text2);padding:4px 12px;border-radius:99px;border:1px solid rgba(11,31,58,.1)}
+.pm-btns{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.no-r{text-align:center;padding:60px 20px;color:var(--text2);grid-column:span 3}
+.no-r i{font-size:44px;color:var(--text3);display:block;margin-bottom:14px}
+@media(max-width:1100px){.tg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){
+  .tg{grid-template-columns:1fr}
+  .no-r{grid-column:span 1}
+  .pm-body{padding:20px}
+  .pm-body h2{font-size:22px}
+  .pc-body h3{font-size:17px}
+}
+@media(max-width:480px){
+  .pm-btns{flex-direction:column}
+  .pm-btns .btn{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+<div id="ldr"><div class="ldr-name">Heavenly <span>Horizon</span> Tours</div><div class="ldr-tag">Crafting Unforgettable Journeys</div><div class="ldr-bar"><div class="ldr-fill"></div></div></div>
+<nav id="nav" class="solid">
+  <div class="nav-in">
+    <a href="index.html" class="brand"><div class="brand-name">Heavenly <span>Horizon</span></div><div class="brand-sub">Tours &amp; Travels</div></a>
+    <ul class="nav-links" id="nl">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tours.html" class="active">Tours</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="book-now.html" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="hbg" id="hbg" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="ph">
+  <img src="https://images.unsplash.com/photo-1584732200355-486a95263014?w=1600&q=85" alt="Kashmir Tours" class="ph-bg" onerror="this.src='https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=1600'"/>
+  <div class="ph-ov"></div>
+  <div class="ph-cnt">
+    <div class="bc"><a href="index.html">Home</a><i class="fas fa-chevron-right"></i><span>Tours</span></div>
+    <div class="lbl" style="justify-content:center">Curated Journeys</div>
+    <h1>Our Premium <em>Tour Packages</em></h1>
+    <p>Handcrafted Kashmir itineraries for every kind of explorer</p>
+  </div>
+</div>
+<section class="sec">
+  <div class="wrap">
+    <div class="sh c rv"><div class="lbl">All Packages</div><h2 class="ttl">Explore <em>Kashmir</em></h2><p class="sub">From romantic honeymoons to adventurous family trips — we have the perfect package for you</p></div>
+    <div class="pills rv" id="pills">
+      <button class="pill on" data-f="all">All Packages</button>
+      <button class="pill" data-f="honeymoon">Honeymoon</button>
+      <button class="pill" data-f="family">Family</button>
+      <button class="pill" data-f="gulmarg">Gulmarg</button>
+      <button class="pill" data-f="pahalgam">Pahalgam</button>
+      <button class="pill" data-f="luxury">Luxury</button>
+    </div>
+    <div class="tg" id="tgrid"></div>
+  </div>
+</section>
+<!-- CTA -->
+<div style="background:linear-gradient(135deg,var(--gold),#b8922e);padding:48px 0;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=1200&q=20') center/cover;opacity:.1"></div>
+  <div class="wrap" style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+    <div><h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,34px);color:var(--navy)">Can't find the right package?</h2><p style="color:rgba(11,31,58,.68);margin-top:5px">Let us craft a custom itinerary just for you.</p></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="contact.html" class="btn btn-nav"><i class="fas fa-sliders-h"></i> Custom Itinerary</a>
+      <a href="https://wa.me/919103269575" target="_blank" class="btn btn-wh"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="ft"><div class="wrap"><div class="fg4">
+    <div>
+      <div class="f-name">Heavenly <span>Horizon</span></div><div class="f-sub">Tours &amp; Travels</div>
+      <p class="f-about">Crafting unforgettable journeys across Kashmir with elegance, comfort and authenticity since 2016.</p>
+      <a href="https://makemetop.in/?biz=C8Q3SOtAhD1ukPq1UX9Y" target="_blank" class="mmt"><i class="fas fa-certificate"></i> Verified on MakeMeTop</a>
+      <div class="f-soc"><a href="https://www.instagram.com/heavenlyhorizontours" target="_blank"><i class="fab fa-instagram"></i></a><a href="https://wa.me/919103269575" target="_blank"><i class="fab fa-whatsapp"></i></a><a href="tel:+918825034964"><i class="fas fa-phone-alt"></i></a><a href="mailto:Sales.heavenlyhorizontours@gmail.com"><i class="fas fa-envelope"></i></a></div>
+    </div>
+    <div class="f-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="tours.html">Tour Packages</a></li><li><a href="about.html">About Us</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="book-now.html">Book Now</a></li></ul></div>
+    <div class="f-col"><h4>Our Tours</h4><ul><li><a href="tours.html">Honeymoon Packages</a></li><li><a href="tours.html">Family Tours</a></li><li><a href="tours.html">Gulmarg Tours</a></li><li><a href="tours.html">Pahalgam Packages</a></li><li><a href="tours.html">Sonamarg Trips</a></li><li><a href="tours.html">Luxury Kashmir Tours</a></li></ul></div>
+    <div class="f-col"><h4>Contact Us</h4>
+      <div class="fc-item"><i class="fas fa-phone-alt"></i><a href="tel:+918825034964">+91 88250 34964</a></div>
+      <div class="fc-item"><i class="fab fa-whatsapp"></i><a href="https://wa.me/919103269575">+91 91032 69575</a></div>
+      <div class="fc-item"><i class="fas fa-envelope"></i><a href="mailto:Sales.heavenlyhorizontours@gmail.com">Sales.heavenlyhorizontours@gmail.com</a></div>
+      <div class="fc-item"><i class="fas fa-map-marker-alt"></i><span>Mehjoor Nagar, Srinagar, J&amp;K 190001</span></div>
+    </div>
+  </div></div></div>
+  <div class="fb"><div class="wrap">© 2025 Heavenly Horizon Tours. All Rights Reserved. | <a href="https://makemetop.in" target="_blank">Powered by MakeMeTop</a></div></div>
+</footer>
+<a href="https://wa.me/919103269575?text=Hi%20Heavenly%20Horizon%20Tours!" target="_blank" class="wa"><i class="fab fa-whatsapp"></i><span class="wa-tip">Chat with us!</span></a>
+<button class="sct" id="sct"><i class="fas fa-chevron-up"></i></button>
+<div class="toast" id="toast"></div><div class="sbb" id="sbb"><div class="sbb-txt"><strong>Plan Your Kashmir Trip</strong><span>Free customised itinerary in 2 hours</span></div><div class="sbb-btns"><a href="book-now.html" class="btn btn-gold btn-sm"><i class="fas fa-paper-plane"></i> Book Now</a><a href="https://wa.me/919103269575" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a></div></div>
+<div class="pmo" id="pmo"><div class="pmb"><button class="pm-close" id="pmc"><i class="fas fa-times"></i></button><div class="pmb-img"><img id="pmi" src="" alt=""/></div><div class="pm-body" id="pmbd"></div></div></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore,collection,getDocs,query,orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+const fbCfg={apiKey:"AIzaSyADiBZe0V5gTnB89Ik1Bby2NDo-9nRxAHc",authDomain:"insta-web-upload.firebaseapp.com",databaseURL:"https://insta-web-upload-default-rtdb.firebaseio.com",projectId:"insta-web-upload",storageBucket:"insta-web-upload.firebasestorage.app",messagingSenderId:"1092302887537",appId:"1:1092302887537:web:a1bb7595868c84c30999d0"};
+let db=null;try{const app=initializeApp(fbCfg);db=getFirestore(app);}catch(e){}
+const DEF=[
+  {id:'p1',title:'Romantic Kashmir Honeymoon',category:'honeymoon',duration:'6N/7D',groupSize:'Couples',price:'₹24,999',oldPrice:'₹32,000',badge:'bdg-red',bdgText:'Best Seller',image:'https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=600&q=80',description:'Immerse in romance with private houseboat stays on Dal Lake, candlelit shikara rides, exclusive couple activities in Gulmarg and Pahalgam.',includes:['Luxury Houseboat','All Meals','Couple Activities','Cab Services','Tour Guide'],itinerary:['Arrival Srinagar, houseboat check-in, shikara ride','Mughal Gardens, Shankaracharya Temple, local market','Gulmarg Gondola, snow activities, romantic dinner','Pahalgam, Betaab Valley, Aru Valley excursion','Sonamarg day trip, glacier visit','Shopping &amp; departure']},
+  {id:'p2',title:'Family Kashmir Adventure',category:'family',duration:'7N/8D',groupSize:'Families',price:'₹18,999',oldPrice:'₹24,000',badge:'',bdgText:'',image:'https://images.unsplash.com/photo-1593417376544-4c4201061e22?w=600&q=80',description:"A perfect family getaway covering all of Kashmir's iconic highlights.",includes:['Hotel Stay','Breakfast & Dinner','Family Vehicle','Expert Guide','All Sightseeing'],itinerary:['Arrival Srinagar, Dal Lake shikara ride','Mughal Gardens, Pari Mahal, Zero Bridge','Gulmarg Gondola & snow play','Pahalgam valleys, Lidder River','Sonamarg, Thajiwas Glacier','Doodhpathri day trip','Shopping & departure']},
+  {id:'p3',title:'Gulmarg Premium Package',category:'gulmarg',duration:'4N/5D',groupSize:'2–8',price:'₹14,999',oldPrice:'₹19,000',badge:'bdg-blue',bdgText:'New',image:'https://images.unsplash.com/photo-1584732200355-486a95263014?w=600&q=80',description:"Experience Gulmarg in full — Asia's highest gondola, pristine ski slopes and breathtaking Himalayan vistas.",includes:['Hotel/Resort','Daily Breakfast','Gondola Phase 1 & 2','Expert Guide','All Transfers'],itinerary:['Arrival Srinagar, drive to Gulmarg','Gondola Phase 1 & 2, meadow walk','Skiing/snow activities (seasonal)','Kongdori viewpoint, nature walks','Return Srinagar & departure']},
+  {id:'p4',title:'Pahalgam Valley Escape',category:'pahalgam',duration:'4N/5D',groupSize:'Any',price:'₹12,999',oldPrice:'₹17,000',badge:'',bdgText:'',image:'https://images.unsplash.com/photo-1623996732821-66f739df7280?w=600&q=80',description:"Discover the shepherd's paradise — Betaab Valley, Aru Valley and the mesmerizing Lidder River.",includes:['Hotel Stay','Daily Breakfast','Local Sightseeing','Expert Guide','Transfers'],itinerary:['Arrival Pahalgam, Lidder River walk','Betaab Valley, Aru Valley','Chandanwari & upper meadows','Mini Kashmir, Tulian Lake trek','Baisaran meadow, departure']},
+  {id:'p5',title:'Luxury Kashmir Experience',category:'luxury',duration:'8N/9D',groupSize:'VIP',price:'₹49,999',oldPrice:'₹65,000',badge:'bdg-gold',bdgText:'Premium',image:'https://plus.unsplash.com/premium_photo-1697729439457-85d4b9d3a2cb?w=600&q=80',description:'The ultimate Kashmir luxury experience — 5-star houseboats, premium resorts, private guides and exclusive VIP experiences.',includes:['5-Star Houseboat & Resorts','All Meals','Private Guide','Luxury Vehicle','Exclusive Experiences','Airport VIP Greeting'],itinerary:['VIP arrival, luxury houseboat check-in','Private Mughal Gardens tour, sunset shikara','Gulmarg by private vehicle, VIP gondola','Pahalgam luxury resort, private valley tours','Sonamarg & Doodhpathri helicopter option','Srinagar city tour, artisan workshop','Shopping, spa & leisure','Farewell dinner, departure']},
+  {id:'p6',title:'Sonamarg Glacier Trek',category:'luxury',duration:'3N/4D',groupSize:'4–12',price:'₹9,999',oldPrice:'₹13,000',badge:'',bdgText:'',image:'https://images.unsplash.com/photo-1692287731328-58f55e8950cd?w=600&q=80',description:'Trek to the legendary Thajiwas Glacier and experience the untouched raw beauty of Sonamarg meadows.',includes:['Camping/Hotel','All Meals','Trek Guide','Equipment','All Transfers'],itinerary:['Arrive Srinagar, drive to Sonamarg','Thajiwas Glacier trek & camping','Sindh Valley nature walk','Return & departure']},
+];
+let allP=[...DEF];
+async function loadP(){try{const s=await getDocs(query(collection(db,'packages'),orderBy('order','asc')));if(!s.empty){allP=[];s.forEach(d=>allP.push({id:d.id,...d.data()}));}}catch(e){}renderP('all');}
+function renderP(f){const list=f==='all'?allP:allP.filter(p=>p.category===f);const g=document.getElementById('tgrid');g.innerHTML='';if(!list.length){g.innerHTML='<div class="no-r"><i class="fas fa-binoculars"></i><p>No packages in this category.</p></div>';return;}list.forEach((p,i)=>{const c=document.createElement('div');c.className='pc rv';c.innerHTML=`<div class="pc-img"><img src="${p.image||''}" alt="${p.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=600'"/>${p.badge?`<span class="pc-bdg ${p.badge}">${p.bdgText}</span>`:''}</div><div class="pc-body"><div class="pc-cat">${p.category||''}</div><h3>${p.title||''}</h3><div class="pc-meta"><span><i class="fas fa-clock"></i>${p.duration||''}</span><span><i class="fas fa-users"></i>${p.groupSize||''}</span></div><p class="pc-desc">${p.description||''}</p><div class="pc-foot"><div class="pc-price">${p.oldPrice?`<span class="op">${p.oldPrice}</span>`:''}${p.price}<small>/person</small></div></div><div class="pc-acts"><a href="book-now.html?pkg=${encodeURIComponent(p.title)}" class="btn btn-gold btn-sm"><i class="fas fa-paper-plane"></i> Book</a><button class="btn btn-og btn-sm" onclick="openPM('${p.id}')"><i class="fas fa-info-circle"></i> Details</button></div></div>`;g.appendChild(c);setTimeout(()=>c.classList.add('in'),i*80);});}
+window.openPM=function(id){const p=allP.find(x=>x.id===id);if(!p)return;document.getElementById('pmi').src=p.image||'';document.getElementById('pmbd').innerHTML=`<h2>${p.title}</h2><div class="pc-meta" style="margin:11px 0"><span><i class="fas fa-clock" style="color:var(--gold)"></i>${p.duration}</span><span><i class="fas fa-users" style="color:var(--gold)"></i>${p.groupSize}</span><span><i class="fas fa-rupee-sign" style="color:var(--gold)"></i>${p.price}/person</span></div><p style="font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:14px">${p.description||''}</p>${p.itinerary?.length?`<div style="margin:14px 0"><h4 style="font-family:'Playfair Display',serif;font-size:15px;color:var(--navy);margin-bottom:10px">Day-by-Day Itinerary</h4>${p.itinerary.map((d,i)=>`<div class="itin-d"><div class="itin-n">${i+1}</div><p>${d}</p></div>`).join('')}</div>`:''}<div class="inc-tags">${(p.includes||[]).map(x=>`<span class="inc-tag"><i class="fas fa-check" style="color:var(--gold);margin-right:4px;font-size:9px"></i>${x}</span>`).join('')}</div><div class="pm-btns"><a href="book-now.html?pkg=${encodeURIComponent(p.title)}" class="btn btn-gold"><i class="fas fa-paper-plane"></i> Book This Package</a><a href="https://wa.me/919103269575?text=Hi!%20I'm%20interested%20in%20${encodeURIComponent(p.title)}" target="_blank" class="btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a></div>`;document.getElementById('pmo').classList.add('open');document.body.style.overflow='hidden';};
+document.getElementById('pmc').onclick=()=>{document.getElementById('pmo').classList.remove('open');document.body.style.overflow='';};
+document.getElementById('pmo').onclick=e=>{if(e.target===document.getElementById('pmo')){document.getElementById('pmo').classList.remove('open');document.body.style.overflow='';}};
+document.getElementById('pills').addEventListener('click',e=>{const p=e.target.closest('.pill');if(!p)return;document.querySelectorAll('.pill').forEach(x=>x.classList.remove('on'));p.classList.add('on');renderP(p.dataset.f);});
+loadP();
+</script><script>
+(function(){
+  window.addEventListener('load',()=>setTimeout(()=>document.getElementById('ldr').classList.add('out'),1200));
+  const nav=document.getElementById('nav'),hbg=document.getElementById('hbg'),nl=document.getElementById('nl'),sct=document.getElementById('sct'),sbb=document.getElementById('sbb');
+  window.addEventListener('scroll',()=>{const sy=window.scrollY;nav.classList.toggle('sc',sy>80);sct.classList.toggle('show',sy>500);if(sbb)sbb.classList.toggle('show',sy>600);},{passive:true});
+  hbg.addEventListener('click',e=>{e.stopPropagation();const o=hbg.classList.toggle('open');nl.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});
+  nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hbg.classList.remove('open');nl.classList.remove('open');document.body.style.overflow='';}));
+  document.addEventListener('click',e=>{if(nl.classList.contains('open')&&!nl.contains(e.target)&&!hbg.contains(e.target)){hbg.classList.remove('open');nl.classList.remove('open');document.body.style.overflow='';}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){hbg.classList.remove('open');nl.classList.remove('open');document.body.style.overflow='';}});
+  sct.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const sib=e.target.parentElement?.querySelectorAll('.rv,.rvl,.rvr')||[];let d=0;sib.forEach((el,i)=>{if(el===e.target)d=i*80;});setTimeout(()=>e.target.classList.add('in'),d);ro.unobserve(e.target);}});},{threshold:0.08});
+  document.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>ro.observe(el));
+})();
+</script></body></html>
