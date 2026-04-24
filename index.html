@@ -22,6 +22,22 @@
 .hslide:nth-child(3){background-image:url('https://images.unsplash.com/photo-1584732200355-486a95263014?w=1600&q=85')}
 .hslide:nth-child(4){background-image:url('https://images.unsplash.com/photo-1623996732821-66f739df7280?w=1600&q=85')}
 .hcnt{position:relative;z-index:2;text-align:center;padding:0 22px;max-width:880px}
+@media(max-width:768px){
+  .hero{
+    height:75vh;        /* screen ka 75% */
+    min-height:auto;    /* ❌ remove 680px force */
+  }
+
+  .hslide{
+    background-size:cover;
+    background-position:center;
+  }
+
+  .hcnt{
+    padding:0 16px;
+    max-width:100%;
+  }
+}
 .h-ey{
   display:inline-flex;
   align-items:center;
@@ -495,17 +511,51 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div id="hsl"><div class="hslide on"></div><div class="hslide"></div><div class="hslide"></div><div class="hslide"></div></div>
-  <div class="hov"></div><div class="hov-bot"></div>
+  <div id="hsl">
+    <div class="hslide on"></div>
+    <div class="hslide"></div>
+    <div class="hslide"></div>
+    <div class="hslide"></div>
+  </div>
+
+  <div class="hov"></div>
+  <div class="hov-bot"></div>
+
   <div class="hcnt">
-    <div class="h-ey"><i class="fas fa-star"></i> Welcome to Kashmir's Finest <i class="fas fa-star"></i></div>
-    <h1 class="htitle">Explore Paradise<em>with Heavenly Horizon</em></h1>
-    <p class="hsub">Crafting unforgettable journeys across Kashmir with elegance, comfort and authenticity — because every traveller deserves a truly extraordinary experience.</p>
-    <div class="hctas">
-      <a href="book-now.html" class="btn btn-gold"><i class="fas fa-paper-plane"></i> Book Now</a>
-      <a href="tours.html" class="btn btn-out"><i class="fas fa-compass"></i> Explore Packages</a>
-      <a href="https://wa.me/919103269575?text=Hi%20Heavenly%20Horizon%20Tours!%20I%20want%20to%20enquire%20about%20a%20Kashmir%20trip." target="_blank" class="btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp Inquiry</a>
+    <div class="h-ey">
+      <i class="fas fa-star"></i> Welcome to Kashmir's Finest <i class="fas fa-star"></i>
     </div>
+
+    <h1 class="htitle">
+      Explore Paradise<em>with Heavenly Horizon</em>
+    </h1>
+
+    <p class="hsub">
+      Crafting unforgettable journeys across Kashmir with elegance, comfort and authenticity — because every traveller deserves a truly extraordinary experience.
+    </p>
+
+    <div class="hctas">
+      <a href="book-now.html" class="btn btn-gold">
+        <i class="fas fa-paper-plane"></i> Book Now
+      </a>
+
+      <a href="tours.html" class="btn btn-out">
+        <i class="fas fa-compass"></i> Explore Packages
+      </a>
+
+      <a href="https://wa.me/919103269575?text=Hi%20Heavenly%20Horizon%20Tours!%20I%20want%20to%20enquire%20about%20a%20Kashmir%20trip."
+         target="_blank"
+         class="btn btn-wa">
+        <i class="fab fa-whatsapp"></i> WhatsApp Inquiry
+      </a>
+    </div>
+  </div>
+
+  <div class="hsdots" id="hsdots"></div>
+
+  <div class="scroll-m">
+    <span>Scroll</span>
+    <div class="sm-b"><div class="sm-d"></div></div>
   </div>
 </section>
 <!-- ABOUT -->
