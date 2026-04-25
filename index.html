@@ -228,7 +228,11 @@
 .sv p{font-size:13px;color:rgba(255,255,255,.52);line-height:1.8}
 .sv-lnk{font-size:11px;color:var(--gold-light);display:inline-flex;align-items:center;gap:5px;margin-top:14px;transition:var(--ease);font-weight:600;letter-spacing:.5px}
 .sv:hover .sv-lnk{gap:9px}
-
+.sv{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 /* WHY */
 .wy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .wy{text-align:center;padding:38px 24px;border-radius:var(--r-xl);background:var(--white);box-shadow:var(--sh-md);transition:var(--ease);position:relative;overflow:hidden}
@@ -556,7 +560,7 @@
 
 <nav id="nav">
   <div class="nav-in">
-    <a href="index.html" class="brand"><div class="brand-name">Heavenly <span>Horizon</span> Tours</div><div class="brand-sub">Explore Kashmir With Heavenly Horizon Tours</div></a>
+    <a href="index.html" class="brand"><div class="brand-name">Heavenly <span>Horizon</span> Tours</div><</a>
     <ul class="nav-links" id="nl">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="tours.html">Tours</a></li>
@@ -577,11 +581,10 @@
     <div class="h-ey"><i class="fas fa-star"></i> Welcome to Kashmir's Finest <i class="fas fa-star"></i></div>
     <h1 class="htitle">Explore Paradise<em>with Heavenly Horizon</em></h1>
     <p style="font-size:clamp(14px,2.5vw,18px);color:rgba(255,255,255,.92);font-weight:600;letter-spacing:.3px;margin-bottom:10px;text-shadow:0 2px 8px rgba(0,0,0,.3)">Comprehensive Travel Solution for Your Perfect Kashmir Journey.</p>
-    <p class="hsub">Crafting unforgettable journeys across Kashmir with elegance, comfort and authenticity — because every traveller deserves a truly extraordinary experience.</p>
     <div class="hctas">
       <a href="book-now.html" class="btn btn-gold"><i class="fas fa-paper-plane"></i> Book Now</a>
-      <a href="tours.html" class="btn btn-out"><i class="fas fa-compass"></i> Explore Packages</a>
-      <a href="#services" class="btn btn-out" id="heroServicesBtn"><i class="fas fa-th-large"></i> Our Services</a>
+      <a href="tours.html" class="btn btn-gold"><i class="fas fa-paper-plane"></i> Explore Packages</a>
+      <a href="#services" class="btn btn-gold" id="heroServicesBtn"><i class="fas fa-th-large"></i> Our Services</a>
     </div>
 
   </div>
@@ -695,46 +698,110 @@
 <!-- SERVICES -->
 <section class="sec svc-bg" id="services">
   <div class="wrap">
-    <div class="sh c rv"><div class="lbl" style="color:var(--gold)">What We Offer</div><h2 class="ttl lt">Our Premium <em>Services</em></h2><p class="sub lt">One-stop comprehensive solution for your complete Kashmir travel experience</p></div>
+    <div class="sh c rv">
+      <div class="lbl" style="color:var(--gold)">What We Offer</div>
+      <h2 class="ttl lt">Our Premium <em>Services</em></h2>
+      <p class="sub lt">One-stop comprehensive solution for your complete Kashmir travel experience</p>
+    </div>
+
     <div class="sv-grid">
-      <div class="sv rv"><div class="sv-ico"><i class="fas fa-compass"></i></div><h3>Tour Packages</h3><p>Fully curated Kashmir itineraries for honeymoons, families, groups and solo travellers.</p><a href="tours.html" class="sv-lnk">▶ Next Page → Tour Packages <i class="fas fa-arrow-right"></i></a></div>
-      <div class="sv rv"><div class="sv-ico"><i class="fas fa-gem"></i></div><h3>Kashmir Special Experience</h3><p>Exclusive houseboat stays, shikara sunsets, saffron farm visits and authentic Kashmiri cuisine.</p><a href="tours.html" class="sv-lnk">▶ Kashmir Tour Packages <i class="fas fa-arrow-right"></i></a></div>
-      <div class="sv rv">
-        <div class="sv-ico"><i class="fas fa-car"></i></div><h3>Transport Services</h3>
+
+      <div class="sv rv" style="background-image:linear-gradient(rgba(0,0,0,.68),rgba(0,0,0,.78)),url('https://images.unsplash.com/photo-1590998012650-33f0dfe40269?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D=80');">
+        <div class="sv-ico"><i class="fas fa-compass"></i></div>
+        <h3>Tour Packages</h3>
+        <p>Fully curated Kashmir itineraries for honeymoons, families, groups and solo travellers.</p>
+        <a href="tours.html" class="sv-lnk">Explore <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="sv rv" style="background-image:linear-gradient(rgba(0,0,0,.68),rgba(0,0,0,.78)),url('https://images.unsplash.com/photo-1564327287902-0ccf559d839e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D=80');">
+        <div class="sv-ico"><i class="fas fa-gem"></i></div>
+        <h3>Kashmir Special Experience</h3>
+        <p>Exclusive houseboat stays, shikara sunsets, saffron farm visits and authentic Kashmiri cuisine.</p>
+        <a href="tours.html" class="sv-lnk">Explore <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="sv rv" style="background-image:linear-gradient(rgba(0,0,0,.68),rgba(0,0,0,.78)),url('https://images.unsplash.com/photo-1776504908057-0316977402da?q=80&w=1178&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D=80');">
+        <div class="sv-ico"><i class="fas fa-car"></i></div>
+        <h3>Transport Services</h3>
         <p>Comfortable AC vehicles with experienced local drivers for all Kashmir routes.</p>
+
         <div class="sv-mini">
-          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20a%20Sedan%20cab%20for%20Kashmir." target="_blank" class="sv-mc"><i class="fas fa-car-side"></i><span>Sedan</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
-          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20an%20Innova%20for%20Kashmir." target="_blank" class="sv-mc"><i class="fas fa-car"></i><span>Innova</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
-          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20a%20Tempo%20Traveller%20for%20Kashmir." target="_blank" class="sv-mc"><i class="fas fa-bus-alt"></i><span>Tempo Traveller</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
-          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20an%20SUV%20for%20Kashmir." target="_blank" class="sv-mc"><i class="fas fa-truck-monster"></i><span>SUV</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
+          <a href="cars.html" class="sv-mc">
+            <i class="fas fa-car-side"></i><span>Sedan</span><i class="fas fa-arrow-right sv-mc-arrow"></i>
+          </a>
+          <a href="cars.html" class="sv-mc">
+            <i class="fas fa-car"></i><span>Innova</span><i class="fas fa-arrow-right sv-mc-arrow"></i>
+          </a>
+          <a href="cars.html" class="sv-mc">
+            <i class="fas fa-bus-alt"></i><span>Tempo Traveller</span><i class="fas fa-arrow-right sv-mc-arrow"></i>
+          </a>
+          <a href="cars.html" class="sv-mc">
+            <i class="fas fa-truck-monster"></i><span>SUV</span><i class="fas fa-arrow-right sv-mc-arrow"></i>
+          </a>
         </div>
+
+        <a href="cars.html" class="sv-lnk">Explore <i class="fas fa-arrow-right"></i></a>
       </div>
-      <div class="sv rv">
-        <div class="sv-ico"><i class="fas fa-hotel"></i></div><h3>Hotel Booking</h3>
+
+      <div class="sv rv" style="background-image:linear-gradient(rgba(0,0,0,.68),rgba(0,0,0,.78)),url('https://images.unsplash.com/photo-1699983148544-eedaa1dc589e?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D=80');">
+        <div class="sv-ico"><i class="fas fa-hotel"></i></div>
+        <h3>Hotel Booking</h3>
         <p>Best-rate rooms at handpicked premium hotels, resorts and heritage houseboats.</p>
+
         <div class="hotel-cards">
-          <div class="hotel-card"><img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=80&q=60" alt="Houseboat" onerror="this.style.display='none'"/><div class="hotel-card-info"><span>Luxury Houseboat — Dal Lake</span><div class="hotel-stars">★★★★★</div></div></div>
-          <div class="hotel-card"><img src="https://images.unsplash.com/photo-1584732200355-486a95263014?w=80&q=60" alt="Hotel" onerror="this.style.display='none'"/><div class="hotel-card-info"><span>Gulmarg Ski Resort Hotel</span><div class="hotel-stars">★★★★</div></div></div>
-          <div class="hotel-card"><img src="https://images.unsplash.com/photo-1623996732821-66f739df7280?w=80&q=60" alt="Resort" onerror="this.style.display='none'"/><div class="hotel-card-info"><span>Pahalgam Valley Resort</span><div class="hotel-stars">★★★★</div></div></div>
+          <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=80&q=60" alt="Houseboat" onerror="this.style.display='none'"/>
+            <div class="hotel-card-info"><span>Luxury Houseboat — Dal Lake</span><div class="hotel-stars">★★★★★</div></div>
+          </div>
+          <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1584732200355-486a95263014?w=80&q=60" alt="Hotel" onerror="this.style.display='none'"/>
+            <div class="hotel-card-info"><span>Gulmarg Ski Resort Hotel</span><div class="hotel-stars">★★★★</div></div>
+          </div>
+          <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1623996732821-66f739df7280?w=80&q=60" alt="Resort" onerror="this.style.display='none'"/>
+            <div class="hotel-card-info"><span>Pahalgam Valley Resort</span><div class="hotel-stars">★★★★</div></div>
+          </div>
         </div>
-        <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20hotel%20booking%20in%20Kashmir." target="_blank" class="sv-lnk">Enquire Hotels <i class="fas fa-arrow-right"></i></a>
+
+        <a href="contact.html" class="sv-lnk">Explore <i class="fas fa-arrow-right"></i></a>
       </div>
-      <div class="sv rv">
-        <div class="sv-ico"><i class="fas fa-plane"></i></div><h3>Flight &amp; Train Assistance</h3>
+
+      <div class="sv rv" style="background-image:linear-gradient(rgba(0,0,0,.68),rgba(0,0,0,.78)),url('https://plus.unsplash.com/premium_photo-1679758629905-a5366fe47844?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D=80');">
+        <div class="sv-ico"><i class="fas fa-plane"></i></div>
+        <h3>Flight &amp; Train Assistance</h3>
         <p>We help you book the best tickets to Srinagar at great prices with full support.</p>
+
         <div class="sv-mini">
-          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20flight%20ticket%20assistance%20to%20Srinagar." target="_blank" class="sv-mc"><i class="fas fa-plane-departure"></i><span>Flight Ticket Assistance</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
-          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20train%20ticket%20assistance%20to%20Kashmir." target="_blank" class="sv-mc"><i class="fas fa-train"></i><span>Train Ticket Assistance</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
+          <a href="contact.html" class="sv-mc">
+            <i class="fas fa-plane-departure"></i><span>Flight Ticket Assistance</span><i class="fas fa-arrow-right sv-mc-arrow"></i>
+          </a>
+          <a href="contact.html" class="sv-mc">
+            <i class="fas fa-train"></i><span>Train Ticket Assistance</span><i class="fas fa-arrow-right sv-mc-arrow"></i>
+          </a>
         </div>
+
+        <a href="contact.html" class="sv-lnk">Explore <i class="fas fa-arrow-right"></i></a>
       </div>
-      <div class="sv rv">
-        <div class="sv-ico"><i class="fas fa-headset"></i></div><h3>Customer &amp; Emergency Support</h3>
+
+      <div class="sv rv" style="background-image:linear-gradient(rgba(0,0,0,.68),rgba(0,0,0,.78)),url('https://plus.unsplash.com/premium_photo-1672759455710-70c879daf721?q=80&w=1716&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D=80');">
+        <div class="sv-ico"><i class="fas fa-headset"></i></div>
+        <h3>Customer &amp; Emergency Support</h3>
         <p>Round-the-clock assistance — from enquiries to on-ground medical emergencies.</p>
+
         <div class="sv-mini">
-          <a href="https://wa.me/919103269575?text=Hi!%20I%20need%20customer%20support." target="_blank" class="sv-mc"><i class="fas fa-comments"></i><span>Customer Support</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
-          <a href="https://wa.me/919103269575?text=EMERGENCY!%20I%20need%20medical%20help%20in%20Kashmir." target="_blank" class="sv-mc" style="border-color:rgba(239,68,68,.3)"><i class="fas fa-ambulance" style="color:#ef4444"></i><span style="color:rgba(255,255,255,.85)">Medical / Emergency</span><i class="fas fa-arrow-right sv-mc-arrow"></i></a>
+          <a href="contact.html" class="sv-mc">
+            <i class="fas fa-comments"></i><span>Customer Support</span><i class="fas fa-arrow-right sv-mc-arrow"></i>
+          </a>
+          <a href="contact.html" class="sv-mc" style="border-color:rgba(239,68,68,.3)">
+            <i class="fas fa-ambulance" style="color:#ef4444"></i>
+            <span style="color:rgba(255,255,255,.85)">Medical / Emergency</span>
+            <i class="fas fa-arrow-right sv-mc-arrow"></i>
+          </a>
         </div>
+
+        <a href="contact.html" class="sv-lnk">Explore <i class="fas fa-arrow-right"></i></a>
       </div>
+
     </div>
   </div>
 </section>
@@ -770,18 +837,22 @@
   </div>
 </section>
 
-<!-- INSTAGRAM -->
-<section class="sec-sm" style="background:var(--cream)">
+<!-- TRAVEL MOMENTS -->
+<section class="sec" style="background:var(--navy)" id="moments">
   <div class="wrap">
-    <div class="sh c rv"><div class="lbl">Follow Our Journey</div><h2 class="ttl">Instagram <em>Moments</em></h2><p class="sub">Follow us <a href="https://www.instagram.com/heavenlyhorizontours" target="_blank" style="color:var(--gold);font-weight:600">@heavenlyhorizontours</a> for daily Kashmir inspiration</p></div>
-    <div class="ig-grid rv">
-      <a href="https://www.instagram.com/heavenlyhorizontours" target="_blank" class="ig-item"><img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=400&q=70" alt="ig1" loading="lazy"/><div class="ig-ov"><i class="fab fa-instagram"></i></div></a>
-      <a href="https://www.instagram.com/heavenlyhorizontours" target="_blank" class="ig-item"><img src="https://images.unsplash.com/photo-1692287731328-58f55e8950cd?w=400&q=70" alt="ig2" loading="lazy"/><div class="ig-ov"><i class="fab fa-instagram"></i></div></a>
-      <a href="https://www.instagram.com/heavenlyhorizontours" target="_blank" class="ig-item"><img src="https://images.unsplash.com/photo-1623996732821-66f739df7280?w=400&q=70" alt="ig3" loading="lazy"/><div class="ig-ov"><i class="fab fa-instagram"></i></div></a>
-      <a href="https://www.instagram.com/heavenlyhorizontours" target="_blank" class="ig-item"><img src="https://images.unsplash.com/photo-1593417376544-4c4201061e22?w=400&q=70" alt="ig4" loading="lazy"/><div class="ig-ov"><i class="fab fa-instagram"></i></div></a>
-      <a href="https://www.instagram.com/heavenlyhorizontours" target="_blank" class="ig-item"><img src="https://images.unsplash.com/photo-1584732200355-486a95263014?w=400&q=70" alt="ig5" loading="lazy"/><div class="ig-ov"><i class="fab fa-instagram"></i></div></a>
-      <a href="https://www.instagram.com/heavenlyhorizontours" target="_blank" class="ig-item"><img src="https://plus.unsplash.com/premium_photo-1697729439457-85d4b9d3a2cb?w=400&q=70" alt="ig6" loading="lazy"/><div class="ig-ov"><i class="fab fa-instagram"></i></div></a>
+    <div class="sh c rv"><div class="lbl" style="color:var(--gold)">Our Travel Moments</div><h2 class="ttl lt">Guest <em>Memories</em></h2><p class="sub lt">Real moments from our travellers across the paradise of Kashmir</p></div>
+    <div class="moments-grid rv">
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=600&q=80" alt="Dal Lake" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1692287731328-58f55e8950cd?w=600&q=80" alt="Doodhpathri" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1584732200355-486a95263014?w=600&q=80" alt="Gulmarg" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1623996732821-66f739df7280?w=600&q=80" alt="Pahalgam" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1593417376544-4c4201061e22?w=600&q=80" alt="Sonamarg" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://plus.unsplash.com/premium_photo-1697729439457-85d4b9d3a2cb?w=600&q=80" alt="Kashmir" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=600&q=70" alt="Kashmir" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1692287731328-58f55e8950cd?w=600&q=70" alt="Kashmir" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
+      <div class="moment-item"><img src="https://images.unsplash.com/photo-1584732200355-486a95263014?w=600&q=70" alt="Kashmir" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
     </div>
+    <div style="text-align:center;margin-top:24px" class="rv"><a href="gallery.html" class="btn btn-out" style="border-color:rgba(255,255,255,.35)"><i class="fas fa-images"></i> View Full Gallery</a></div>
   </div>
 </section>
 
@@ -796,7 +867,20 @@
   </div></div>
 </div>
 
-<!-- ENQUIRY FORM -->
+<!-- TEAM -->
+<section class="sec" style="background:var(--mist)" id="team">
+  <div class="wrap">
+    <div class="sh c rv"><div class="lbl">Meet the Team</div><h2 class="ttl">Our Travel <em>Experts</em></h2><p class="sub">Passionate Kashmiris dedicated to making your trip unforgettable</p></div>
+    <div class="team-grid">
+      <div class="team-card rv"><div class="team-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Mohammad Zakir" loading="lazy" onerror="this.style.display='none'"/></div><div class="team-body"><h3>Mohammad Zakir</h3><span class="team-role">Founder &amp; CEO</span><p>8+ years crafting premium Kashmir journeys. Deep local expertise and genuine passion for hospitality.</p><div class="team-contact"><a href="tel:+918825034964" class="btn btn-og btn-sm"><i class="fas fa-phone-alt"></i> Call</a><a href="https://wa.me/919103269575" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a></div></div></div>
+      <div class="team-card rv"><div class="team-img"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" alt="Irfan Mir" loading="lazy" onerror="this.style.display='none'"/></div><div class="team-body"><h3>Irfan Mir</h3><span class="team-role">Head of Operations</span><p>Expert at crafting seamless itineraries. Ensures every detail of your trip is executed flawlessly.</p><div class="team-contact"><a href="https://wa.me/919103269575?text=Hi%20Irfan!" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> Contact</a></div></div></div>
+      <div class="team-card rv"><div class="team-img"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="Tariq Wani" loading="lazy" onerror="this.style.display='none'"/></div><div class="team-body"><h3>Tariq Wani</h3><span class="team-role">Senior Tour Guide</span><p>Trilingual guide with encyclopaedic knowledge of Kashmir's history, culture and every hidden scenic spot.</p><div class="team-contact"><a href="https://wa.me/919103269575?text=Hi%20Tariq!" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> Contact</a></div></div></div>
+      <div class="team-card rv"><div class="team-img"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80" alt="Bilal Shah" loading="lazy" onerror="this.style.display='none'"/></div><div class="team-body"><h3>Bilal Shah</h3><span class="team-role">Transport Manager</span><p>Oversees our entire fleet ensuring safe, comfortable and timely travel across all Kashmir routes.</p><div class="team-contact"><a href="https://wa.me/919103269575?text=Hi!%20I%20need%20cab%20service." target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> Contact</a></div></div></div>
+    </div>
+  </div>
+</section>
+
+  <!-- ENQUIRY FORM -->
 <section class="sec enq-section" id="enquiry">
   <div class="wrap">
     <div class="enq-inner">
@@ -852,39 +936,7 @@
     </div>
   </div>
 </section>
-
-<!-- TRAVEL MOMENTS -->
-<section class="sec" style="background:var(--navy)" id="moments">
-  <div class="wrap">
-    <div class="sh c rv"><div class="lbl" style="color:var(--gold)">Our Travel Moments</div><h2 class="ttl lt">Guest <em>Memories</em></h2><p class="sub lt">Real moments from our travellers across the paradise of Kashmir</p></div>
-    <div class="moments-grid rv">
-      <div class="moment-item"><img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=600&q=80" alt="Dal Lake" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
-      <div class="moment-item"><img src="https://images.unsplash.com/photo-1692287731328-58f55e8950cd?w=600&q=80" alt="Doodhpathri" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
-      <div class="moment-item"><img src="https://images.unsplash.com/photo-1584732200355-486a95263014?w=600&q=80" alt="Gulmarg" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
-      <div class="moment-item"><img src="https://images.unsplash.com/photo-1623996732821-66f739df7280?w=600&q=80" alt="Pahalgam" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
-      <div class="moment-item"><img src="https://images.unsplash.com/photo-1593417376544-4c4201061e22?w=600&q=80" alt="Sonamarg" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
-      <div class="moment-item"><img src="https://plus.unsplash.com/premium_photo-1697729439457-85d4b9d3a2cb?w=600&q=80" alt="Kashmir" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
-      <div class="moment-item"><img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=600&q=70" alt="Kashmir" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
-      <div class="moment-item"><img src="https://images.unsplash.com/photo-1692287731328-58f55e8950cd?w=600&q=70" alt="Kashmir" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
-      <div class="moment-item"><img src="https://images.unsplash.com/photo-1584732200355-486a95263014?w=600&q=70" alt="Kashmir" loading="lazy"/><div class="moment-ov"><i class="fas fa-expand"></i></div></div>
-    </div>
-    <div style="text-align:center;margin-top:24px" class="rv"><a href="gallery.html" class="btn btn-out" style="border-color:rgba(255,255,255,.35)"><i class="fas fa-images"></i> View Full Gallery</a></div>
-  </div>
-</section>
-
-<!-- TEAM -->
-<section class="sec" style="background:var(--mist)" id="team">
-  <div class="wrap">
-    <div class="sh c rv"><div class="lbl">Meet the Team</div><h2 class="ttl">Our Travel <em>Experts</em></h2><p class="sub">Passionate Kashmiris dedicated to making your trip unforgettable</p></div>
-    <div class="team-grid">
-      <div class="team-card rv"><div class="team-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Mohammad Zakir" loading="lazy" onerror="this.style.display='none'"/></div><div class="team-body"><h3>Mohammad Zakir</h3><span class="team-role">Founder &amp; CEO</span><p>8+ years crafting premium Kashmir journeys. Deep local expertise and genuine passion for hospitality.</p><div class="team-contact"><a href="tel:+918825034964" class="btn btn-og btn-sm"><i class="fas fa-phone-alt"></i> Call</a><a href="https://wa.me/919103269575" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a></div></div></div>
-      <div class="team-card rv"><div class="team-img"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" alt="Irfan Mir" loading="lazy" onerror="this.style.display='none'"/></div><div class="team-body"><h3>Irfan Mir</h3><span class="team-role">Head of Operations</span><p>Expert at crafting seamless itineraries. Ensures every detail of your trip is executed flawlessly.</p><div class="team-contact"><a href="https://wa.me/919103269575?text=Hi%20Irfan!" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> Contact</a></div></div></div>
-      <div class="team-card rv"><div class="team-img"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="Tariq Wani" loading="lazy" onerror="this.style.display='none'"/></div><div class="team-body"><h3>Tariq Wani</h3><span class="team-role">Senior Tour Guide</span><p>Trilingual guide with encyclopaedic knowledge of Kashmir's history, culture and every hidden scenic spot.</p><div class="team-contact"><a href="https://wa.me/919103269575?text=Hi%20Tariq!" target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> Contact</a></div></div></div>
-      <div class="team-card rv"><div class="team-img"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80" alt="Bilal Shah" loading="lazy" onerror="this.style.display='none'"/></div><div class="team-body"><h3>Bilal Shah</h3><span class="team-role">Transport Manager</span><p>Oversees our entire fleet ensuring safe, comfortable and timely travel across all Kashmir routes.</p><div class="team-contact"><a href="https://wa.me/919103269575?text=Hi!%20I%20need%20cab%20service." target="_blank" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp"></i> Contact</a></div></div></div>
-    </div>
-  </div>
-</section>
-
+  
 <!-- FOOTER -->
 <footer class="footer">
   <div class="ft"><div class="wrap"><div class="fg4">
