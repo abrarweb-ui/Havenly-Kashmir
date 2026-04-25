@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cars & Cab Services</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:Arial,sans-serif;
+      background:#07120d;
+      color:#fff;
+    }
+    .cars-hero{
+      min-height:45vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:70px 20px;
+      background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.8)),
+      url("https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1600&q=80") center/cover;
+    }
+    .cars-hero h1{
+      font-size:clamp(34px,6vw,70px);
+      margin-bottom:12px;
+      color:#fff;
+    }
+    .cars-hero p{
+      max-width:720px;
+      margin:auto;
+      color:#ddd;
+      font-size:18px;
+      line-height:1.6;
+    }
+    .wrap{
+      max-width:1200px;
+      margin:auto;
+      padding:60px 18px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:25px;
+    }
+    .car-card{
+      background:#0d1f17;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:0 20px 45px rgba(0,0,0,.35);
+      transition:.3s;
+    }
+    .car-card:hover{
+      transform:translateY(-8px);
+      border-color:#d6a84f;
+    }
+    .car-img{
+      height:230px;
+      overflow:hidden;
+    }
+    .car-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:.4s;
+    }
+    .car-card:hover img{
+      transform:scale(1.08);
+    }
+    .car-body{
+      padding:22px;
+    }
+    .car-body h3{
+      font-size:24px;
+      margin-bottom:10px;
+      color:#fff;
+    }
+    .route{
+      color:#cfcfcf;
+      margin-bottom:14px;
+      font-size:15px;
+    }
+    .price{
+      font-size:28px;
+      font-weight:800;
+      color:#d6a84f;
+      margin-bottom:18px;
+    }
+    .price span{
+      font-size:14px;
+      color:#bbb;
+      font-weight:400;
+    }
+    .features{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:20px;
+    }
+    .features span{
+      font-size:13px;
+      padding:7px 10px;
+      background:rgba(255,255,255,.08);
+      border-radius:50px;
+      color:#eee;
+    }
+    .book-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      width:100%;
+      padding:14px;
+      border-radius:14px;
+      text-decoration:none;
+      color:#111;
+      background:#d6a84f;
+      font-weight:800;
+      transition:.3s;
+    }
+    .book-btn:hover{
+      background:#fff;
+      transform:scale(.98);
+    }
+    .back-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      margin-bottom:25px;
+      color:#d6a84f;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    @media(max-width:900px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:600px){
+      .grid{grid-template-columns:1fr}
+      .cars-hero{min-height:38vh;padding:55px 16px}
+      .wrap{padding:40px 14px}
+      .car-img{height:210px}
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="cars-hero">
+    <div>
+      <h1>Cab & Car Services</h1>
+      <p>Comfortable Kashmir cab services from Srinagar to Srinagar with verified local drivers and clean vehicles.</p>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+    <div class="grid">
+
+      <div class="car-card">
+        <div class="car-img">
+          <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?w=900&q=80" alt="Sedan Cab">
+        </div>
+        <div class="car-body">
+          <h3>Sedan</h3>
+          <p class="route">Srinagar to Srinagar</p>
+          <div class="price">₹1800 <span>/ day</span></div>
+          <div class="features">
+            <span>AC Cab</span><span>4 Seats</span><span>Local Driver</span>
+          </div>
+          <a class="book-btn" target="_blank" href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20book%20Sedan%20cab%20Srinagar%20to%20Srinagar%20for%20₹1800.">
+            Book Now <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-img">
+          <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=900&q=80" alt="Ertiga Cab">
+        </div>
+        <div class="car-body">
+          <h3>Ertiga</h3>
+          <p class="route">Srinagar to Srinagar</p>
+          <div class="price">₹1900 <span>/ day</span></div>
+          <div class="features">
+            <span>AC Cab</span><span>6 Seats</span><span>Family Friendly</span>
+          </div>
+          <a class="book-btn" target="_blank" href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20book%20Ertiga%20cab%20Srinagar%20to%20Srinagar%20for%20₹1900.">
+            Book Now <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-img">
+          <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=900&q=80" alt="Innova Cab">
+        </div>
+        <div class="car-body">
+          <h3>Innova</h3>
+          <p class="route">Srinagar to Srinagar</p>
+          <div class="price">₹2300 <span>/ day</span></div>
+          <div class="features">
+            <span>AC Cab</span><span>7 Seats</span><span>Comfort Ride</span>
+          </div>
+          <a class="book-btn" target="_blank" href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20book%20Innova%20cab%20Srinagar%20to%20Srinagar%20for%20₹2300.">
+            Book Now <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-img">
+          <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=900&q=80" alt="Innova Crysta">
+        </div>
+        <div class="car-body">
+          <h3>Innova Crysta</h3>
+          <p class="route">Srinagar to Srinagar</p>
+          <div class="price">₹2700 <span>/ day</span></div>
+          <div class="features">
+            <span>Premium AC</span><span>7 Seats</span><span>Luxury Comfort</span>
+          </div>
+          <a class="book-btn" target="_blank" href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20book%20Innova%20Crysta%20Srinagar%20to%20Srinagar%20for%20₹2700.">
+            Book Now <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-img">
+          <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=900&q=80" alt="Tempo Traveller">
+        </div>
+        <div class="car-body">
+          <h3>Tempo Traveller</h3>
+          <p class="route">Srinagar to Srinagar</p>
+          <div class="price">₹3700 <span>/ day</span></div>
+          <div class="features">
+            <span>Group Travel</span><span>12+ Seats</span><span>AC Vehicle</span>
+          </div>
+          <a class="book-btn" target="_blank" href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20book%20Tempo%20Traveller%20Srinagar%20to%20Srinagar%20for%20₹3700.">
+            Book Now <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <div class="car-img">
+          <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=900&q=80" alt="Force Urbania">
+        </div>
+        <div class="car-body">
+          <h3>Force Urbania</h3>
+          <p class="route">Srinagar to Srinagar</p>
+          <div class="price">₹6300 <span>/ day</span></div>
+          <div class="features">
+            <span>Premium Van</span><span>Group Travel</span><span>Luxury Seats</span>
+          </div>
+          <a class="book-btn" target="_blank" href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20book%20Force%20Urbania%20Srinagar%20to%20Srinagar%20for%20₹6300.">
+            Book Now <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
