@@ -1239,4 +1239,54 @@ document.getElementById('enqForm')?.addEventListener('submit',async e=>{
   function startTmt(){tmt=setInterval(()=>gt(tc2+1),5500);}startTmt();}
 })();
 </script>
+  <script>// ===============================
+// NAVBAR JS (SCROLL + TOGGLE)
+// ===============================
+
+const nav = document.getElementById("nav");
+const hamburger = document.querySelector(".hbg");
+const navLinks = document.querySelector(".nav-links");
+
+// SCROLL EFFECT (shrink + glass)
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) {
+    nav.classList.add("sc");
+  } else {
+    nav.classList.remove("sc");
+  }
+});
+
+// HAMBURGER TOGGLE
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("open");
+  navLinks.classList.toggle("show");
+});
+
+// CLOSE MENU WHEN LINK CLICK
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    hamburger.classList.remove("open");
+    navLinks.classList.remove("show");
+  });
+});
+
+// CLOSE WHEN CLICK OUTSIDE
+document.addEventListener("click", (e) => {
+  if (
+    !nav.contains(e.target) &&
+    navLinks.classList.contains("show")
+  ) {
+    hamburger.classList.remove("open");
+    navLinks.classList.remove("show");
+  }
+});
+
+// ESC KEY CLOSE
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    hamburger.classList.remove("open");
+    navLinks.classList.remove("show");
+  }
+});
+</script>
 </body></html>
