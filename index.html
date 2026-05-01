@@ -560,7 +560,15 @@
 
 <nav id="nav">
   <div class="nav-in">
-    <a href="index.html" class="brand"><div class="brand-name">Heavenly <span>Horizon</span> Tours</div><</a>
+
+    <!-- BRAND -->
+    <a href="index.html" class="brand">
+      <div class="brand-name">
+        Heavenly <span>Horizon</span> Tours
+      </div>
+    </a>
+
+    <!-- NAV LINKS -->
     <ul class="nav-links" id="nl">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="tours.html">Tours</a></li>
@@ -569,7 +577,14 @@
       <li><a href="contact.html">Contact</a></li>
       <li><a href="book-now.html" class="nav-cta">Book Now</a></li>
     </ul>
-    <button class="hbg" id="hbg" aria-label="Menu"><span></span><span></span><span></span></button>
+
+    <!-- HAMBURGER -->
+    <button class="hbg" id="hbg" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
   </div>
 </nav>
 
@@ -1239,54 +1254,35 @@ document.getElementById('enqForm')?.addEventListener('submit',async e=>{
   function startTmt(){tmt=setInterval(()=>gt(tc2+1),5500);}startTmt();}
 })();
 </script>
-  <script>// ===============================
-// NAVBAR JS (SCROLL + TOGGLE)
-// ===============================
+  const nav = document.getElementById("nav");
+const hamburger = document.getElementById("hbg");
+const navLinks = document.getElementById("nl");
 
-const nav = document.getElementById("nav");
-const hamburger = document.querySelector(".hbg");
-const navLinks = document.querySelector(".nav-links");
-
-// SCROLL EFFECT (shrink + glass)
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
-    nav.classList.add("sc");
-  } else {
-    nav.classList.remove("sc");
-  }
+  nav.classList.toggle("sc", window.scrollY > 50);
 });
 
-// HAMBURGER TOGGLE
 hamburger.addEventListener("click", () => {
   hamburger.classList.toggle("open");
   navLinks.classList.toggle("show");
+  document.body.classList.toggle("menu-open");
 });
 
-// CLOSE MENU WHEN LINK CLICK
-document.querySelectorAll(".nav-links a").forEach(link => {
+document.querySelectorAll("#nl a").forEach((link) => {
   link.addEventListener("click", () => {
     hamburger.classList.remove("open");
     navLinks.classList.remove("show");
+    document.body.classList.remove("menu-open");
   });
 });
 
-// CLOSE WHEN CLICK OUTSIDE
-document.addEventListener("click", (e) => {
-  if (
-    !nav.contains(e.target) &&
-    navLinks.classList.contains("show")
-  ) {
-    hamburger.classList.remove("open");
-    navLinks.classList.remove("show");
-  }
-});
-
-// ESC KEY CLOSE
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     hamburger.classList.remove("open");
     navLinks.classList.remove("show");
+    document.body.classList.remove("menu-open");
   }
 });
+  <script>
 </script>
 </body></html>
