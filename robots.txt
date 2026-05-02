@@ -1,9 +1,9 @@
 User-agent: *
 Allow: /
 
-# Block admin/private paths (add any relevant paths below)
+# Block sensitive or unnecessary files
 Disallow: /admin/
 Disallow: /firebase-config.js
 
-# Sitemap location
-Sitemap: https://heavenlyhorizonstours.com/sitemap.xml
+# Sitemap
+Sitemap: https://heavenlyhorizontours.com/sitemap.xml
