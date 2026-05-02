@@ -142,7 +142,12 @@
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore,collection,getDocs,query,orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-const fbCfg={apiKey:"AIzaSyADiBZe0V5gTnB89Ik1Bby2NDo-9nRxAHc",authDomain:"insta-web-upload.firebaseapp.com",databaseURL:"https://insta-web-upload-default-rtdb.firebaseio.com",projectId:"insta-web-upload",storageBucket:"insta-web-upload.firebasestorage.app",messagingSenderId:"1092302887537",appId:"1:1092302887537:web:a1bb7595868c84c30999d0"};
+const fbCfg={apiKey: "AIzaSyDUYb1s7PrqAiaHz-O-oUdOKt2U9SZLQy0",
+  authDomain: "havenly-horizon.firebaseapp.com",
+  projectId: "havenly-horizon",
+  storageBucket: "havenly-horizon.firebasestorage.app",
+  messagingSenderId: "478040986190",
+  appId: "1:478040986190:web:0a3b0d77f5ae677b9da91f"};
 let db=null;try{const app=initializeApp(fbCfg);db=getFirestore(app);}catch(e){}
 const DEF=[
   {id:'p1',title:'Romantic Kashmir Honeymoon',category:'honeymoon',duration:'6N/7D',groupSize:'Couples',price:'₹24,999',oldPrice:'₹32,000',badge:'bdg-red',bdgText:'Best Seller',image:'https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=600&q=80',description:'Immerse in romance with private houseboat stays on Dal Lake, candlelit shikara rides, exclusive couple activities in Gulmarg and Pahalgam.',includes:['Luxury Houseboat','All Meals','Couple Activities','Cab Services','Tour Guide'],itinerary:['Arrival Srinagar, houseboat check-in, shikara ride','Mughal Gardens, Shankaracharya Temple, local market','Gulmarg Gondola, snow activities, romantic dinner','Pahalgam, Betaab Valley, Aru Valley excursion','Sonamarg day trip, glacier visit','Shopping &amp; departure']},
