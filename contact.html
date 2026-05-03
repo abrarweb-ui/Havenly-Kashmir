@@ -159,10 +159,7 @@ const fbCfg={
   appId:"1:478040986190:web:0a3b0d77f5ae677b9da91f"
 };
 let db=null;
-try{
-  const app=initializeApp(fbCfg);
-  db=getFirestore(app);
-}catch(e){console.error('Firebase init error:',e);}
+try{const app=initializeApp(fbCfg);db=getFirestore(app);}catch(e){console.error('Firebase init:',e);}
 
 document.getElementById('cform').addEventListener('submit',async function(e){
   e.preventDefault();
@@ -174,30 +171,24 @@ document.getElementById('cform').addEventListener('submit',async function(e){
   btn.disabled=true;
   btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-  var data={
-    name:nm,
-    phone:ph,
-    email:(document.getElementById('cemail').value||'').trim(),
-    date:(document.getElementById('cdate').value||''),
-    travellers:(document.getElementById('ctravellers').value||''),
-    package:(document.getElementById('cpackage').value||''),
-    message:(document.getElementById('cmessage').value||'').trim(),
-    source:'contact_page',
-    status:'new',
-    createdAt:serverTimestamp()
-  };
-
   try{
     if(db){
-      await addDoc(collection(db,'contactMessages'),data);
-      console.log('Contact message saved to contactMessages collection');
+      await addDoc(collection(db,'contactMessages'),{
+        name: nm,
+        phone: ph,
+        email: (document.getElementById('cemail').value||'').trim(),
+        date: (document.getElementById('cdate').value||''),
+        travellers: (document.getElementById('ctravellers').value||''),
+        package: (document.getElementById('cpackage').value||''),
+        message: (document.getElementById('cmessage').value||'').trim(),
+        source: 'contact_page',
+        status: 'new',
+        createdAt: serverTimestamp()
+      });
     }
-  }catch(err){
-    console.error('Firestore write error:',err.code,err.message);
-  }
+  }catch(err){console.error('Firestore error:',err);}
 
-  e.target.style.display='none';
-  document.getElementById('cok').style.display='block';
+  window.location.href='thankyou.html';
 });
 </script>
 <script>
