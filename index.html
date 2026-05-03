@@ -981,7 +981,13 @@ const fbCfg = {
   appId: "1:478040986190:web:0a3b0d77f5ae677b9da91f"
 };
 let db = null;
-try { const app = initializeApp(fbCfg); db = getFirestore(app); } catch(e) {}
+try {
+  const app = initializeApp(fbCfg);
+  db = getFirestore(app);
+  console.log('[Index] Firebase initialised OK');
+} catch(e) {
+  console.error('[Index] Firebase init failed:',e);
+}
 
 // ── Default packages (shown if Firebase empty/offline) ──
 const DEF = [
@@ -1094,9 +1100,17 @@ document.getElementById('enqForm').addEventListener('submit', async e => {
   const btn = document.getElementById('enqSubmit');
   btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Sending…';
   const data = Object.fromEntries(new FormData(e.target));
+  console.log('[Index] Submitting enquiry:', {name:nm, phone:ph});
   try {
-    if (db) await addDoc(collection(db, 'enquiries'), { ...data, source:'homepage_enquiry', createdAt:serverTimestamp(), status:'new' });
-  } catch(err) {}
+    if (db) {
+      const ref = await addDoc(collection(db, 'enquiries'), { ...data, source:'homepage_enquiry', createdAt:serverTimestamp(), status:'new' });
+      console.log('[Index] Enquiry saved to Firestore with ID:', ref.id);
+    } else {
+      console.warn('[Index] Firestore not ready — enquiry NOT saved.');
+    }
+  } catch(err) {
+    console.error('[Index] Firestore write failed:', err.code, err.message);
+  }
   e.target.style.display = 'none';
   document.getElementById('enqOk').style.display = 'block';
 });
