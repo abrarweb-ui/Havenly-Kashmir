@@ -377,7 +377,24 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
     <button class="mc" onclick="closeMov('pkgMov')"><i class="fas fa-times"></i></button>
     <h3 id="pkgMTitle">Add Tour Package</h3>
     <input type="hidden" id="pkgId"/>
-    <div class="mfr"><div class="mf"><label>Title *</label><input id="pkgTitle" placeholder="e.g. Romantic Kashmir Honeymoon"/></div><div class="mf"><label>Category</label><select id="pkgCat"><option value="honeymoon">Honeymoon</option><option value="family">Family</option><option value="gulmarg">Gulmarg</option><option value="pahalgam">Pahalgam</option><option value="luxury">Luxury</option><option value="sonamarg">Sonamarg</option></select></div></div>
+    <div class="mfr">
+  <div class="mf">
+    <label>Title *</label>
+    <input id="pkgTitle" placeholder="e.g. Romantic Kashmir Honeymoon"/>
+  </div>
+
+  <div class="mf">
+    <label>Category</label>
+    <select id="pkgCat">
+      <option value="honeymoon">Honeymoon</option>
+      <option value="family">Family</option>
+      <option value="budget">Budget Tour Package</option>
+      <option value="mata-vaishno-devi">Mata Vaishno Devi</option>
+      <option value="luxury">Luxury</option>
+      <option value="group-tour">Group Tour</option>
+    </select>
+  </div>
+</div>
     <div class="mfr"><div class="mf"><label>Duration</label><input id="pkgDur" placeholder="6N/7D"/></div><div class="mf"><label>Group Size</label><input id="pkgGrp" placeholder="Couples / Families / Any"/></div></div>
     <div class="mfr"><div class="mf"><label>Price</label><input id="pkgPrice" placeholder="₹24,999"/></div><div class="mf"><label>Old Price (strike-through)</label><input id="pkgOld" placeholder="₹32,000"/></div></div>
     <div class="mfr"><div class="mf"><label>Badge Style</label><select id="pkgBadge"><option value="">No badge</option><option value="bdg-red">Red — Best Seller</option><option value="bdg-gold">Gold — Premium</option><option value="bdg-blue">Blue — New</option></select></div><div class="mf"><label>Badge Text</label><input id="pkgBdgTxt" placeholder="Best Seller"/></div></div>
