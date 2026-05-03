@@ -107,6 +107,77 @@
   <p class="lb-txt" id="lbtxt"></p>
   <button class="lb-n" id="lbn"><i class="fas fa-chevron-right"></i></button>
 </div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore,collection,getDocs,query,orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+const fbCfg={
+  apiKey:"AIzaSyDUYb1s7PrqAiaHz-O-oUdOKt2U9SZLQy0",
+  authDomain:"havenly-horizon.firebaseapp.com",
+  projectId:"havenly-horizon",
+  storageBucket:"havenly-horizon.firebasestorage.app",
+  messagingSenderId:"478040986190",
+  appId:"1:478040986190:web:0a3b0d77f5ae677b9da91f"
+};
+(async function(){
+  try{
+    const app=initializeApp(fbCfg);
+    const db=getFirestore(app);
+    const snap=await getDocs(query(collection(db,'gallery'),orderBy('order','asc')));
+    if(snap.empty){console.log('Gallery: no admin images in Firebase, showing defaults');return;}
+    const gg=document.getElementById('gg');
+    if(!gg) return;
+    var added=0;
+    snap.forEach(function(d){
+      const img=d.data();
+      if(!img.url) return;
+      const div=document.createElement('div');
+      div.className='gi';
+      div.dataset.src=img.url;
+      div.dataset.cat=img.category||'other';
+      div.innerHTML=
+        '<img src="'+img.url+'" alt="'+(img.caption||'Kashmir')+'" loading="lazy" onerror="this.parentElement.style.display=\'none\'"/>'+
+        '<div class="gi-ov"><i class="fas fa-expand"></i></div>'+
+        '<div class="gi-cap">'+(img.caption||'')+'</div>';
+      gg.insertBefore(div,gg.firstChild);
+      added++;
+    });
+    // Re-wire click listeners for all .gi items including newly added ones
+    var allItems=Array.from(gg.querySelectorAll('.gi'));
+    var lb=document.getElementById('lb');
+    var lbi=document.getElementById('lbi');
+    var lbtxt=document.getElementById('lbtxt');
+    var curIdx=0;
+    function openLbAt(i){
+      curIdx=i;
+      var items=Array.from(gg.querySelectorAll('.gi'));
+      lbi.src=items[i].dataset.src||items[i].querySelector('img').src;
+      lbtxt.textContent=(items[i].querySelector('.gi-cap')||{}).textContent||'';
+      lb.classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+    allItems.forEach(function(item,i){
+      var fresh=item.cloneNode(true);
+      item.parentNode.replaceChild(fresh,item);
+      fresh.addEventListener('click',function(){openLbAt(i);});
+    });
+    document.getElementById('lbp').onclick=function(){
+      var items=Array.from(gg.querySelectorAll('.gi'));
+      curIdx=(curIdx-1+items.length)%items.length;
+      lbi.src=items[curIdx].dataset.src||items[curIdx].querySelector('img').src;
+      lbtxt.textContent=(items[curIdx].querySelector('.gi-cap')||{}).textContent||'';
+    };
+    document.getElementById('lbn').onclick=function(){
+      var items=Array.from(gg.querySelectorAll('.gi'));
+      curIdx=(curIdx+1)%items.length;
+      lbi.src=items[curIdx].dataset.src||items[curIdx].querySelector('img').src;
+      lbtxt.textContent=(items[curIdx].querySelector('.gi-cap')||{}).textContent||'';
+    };
+    console.log('Gallery: inserted '+added+' admin images from Firebase');
+  }catch(e){
+    console.error('Gallery Firebase error:',e.message);
+  }
+})();
+</script>
 <script>
 (function(){
   var all=Array.from(document.querySelectorAll('.gi'));
