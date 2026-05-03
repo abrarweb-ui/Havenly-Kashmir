@@ -336,7 +336,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
     <!-- CONTACT MESSAGES -->
     <div class="panel" id="sec-contactMessages">
       <div class="panel-hd"><span class="panel-title">Contact Messages <small id="cmCnt"></small></span><input class="tsearch" id="cmSearch" placeholder="Search name, phone, message..."/></div>
-      <div class="tw"><table class="at"><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Package Interest</th><th>Message</th><th>Received</th><th>Status</th><th>Actions</th></tr></thead><tbody id="cmBody"><tr><td colspan="8" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr></tbody></table></div>
+      <div class="tw"><table class="at"><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Package</th><th>Message</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody id="cmBody"><tr><td colspan="8" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr></tbody></table></div>
     </div>
 
     <!-- SETTINGS -->
@@ -358,22 +358,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
         <button class="btn-gold" onclick="saveSettings()"><i class="fas fa-save"></i> Save Settings</button>
       </div>
       <div class="set-note">
-        <strong><i class="fas fa-info-circle"></i> Firebase Configuration & Rules</strong><br/><br/>
-        Firebase Project: <strong>havenly-horizon</strong> is configured in all pages.<br/><br/>
-        Required Firestore collections: <code>bookings</code> · <code>enquiries</code> · <code>contactMessages</code> · <code>packages</code> · <code>gallery</code> · <code>vehicles</code> · <code>testimonials</code> · <code>settings</code><br/><br/>
-        <strong>Firestore Security Rules (paste in Firebase Console → Firestore → Rules):</strong><br/>
-        <code style="display:block;margin-top:6px;white-space:pre;font-size:10px;line-height:1.8">rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    // Public can create enquiries, bookings & contactMessages only
-    match /enquiries/{id}  { allow create: if true; allow read,update,delete: if request.auth != null; }
-    match /bookings/{id}   { allow create: if true; allow read,update,delete: if request.auth != null; }
-    match /contactMessages/{id} { allow create: if true; allow read,update,delete: if request.auth != null; }
-    // Admin only for all other collections
-    match /{col}/{id} { allow read,write: if request.auth != null; }
-  }
-}</code><br/>
-        Admin Setup: Firebase Console → Authentication → Sign-in method → Enable Email/Password → Add Users → use those credentials to login here.
+        <strong><i class="fas fa-info-circle"></i> Firebase Configuration</strong><br/><br/>
+        Firebase Project: <strong>insta-web-upload</strong> is already configured in all pages.<br/><br/>
+        Required Firestore collections: <code>bookings</code>, <code>enquiries</code>, <code>packages</code>, <code>gallery</code>, <code>vehicles</code>, <code>testimonials</code>, <code>settings</code><br/><br/>
+        Firestore Security Rules: <code>allow read: if true; allow write: if request.auth != null;</code><br/><br/>
+        Admin Setup: Go to Firebase Console → Authentication → Sign-in method → Enable Email/Password → Add Users → create your admin account, then use those credentials to login here.
       </div>
     </div>
 
@@ -471,7 +460,7 @@ service cloud.firestore {
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore,collection,addDoc,getDocs,doc,updateDoc,deleteDoc,query,orderBy,serverTimestamp,limit,where }
+import { getFirestore,collection,addDoc,getDocs,doc,updateDoc,deleteDoc,query,orderBy,serverTimestamp,limit }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -548,20 +537,32 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape') document.querySelectorAll('.mov.open').forEach(m=>m.classList.remove('open'));
 });
 
+// ── IMAGE URL NORMALISER ───────────────────────────────────
+// Handles Cloudinary, Unsplash, Google Drive share links
+function normaliseImgUrl(url){
+  if(!url||!url.trim()) return '';
+  url=url.trim();
+  // Google Drive: convert /file/d/ID/view → direct uc?export=view
+  var gd=url.match(/drive\.google\.com\/file\/d\/([^/?\s]+)/);
+  if(gd) return 'https://drive.google.com/uc?export=view&id='+gd[1];
+  // Cloudinary & Unsplash: already delivery URLs, use as-is
+  return url;
+}
+
 // ── IMAGE PREVIEW ──────────────────────────────────────────
 window.prevImg=function(inputId,prevId){
-  const url=document.getElementById(inputId).value.trim();
+  const url=normaliseImgUrl(document.getElementById(inputId).value||'');
   const prev=document.getElementById(prevId);
   if(url){
-    const src=normaliseImgUrl(url);
-    prev.src=src;
+    prev.src=url;
     prev.classList.add('show');
-    prev.onerror=()=>{
-      console.error('[Admin] Image preview failed to load:',src,'(original:',url,')');
+    prev.onerror=function(){
+      console.error('Image preview failed to load:',url);
       prev.classList.remove('show');
-      toast('⚠️ Image URL could not be loaded. Check the URL is a direct image link.','err');
     };
-  } else { prev.classList.remove('show'); }
+  } else {
+    prev.classList.remove('show');
+  }
 };
 
 // ── HELPERS ────────────────────────────────────────────────
@@ -574,39 +575,38 @@ function fmtDate(ts){if(!ts)return '';try{const d=ts.toDate?ts.toDate():new Date
 function loadSec(sec){
   const m={dashboard:loadDash,packages:loadPkgs,gallery:loadGal,vehicles:loadVeh,testimonials:loadTst,bookings:loadBk,enquiries:loadEn,contactMessages:loadCm};
   if(m[sec]) m[sec]();
-  else console.warn('[Admin] Unknown section:',sec);
 }
 
 // ── DASHBOARD ──────────────────────────────────────────────
 async function loadDash(){
-  // Stat counts
+  // Stat counts for all 5 cards
   const cols=[['bookings','cB'],['enquiries','cE'],['contactMessages','cC'],['packages','cP'],['gallery','cG']];
   for(const [col,el] of cols){
-    try{const s=await getDocs(collection(db,col));const target=document.getElementById(el);if(target)target.textContent=s.size;}
-    catch(e){console.error('[Admin] Count error for',col,e);const target=document.getElementById(el);if(target)target.textContent='—';}
+    try{const s=await getDocs(collection(db,col));const t=document.getElementById(el);if(t)t.textContent=s.size;}
+    catch(e){const t=document.getElementById(el);if(t)t.textContent='—';}
   }
-  // Recent Bookings
+  // Recent Bookings widget
   const db_el=document.getElementById('dB');
   try{
-    const s=await getDocs(query(collection(db,'bookings'),orderBy('createdAt','desc'),limit(6)));
+    const s=await getDocs(query(collection(db,'bookings'),orderBy('createdAt','desc'),limit(5)));
     if(s.empty){db_el.innerHTML='<p style="font-size:12px;color:var(--t2)">No bookings yet.</p>';}
-    else{db_el.innerHTML=s.docs.map(d=>{const b=d.data();return`<div class="dr"><span style="font-weight:600">${b.name||'—'}</span><span style="color:var(--t2);font-size:11px">${b.packageType?.split(' — ')[0]||'—'}</span><span class="bdg bdg-${b.status||'pending'}">${b.status||'pending'}</span></div>`;}).join('');}
-  }catch(e){console.error('[Admin] Recent bookings error:',e);db_el.innerHTML='<p style="font-size:12px;color:var(--t2)">Error loading. Check Firebase rules.</p>';}
-  // Recent Enquiries
+    else{db_el.innerHTML=s.docs.map(d=>{const b=d.data();return`<div class="dr"><span style="font-weight:600">${b.name||'—'}</span><span style="color:var(--t2);font-size:11px">${(b.packageType||'—').split(' — ')[0]}</span><span class="bdg bdg-${b.status||'pending'}">${b.status||'pending'}</span></div>`;}).join('');}
+  }catch(e){db_el.innerHTML='<p style="font-size:12px;color:#ef4444">Error: '+e.message+'</p>';}
+  // Recent Enquiries widget
   const de_el=document.getElementById('dE');
   try{
-    const s=await getDocs(query(collection(db,'enquiries'),orderBy('createdAt','desc'),limit(6)));
+    const s=await getDocs(query(collection(db,'enquiries'),orderBy('createdAt','desc'),limit(5)));
     if(s.empty){de_el.innerHTML='<p style="font-size:12px;color:var(--t2)">No enquiries yet.</p>';}
     else{de_el.innerHTML=s.docs.map(d=>{const e=d.data();return`<div class="dr"><span style="font-weight:600">${e.name||'—'}</span><span style="color:var(--t2);font-size:11px">${e.phone||'—'}</span><span class="bdg bdg-${e.status==='contacted'?'confirmed':'new'}">${e.status||'new'}</span></div>`;}).join('');}
-  }catch(e){console.error('[Admin] Recent enquiries error:',e);de_el.innerHTML='<p style="font-size:12px;color:var(--t2)">Error loading. Check Firebase rules.</p>';}
-  // Recent Contact Messages
+  }catch(e){de_el.innerHTML='<p style="font-size:12px;color:#ef4444">Error: '+e.message+'</p>';}
+  // Recent Contact Messages widget
   const dc_el=document.getElementById('dC');
   if(dc_el){
     try{
-      const s=await getDocs(query(collection(db,'contactMessages'),orderBy('createdAt','desc'),limit(6)));
+      const s=await getDocs(query(collection(db,'contactMessages'),orderBy('createdAt','desc'),limit(5)));
       if(s.empty){dc_el.innerHTML='<p style="font-size:12px;color:var(--t2)">No contact messages yet.</p>';}
-      else{dc_el.innerHTML=s.docs.map(d=>{const c=d.data();return`<div class="dr"><span style="font-weight:600">${c.name||'—'}</span><span style="color:var(--t2);font-size:11px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.message||c.phone||'—'}</span><span class="bdg bdg-${c.status==='contacted'?'confirmed':'new'}">${c.status||'new'}</span></div>`;}).join('');}
-    }catch(e){console.error('[Admin] Recent contact messages error:',e);dc_el.innerHTML='<p style="font-size:12px;color:var(--t2)">Error loading.</p>';}
+      else{dc_el.innerHTML=s.docs.map(d=>{const c=d.data();return`<div class="dr"><span style="font-weight:600">${c.name||'—'}</span><span style="color:var(--t2);font-size:11px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.message||c.phone||'—'}</span><span class="bdg bdg-${c.status==='contacted'?'confirmed':'new'}">${c.status||'new'}</span></div>`;}).join('');}
+    }catch(e){dc_el.innerHTML='<p style="font-size:12px;color:#ef4444">Error: '+e.message+'</p>';}
   }
 }
 
@@ -616,13 +616,11 @@ async function loadPkgs(){
   const tb=document.getElementById('pkgBody');
   tb.innerHTML='<tr><td colspan="7" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr>';
   try{const s=await getDocs(query(collection(db,'packages'),orderBy('order','asc')));pkgCache=[];s.forEach(d=>pkgCache.push({id:d.id,...d.data()}));}
-  catch(e){console.error('[Admin] loadPkgs error:',e);pkgCache=[];tb.innerHTML='<tr><td colspan="7" style="padding:20px;color:#ef4444;font-size:12px">❌ Error: '+e.message+'</td></tr>';return;}
+  catch(e){pkgCache=[];}
   document.getElementById('pkgCnt').textContent='('+pkgCache.length+')';
   if(!pkgCache.length){tb.innerHTML='<tr><td colspan="7" class="empty-row"><i class="fas fa-compass"></i>No packages yet. Add your first tour!</td></tr>';return;}
-  tb.innerHTML=pkgCache.map(p=>{
-    const src=normaliseImgUrl(p.image||'');
-    return`<tr>
-    <td>${src?`<img src="${src}" class="thumb" onerror="console.error('[Admin] Pkg thumb failed: ${src.replace(/"/g,'')}');this.style.display='none'" alt=""/>`:'—'}</td>
+  tb.innerHTML=pkgCache.map(p=>`<tr>
+    <td>${p.image?`<img src="${normaliseImgUrl(p.image)}" class="thumb" onerror="this.style.display='none'" alt=""/>`:'—'}</td>
     <td style="font-weight:600;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.title||'—'}</td>
     <td><span class="bdg bdg-${p.category||'luxury'}">${p.category||'—'}</span></td>
     <td style="color:var(--t2);white-space:nowrap">${p.duration||'—'}</td>
@@ -632,7 +630,7 @@ async function loadPkgs(){
       <button class="ab ab-e" onclick="openPkgModal('${p.id}')" title="Edit"><i class="fas fa-edit"></i></button>
       <button class="ab ab-d" onclick="delRec('packages','${p.id}',loadPkgs)" title="Delete"><i class="fas fa-trash"></i></button>
     </div></td>
-  </tr>`;}).join('');
+  </tr>`).join('');
 }
 window.openPkgModal=function(id){
   clr(['pkgId','pkgTitle','pkgDur','pkgGrp','pkgPrice','pkgOld','pkgBdgTxt','pkgImg','pkgDesc','pkgInc','pkgItin','pkgOrder']);
@@ -643,7 +641,7 @@ window.openPkgModal=function(id){
     sv('pkgGrp',p.groupSize);sv('pkgPrice',p.price);sv('pkgOld',p.oldPrice);
     sv('pkgBadge',p.badge||'');sv('pkgBdgTxt',p.bdgText);sv('pkgImg',p.image);sv('pkgDesc',p.description);
     sv('pkgInc',(p.includes||[]).join(', '));sv('pkgItin',(p.itinerary||[]).join('\n'));sv('pkgOrder',p.order||1);
-    if(p.image){const pr=document.getElementById('pkgImgP');pr.src=normaliseImgUrl(p.image);pr.classList.add('show');pr.onerror=()=>{console.error('[Admin] Pkg preview failed:',p.image);pr.classList.remove('show');};}
+    if(p.image){const pr=document.getElementById('pkgImgP');pr.src=p.image;pr.classList.add('show');}
     document.getElementById('pkgMTitle').textContent='Edit Package';
   } else { document.getElementById('pkgMTitle').textContent='Add Tour Package'; }
   openMov('pkgMov');
@@ -661,41 +659,22 @@ window.savePkg=async function(){
     if(id) await updateDoc(doc(db,'packages',id),data);
     else{data.createdAt=serverTimestamp();await addDoc(collection(db,'packages'),data);}
     toast(id?'Package updated!':'Package added!','ok');closeMov('pkgMov');loadPkgs();
-  }catch(e){console.error('[Admin] savePkg error:',e);toast('Error: '+e.message,'err');}
+  }catch(e){toast('Error: '+e.message,'err');}
 };
 
 // ── GALLERY ────────────────────────────────────────────────
-// Helper: normalise any image URL (Cloudinary, Unsplash, Google Drive)
-function normaliseImgUrl(url){
-  if(!url) return '';
-  // Google Drive: convert share link to direct
-  const gd=url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
-  if(gd) return 'https://drive.google.com/uc?export=view&id='+gd[1];
-  // Cloudinary: already a delivery URL — use as-is
-  // Unsplash: already a delivery URL — use as-is
-  return url.trim();
-}
 let galCache=[];
 async function loadGal(){
   const grid=document.getElementById('agrid');
   grid.innerHTML='<p style="padding:18px;color:var(--t2);font-size:12px"><i class="fas fa-spinner fa-spin"></i> Loading...</p>';
-  try{
-    const s=await getDocs(query(collection(db,'gallery'),orderBy('order','asc')));
-    galCache=[];
-    s.forEach(d=>galCache.push({id:d.id,...d.data()}));
-  }catch(e){
-    console.error('[Admin] Gallery load error:',e);
-    galCache=[];
-    grid.innerHTML='<p style="padding:18px;color:#ef4444;font-size:12px">❌ Failed to load gallery. Check Firestore rules: <code>allow read: if request.auth != null</code></p>';
-    return;
-  }
+  try{const s=await getDocs(query(collection(db,'gallery'),orderBy('order','asc')));galCache=[];s.forEach(d=>galCache.push({id:d.id,...d.data()}));}
+  catch(e){galCache=[];}
   document.getElementById('galCnt').textContent='('+galCache.length+')';
   if(!galCache.length){grid.innerHTML='<p style="padding:18px;color:var(--t2);font-size:12px">No images yet. Click "Add Image" to get started.</p>';return;}
   grid.innerHTML=galCache.map(img=>{
     const src=normaliseImgUrl(img.url||'');
     return`<div class="ag-item">
-      <img src="${src}" alt="${img.caption||''}"
-        onerror="console.error('[Admin] Image failed to load: ${src.replace(/'/g,'').replace(/"/g,'')}');this.src='https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=400';this.style.opacity='.5'"/>
+      <img src="${src}" alt="${img.caption||''}" onerror="this.src='https://images.unsplash.com/photo-1598091383021-15ddea10925d?w=400';console.error('Gallery thumb failed:','${src.replace(/'/g,'').replace(/"/g,'').substring(0,80)}')"/>
       <div class="ag-acts">
         <button class="ab ab-e" onclick="openGalModal('${img.id}')" title="Edit"><i class="fas fa-edit"></i></button>
         <button class="ab ab-d" onclick="delRec('gallery','${img.id}',loadGal)" title="Delete"><i class="fas fa-trash"></i></button>
@@ -709,7 +688,7 @@ window.openGalModal=function(id){
   if(id){
     const img=galCache.find(x=>x.id===id);if(!img)return;
     sv('galId',id);sv('galUrl',img.url);sv('galCap',img.caption);sv('galCat',img.category);sv('galOrder',img.order||1);
-    if(img.url){const p=document.getElementById('galImgP');p.src=normaliseImgUrl(img.url);p.classList.add('show');p.onerror=()=>{console.error('[Admin] Preview failed:',img.url);p.classList.remove('show');};}
+    if(img.url){const p=document.getElementById('galImgP');p.src=normaliseImgUrl(img.url);p.classList.add('show');p.onerror=()=>{console.error('Preview failed:',img.url);p.classList.remove('show');};}
     document.getElementById('galMTitle').textContent='Edit Gallery Image';
   } else { document.getElementById('galMTitle').textContent='Add Gallery Image'; }
   openMov('galMov');
@@ -722,7 +701,7 @@ window.saveGal=async function(){
     if(id) await updateDoc(doc(db,'gallery',id),data);
     else{data.createdAt=serverTimestamp();await addDoc(collection(db,'gallery'),data);}
     toast(id?'Image updated!':'Image added!','ok');closeMov('galMov');loadGal();
-  }catch(e){console.error('[Admin] saveGal error:',e);toast('Error: '+e.message,'err');}
+  }catch(e){toast('Error: '+e.message,'err');}
 };
 
 // ── VEHICLES ───────────────────────────────────────────────
@@ -731,19 +710,17 @@ async function loadVeh(){
   const tb=document.getElementById('vehBody');
   tb.innerHTML='<tr><td colspan="7" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr>';
   try{const s=await getDocs(query(collection(db,'vehicles'),orderBy('order','asc')));vehCache=[];s.forEach(d=>vehCache.push({id:d.id,...d.data()}));}
-  catch(e){console.error('[Admin] loadVeh error:',e);tb.innerHTML='<tr><td colspan="7" style="padding:20px;color:#ef4444;font-size:12px">❌ Error: '+e.message+'</td></tr>';return;}
+  catch(e){vehCache=[];}
   if(!vehCache.length){tb.innerHTML='<tr><td colspan="7" class="empty-row"><i class="fas fa-car"></i>No vehicles yet.</td></tr>';return;}
-  tb.innerHTML=vehCache.map(v2=>{
-    const src=normaliseImgUrl(v2.image||'');
-    return`<tr>
-    <td>${src?`<img src="${src}" class="thumb" onerror="console.error('[Admin] Veh thumb failed: ${src.replace(/"/g,'')}');this.style.display='none'" alt=""/>`:'—'}</td>
+  tb.innerHTML=vehCache.map(v2=>`<tr>
+    <td>${v2.image?`<img src="${normaliseImgUrl(v2.image)}" class="thumb" onerror="this.style.display='none'" alt=""/>`:'—'}</td>
     <td style="font-weight:600">${v2.name||'—'}</td>
     <td style="color:var(--t2)">${v2.sub||'—'}</td>
     <td style="font-weight:600;color:var(--navy)">${v2.price||'—'}</td>
     <td>${v2.featured?'<span class="bdg bdg-confirmed">Yes</span>':'<span class="bdg">No</span>'}</td>
     <td style="color:var(--t2)">${v2.order||1}</td>
     <td><div class="acts"><button class="ab ab-e" onclick="openVehModal('${v2.id}')"><i class="fas fa-edit"></i></button><button class="ab ab-d" onclick="delRec('vehicles','${v2.id}',loadVeh)"><i class="fas fa-trash"></i></button></div></td>
-  </tr>`;}).join('');
+  </tr>`).join('');
 }
 window.openVehModal=function(id){
   clr(['vehId','vehName','vehSub','vehImg','vehIco','vehSpecs','vehPrice','vehNote','vehOrder']);
@@ -753,7 +730,7 @@ window.openVehModal=function(id){
     sv('vehId',id);sv('vehName',v2.name);sv('vehSub',v2.sub);sv('vehImg',v2.image);sv('vehIco',v2.icon);
     sv('vehSpecs',(v2.specs||[]).join(', '));sv('vehPrice',v2.price);sv('vehNote',v2.priceNote);
     sv('vehFeat',String(!!v2.featured));sv('vehOrder',v2.order||1);
-    if(v2.image){const p=document.getElementById('vehImgP');p.src=normaliseImgUrl(v2.image);p.classList.add('show');p.onerror=()=>{console.error('[Admin] Veh preview failed:',v2.image);p.classList.remove('show');};}
+    if(v2.image){const p=document.getElementById('vehImgP');p.src=v2.image;p.classList.add('show');}
     document.getElementById('vehMTitle').textContent='Edit Vehicle';
   } else { document.getElementById('vehMTitle').textContent='Add Vehicle'; }
   openMov('vehMov');
@@ -769,7 +746,7 @@ window.saveVeh=async function(){
     if(id) await updateDoc(doc(db,'vehicles',id),data);
     else{data.createdAt=serverTimestamp();await addDoc(collection(db,'vehicles'),data);}
     toast('Vehicle saved!','ok');closeMov('vehMov');loadVeh();
-  }catch(e){console.error('[Admin] saveVeh error:',e);toast('Error: '+e.message,'err');}
+  }catch(e){toast('Error: '+e.message,'err');}
 };
 
 // ── TESTIMONIALS ───────────────────────────────────────────
@@ -824,15 +801,8 @@ let bkCache=[];
 async function loadBk(){
   const tb=document.getElementById('bkBody');
   tb.innerHTML='<tr><td colspan="8" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr>';
-  try{
-    const s=await getDocs(query(collection(db,'bookings'),orderBy('createdAt','desc')));
-    bkCache=[];s.forEach(d=>bkCache.push({id:d.id,...d.data()}));
-  }catch(e){
-    console.error('[Admin] loadBk error:',e);
-    bkCache=[];
-    tb.innerHTML='<tr><td colspan="8" style="padding:20px;color:#ef4444;font-size:12px">❌ Error loading bookings: '+e.message+'<br>Check Firestore security rules.</td></tr>';
-    return;
-  }
+  try{const s=await getDocs(query(collection(db,'bookings'),orderBy('createdAt','desc')));bkCache=[];s.forEach(d=>bkCache.push({id:d.id,...d.data()}));}
+  catch(e){bkCache=[];}
   document.getElementById('bkCnt').textContent='('+bkCache.length+')';
   renderBk(bkCache);
 }
@@ -868,15 +838,8 @@ let enCache=[];
 async function loadEn(){
   const tb=document.getElementById('enBody');
   tb.innerHTML='<tr><td colspan="7" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr>';
-  try{
-    const s=await getDocs(query(collection(db,'enquiries'),orderBy('createdAt','desc')));
-    enCache=[];s.forEach(d=>enCache.push({id:d.id,...d.data()}));
-  }catch(e){
-    console.error('[Admin] loadEn error:',e);
-    enCache=[];
-    tb.innerHTML='<tr><td colspan="7" style="padding:20px;color:#ef4444;font-size:12px">❌ Error loading enquiries: '+e.message+'<br>Check Firestore security rules.</td></tr>';
-    return;
-  }
+  try{const s=await getDocs(query(collection(db,'enquiries'),orderBy('createdAt','desc')));enCache=[];s.forEach(d=>enCache.push({id:d.id,...d.data()}));}
+  catch(e){enCache=[];}
   document.getElementById('enCnt').textContent='('+enCache.length+')';
   renderEn(enCache);
 }
@@ -903,24 +866,22 @@ function renderEn(data){
 }
 document.getElementById('enSearch').addEventListener('input',function(){
   const q=this.value.toLowerCase();
-  renderEn(enCache.filter(e=>`${e.name}${e.phone}${e.email}`.toLowerCase().includes(q)));
+  renderEn(enCache.filter(e=>`${e.name||''}${e.phone||''}${e.email||''}`.toLowerCase().includes(q)));
 });
 
 // ── CONTACT MESSAGES ───────────────────────────────────────
 let cmCache=[];
 async function loadCm(){
   const tb=document.getElementById('cmBody');
-  if(!tb){console.error('[Admin] cmBody element not found');return;}
   tb.innerHTML='<tr><td colspan="8" class="loading-row"><i class="fas fa-spinner fa-spin"></i></td></tr>';
   try{
     const s=await getDocs(query(collection(db,'contactMessages'),orderBy('createdAt','desc')));
     cmCache=[];
     s.forEach(d=>cmCache.push({id:d.id,...d.data()}));
-    console.log('[Admin] contactMessages loaded:',cmCache.length,'records');
   }catch(e){
-    console.error('[Admin] loadCm error:',e);
+    console.error('loadCm error:',e);
     cmCache=[];
-    tb.innerHTML='<tr><td colspan="8" style="padding:20px;color:#ef4444;font-size:12px">❌ Error loading contact messages: '+e.message+'<br>Make sure Firestore collection <strong>contactMessages</strong> exists and rules allow admin read.</td></tr>';
+    tb.innerHTML='<tr><td colspan="8" style="padding:20px;color:#ef4444;font-size:12px;text-align:center">❌ '+e.message+'<br><small>Ensure Firestore collection <strong>contactMessages</strong> exists and rules allow admin read.</small></td></tr>';
     return;
   }
   document.getElementById('cmCnt').textContent='('+cmCache.length+')';
@@ -933,17 +894,19 @@ function renderCm(data){
     return;
   }
   tb.innerHTML=data.map(c=>{
-    const ts=c.createdAt?.toDate?c.createdAt.toDate().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
-    const safeC=JSON.stringify(c).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    const ts=c.createdAt?.toDate
+      ?c.createdAt.toDate().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})
+      :'—';
+    const safeRec=JSON.stringify(c).replace(/\\/g,'\\\\').replace(/"/g,'&quot;');
     return`<tr>
       <td style="font-weight:600">${c.name||'—'}</td>
       <td><a href="tel:${c.phone||''}" style="color:var(--sky)">${c.phone||'—'}</a></td>
       <td style="color:var(--t2);font-size:11px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.email||'—'}</td>
       <td style="font-size:12px;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.package||'—'}</td>
-      <td style="font-size:12px;color:var(--t2);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${(c.message||'').replace(/"/g,'&quot;')}">${c.message||'—'}</td>
+      <td style="font-size:12px;color:var(--t2);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${(c.message||'').replace(/"/g,'&quot;')}">${c.message||'—'}</td>
       <td style="color:var(--t2);white-space:nowrap;font-size:11px">${ts}</td>
       <td><select class="ssel" onchange="updStatus('contactMessages','${c.id}',this.value)">
-        <option value="new" ${c.status==='new'?'selected':''}>New</option>
+        <option value="new" ${(c.status||'new')==='new'?'selected':''}>New</option>
         <option value="contacted" ${c.status==='contacted'?'selected':''}>Contacted</option>
         <option value="done" ${c.status==='done'?'selected':''}>Done</option>
       </select></td>
@@ -962,28 +925,20 @@ document.getElementById('cmSearch').addEventListener('input',function(){
 
 // ── SHARED CRUD ────────────────────────────────────────────
 window.updStatus=async function(col,id,status){
-  try{
-    await updateDoc(doc(db,col,id),{status,updatedAt:serverTimestamp()});
-    toast('Status updated','ok');
-    console.log('[Admin] Status updated:',col,id,'→',status);
-  }catch(e){console.error('[Admin] updStatus error:',col,id,e);toast('Error: '+e.message,'err');}
+  try{await updateDoc(doc(db,col,id),{status,updatedAt:serverTimestamp()});toast('Status updated','ok');}
+  catch(e){toast('Error: '+e.message,'err');}
 };
 window.delRec=async function(col,id,reload){
   if(!confirm('Delete this record permanently?')) return;
-  try{
-    await deleteDoc(doc(db,col,id));
-    toast('Deleted','ok');
-    console.log('[Admin] Deleted:',col,id);
-    reload?.();
-  }catch(e){console.error('[Admin] delRec error:',col,id,e);toast('Error: '+e.message,'err');}
+  try{await deleteDoc(doc(db,col,id));toast('Deleted','ok');reload?.();}
+  catch(e){toast('Error: '+e.message,'err');}
 };
 window.viewRec=function(rec){
   const skip=['id'];
   document.getElementById('viewBody').innerHTML='<table style="width:100%;border-collapse:collapse">'+
-    Object.entries(rec).filter(([k])=>!skip.includes(k)).map(([k,val])=>{
-      let display=val?.toDate?val.toDate().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):Array.isArray(val)?val.join(', '):(String(val||'—'));
-      return`<tr style="border-bottom:1px solid #f1f5f9"><td style="padding:6px 0;font-weight:600;color:var(--text);width:140px;text-transform:capitalize;font-size:11px;letter-spacing:.5px">${k.replace(/([A-Z])/g,' $1').replace(/^./,s=>s.toUpperCase())}</td><td style="padding:6px 0;color:var(--t2);word-break:break-word">${display}</td></tr>`;
-    }).join('')+'</table>';
+    Object.entries(rec).filter(([k])=>!skip.includes(k)).map(([k,val])=>
+      `<tr style="border-bottom:1px solid #f1f5f9"><td style="padding:6px 0;font-weight:600;color:var(--text);width:140px;text-transform:capitalize;font-size:11px;letter-spacing:.5px">${k.replace(/([A-Z])/g,' $1').replace(/^./,s=>s.toUpperCase())}</td><td style="padding:6px 0;color:var(--t2)">${val?.toDate?val.toDate().toLocaleDateString('en-IN'):Array.isArray(val)?val.join(', '):(String(val||'—'))}</td></tr>`
+    ).join('')+'</table>';
   openMov('viewMov');
 };
 
