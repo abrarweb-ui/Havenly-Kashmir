@@ -418,8 +418,8 @@ Package: ${data.packageType}
 Accommodation: ${data.accommodation}
 Special Request: ${data.requests || 'No request'}`;
 
-  document.getElementById('bl').innerHTML =
-  '<div style="grid-column:span 2"><div class="sw"><i class="fas fa-check-circle"></i><h2>Enquiry Sent!</h2><p>Your booking enquiry has been received and saved. Our team will call you at <strong>'+data.phone+'</strong> within 2 hours.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px"><a href="https://wa.me/919103269575?text='+encodeURIComponent(waText)+'" target="_blank" class="btn btn-wa"><i class="fab fa-whatsapp"></i> Also Send on WhatsApp</a><a href="tours.html" class="btn btn-og">View More Packages</a></div></div></div>';
+  document.getElementById('bl').innerHTML = '<div style="grid-column:span 2"><div class="sw"><i class="fas fa-spinner fa-spin" style="color:var(--gold)"></i><p>Redirecting...</p></div></div>';
+  setTimeout(function(){ window.location.href = 'thankyou.html'; }, 800);
 });
 </script>
 
