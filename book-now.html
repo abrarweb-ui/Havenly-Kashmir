@@ -342,7 +342,8 @@ let db=null;
 try{
   const app=initializeApp(fbCfg);
   db=getFirestore(app);
-}catch(e){console.log(e);}
+  console.log('[BookNow] Firebase initialised OK');
+}catch(e){console.error('[BookNow] Firebase init failed:',e);}
 
 /* URL prefill */
 var urlP=new URLSearchParams(location.search);
@@ -392,13 +393,16 @@ document.getElementById('bform').addEventListener('submit',async function(e){
 
   try{
     if(db){
-      await addDoc(collection(db,'bookings'),{
+      const ref=await addDoc(collection(db,'bookings'),{
         ...data,
         createdAt:serverTimestamp()
       });
+      console.log('[BookNow] Booking saved to Firestore with ID:',ref.id);
+    } else {
+      console.warn('[BookNow] Firestore not ready — booking NOT saved to Firebase.');
     }
   }catch(error){
-    console.error('Booking error:',error);
+    console.error('[BookNow] Firestore write failed:',error.code,error.message);
   }
 
   var waText =
