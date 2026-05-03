@@ -342,8 +342,7 @@ let db=null;
 try{
   const app=initializeApp(fbCfg);
   db=getFirestore(app);
-  console.log('[BookNow] Firebase initialised OK');
-}catch(e){console.error('[BookNow] Firebase init failed:',e);}
+}catch(e){console.log(e);}
 
 /* URL prefill */
 var urlP=new URLSearchParams(location.search);
@@ -393,16 +392,13 @@ document.getElementById('bform').addEventListener('submit',async function(e){
 
   try{
     if(db){
-      const ref=await addDoc(collection(db,'bookings'),{
+      await addDoc(collection(db,'bookings'),{
         ...data,
         createdAt:serverTimestamp()
       });
-      console.log('[BookNow] Booking saved to Firestore with ID:',ref.id);
-    } else {
-      console.warn('[BookNow] Firestore not ready — booking NOT saved to Firebase.');
     }
   }catch(error){
-    console.error('[BookNow] Firestore write failed:',error.code,error.message);
+    console.error('Booking error:',error);
   }
 
   var waText =
@@ -423,9 +419,7 @@ Accommodation: ${data.accommodation}
 Special Request: ${data.requests || 'No request'}`;
 
   document.getElementById('bl').innerHTML =
-  '<div style="grid-column:span 2"><div class="sw"><i class="fas fa-check-circle"></i><h2>Enquiry Sent!</h2><p>Your booking enquiry has been received. Our team will call you at <strong>'+data.phone+'</strong> within 2 hours.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px"><a href="https://wa.me/919103269575?text='+encodeURIComponent(waText)+'" target="_blank" class="btn btn-wa"><i class="fab fa-whatsapp"></i> Send on WhatsApp</a><a href="tours.html" class="btn btn-og">View More Packages</a></div></div></div>';
-
-  window.open('https://wa.me/919103269575?text='+encodeURIComponent(waText),'_blank');
+  '<div style="grid-column:span 2"><div class="sw"><i class="fas fa-check-circle"></i><h2>Enquiry Sent!</h2><p>Your booking enquiry has been received and saved. Our team will call you at <strong>'+data.phone+'</strong> within 2 hours.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px"><a href="https://wa.me/919103269575?text='+encodeURIComponent(waText)+'" target="_blank" class="btn btn-wa"><i class="fab fa-whatsapp"></i> Also Send on WhatsApp</a><a href="tours.html" class="btn btn-og">View More Packages</a></div></div></div>';
 });
 </script>
 
