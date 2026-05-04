@@ -1333,5 +1333,28 @@ loadP();
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4B9ZDRV"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  // 📞 Track all phone clicks
+  document.querySelectorAll("a[href^='tel:']").forEach(function(el) {
+    el.addEventListener("click", function() {
+      gtag('event', 'conversion', {
+        'send_to': 'AW-18086930292/tlEsCIedvaccEPTOwrBD'
+      });
+    });
+  });
+
+  // 💬 (Optional) Track WhatsApp clicks
+  document.querySelectorAll("a[href*='wa.me']").forEach(function(el) {
+    el.addEventListener("click", function() {
+      gtag('event', 'conversion', {
+        'send_to': 'AW-18086930292/tlEsCIedvaccEPTOwrBD'
+      });
+    });
+  });
+
+});
+</script>
 </body>
 </html>
