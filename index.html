@@ -850,35 +850,146 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <section class="sec enq-section" id="enquiry" aria-label="Quick enquiry form">
   <div class="wrap">
     <div class="enq-inner">
+
       <div class="enq-left rv">
         <div class="lbl" style="color:var(--gold)">Quick Enquiry</div>
-        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(24px,3.8vw,40px);color:var(--white);margin-bottom:11px">Plan Your <em style="font-style:italic;color:var(--gold-light)">Kashmir Trip</em></h2>
-        <p>Fill in your details and our Kashmir travel expert will call you within 2 hours with a fully customised itinerary and transparent pricing.</p>
+
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(24px,3.8vw,40px);color:var(--white);margin-bottom:11px">
+          Plan Your <em style="font-style:italic;color:var(--gold-light)">Kashmir Trip</em>
+        </h2>
+
+        <p>
+          Fill in your details and our Kashmir travel expert will call you within 2 hours with a fully customised itinerary and transparent pricing.
+        </p>
+
         <div class="enq-contact">
-          <div class="enq-ci"><i class="fas fa-phone-alt" aria-hidden="true"></i><a href="tel:+918825034964">+91 88250 34964</a></div>
-          <div class="enq-ci"><i class="fab fa-whatsapp" aria-hidden="true"></i><a href="https://wa.me/919103269575">+91 91032 69575</a></div>
-          <div class="enq-ci"><i class="fas fa-envelope" aria-hidden="true"></i><a href="mailto:Sales.heavenlyhorizontours@gmail.com">Sales.heavenlyhorizontours@gmail.com</a></div>
-          <div class="enq-ci"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Mehjoor Nagar, Srinagar, J&amp;K 190001</span></div>
-          <div class="enq-ci"><i class="fas fa-clock" aria-hidden="true"></i><span>Mon–Sun: 8:00 AM – 10:00 PM</span></div>
+          <div class="enq-ci">
+            <i class="fas fa-phone-alt" aria-hidden="true"></i>
+            <a href="tel:+918825034964">+91 88250 34964</a>
+          </div>
+
+          <div class="enq-ci">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            <a href="https://wa.me/919103269575">+91 91032 69575</a>
+          </div>
+
+          <div class="enq-ci">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <a href="mailto:Sales.heavenlyhorizontours@gmail.com">
+              Sales.heavenlyhorizontours@gmail.com
+            </a>
+          </div>
+
+          <div class="enq-ci">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            <span>Mehjoor Nagar, Srinagar, J&amp;K 190001</span>
+          </div>
+
+          <div class="enq-ci">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+            <span>Mon–Sun: 8:00 AM – 10:00 PM</span>
+          </div>
         </div>
       </div>
+
       <div class="enq-card rv">
-        <h3 style="font-family:'Playfair Display',serif;font-size:clamp(18px,2.5vw,24px);color:var(--navy);margin-bottom:4px">Get a Free <em style="font-style:italic;color:var(--gold)">Quote</em></h3>
-        <p style="font-size:12px;color:var(--text2);margin-bottom:18px">Respond within 2 hours · 100% free &amp; no obligation</p>
-        <form id="enqForm" novalidate aria-label="Enquiry form">
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:clamp(18px,2.5vw,24px);color:var(--navy);margin-bottom:4px">
+          Get a Free <em style="font-style:italic;color:var(--gold)">Quote</em>
+        </h3>
+
+        <p style="font-size:12px;color:var(--text2);margin-bottom:18px">
+          Respond within 2 hours · 100% free &amp; no obligation
+        </p>
+
+        <!-- FORM START -->
+        <form
+          action="https://formsubmit.co/Sales.heavenlyhorizontours@gmail.com"
+          method="POST"
+          id="enqForm"
+          novalidate
+          aria-label="Enquiry form">
+
+          <!-- Hidden Settings -->
+          <input type="hidden" name="_subject" value="New Kashmir Trip Enquiry">
+          <input type="hidden" name="_captcha" value="false">
+
+          <!-- CHANGE DOMAIN -->
+          <input type="hidden" name="_next" value="https://heavenlyhorizontours.com/thankyou.html">
+
           <div class="ef-row">
-            <div class="ef-group"><label for="eName">Full Name *</label><input type="text" id="eName" name="name" placeholder="Your full name" required autocomplete="name"/></div>
-            <div class="ef-group"><label for="ePhone">Phone Number *</label><input type="tel" id="ePhone" name="phone" placeholder="+91 XXXXX XXXXX" required autocomplete="tel"/></div>
+
+            <div class="ef-group">
+              <label for="eName">Full Name *</label>
+              <input
+                type="text"
+                id="eName"
+                name="name"
+                placeholder="Your full name"
+                required
+                autocomplete="name"/>
+            </div>
+
+            <div class="ef-group">
+              <label for="ePhone">Phone Number *</label>
+              <input
+                type="tel"
+                id="ePhone"
+                name="phone"
+                placeholder="+91 XXXXX XXXXX"
+                required
+                autocomplete="tel"/>
+            </div>
+
           </div>
+
           <div class="ef-row">
-            <div class="ef-group"><label for="ePickup">Pickup Location</label><input type="text" id="ePickup" name="pickup" placeholder="e.g. Srinagar Airport, Delhi"/></div>
-            <div class="ef-group"><label for="eDrop">Drop Location</label><input type="text" id="eDrop" name="drop" placeholder="e.g. Dal Lake Houseboat"/></div>
+
+            <div class="ef-group">
+              <label for="ePickup">Pickup Location</label>
+              <input
+                type="text"
+                id="ePickup"
+                name="pickup"
+                placeholder="e.g. Srinagar Airport, Delhi"/>
+            </div>
+
+            <div class="ef-group">
+              <label for="eDrop">Drop Location</label>
+              <input
+                type="text"
+                id="eDrop"
+                name="drop"
+                placeholder="e.g. Dal Lake Houseboat"/>
+            </div>
+
           </div>
+
           <div class="ef-row">
-            <div class="ef-group"><label for="ePersons">Number of Persons</label><input type="number" id="ePersons" name="persons" placeholder="2" min="1"/></div>
-            <div class="ef-group"><label for="eDate">Travel Date</label><input type="date" id="eDate" name="travelDate"/></div>
+
+            <div class="ef-group">
+              <label for="ePersons">Number of Persons</label>
+              <input
+                type="number"
+                id="ePersons"
+                name="persons"
+                placeholder="2"
+                min="1"/>
+            </div>
+
+            <div class="ef-group">
+              <label for="eDate">Travel Date</label>
+              <input
+                type="date"
+                id="eDate"
+                name="travelDate"/>
+            </div>
+
           </div>
-          <div class="ef-group"><label for="ePkg">Package Interest</label>
+
+          <div class="ef-group">
+            <label for="ePkg">Package Interest</label>
+
             <select id="ePkg" name="package">
               <option value="">Select a package type</option>
               <option>Kashmir Honeymoon Package</option>
@@ -893,24 +1004,59 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <option>Custom Itinerary</option>
             </select>
           </div>
-          <div class="ef-group"><label for="eMsg">Your Message</label><textarea id="eMsg" name="message" rows="3" placeholder="Tell us about your dream Kashmir trip…"></textarea></div>
+
+          <div class="ef-group">
+            <label for="eMsg">Your Message</label>
+
+            <textarea
+              id="eMsg"
+              name="message"
+              rows="3"
+              placeholder="Tell us about your dream Kashmir trip…"></textarea>
+          </div>
+
           <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:4px">
-            <button type="submit" class="btn btn-gold" id="enqSubmit" style="flex:1;justify-content:center"><i class="fas fa-paper-plane" aria-hidden="true"></i> Send Enquiry</button>
-            <a href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20plan%20a%20Kashmir%20trip." target="_blank" rel="noopener noreferrer" class="btn btn-wa" style="flex:1;justify-content:center"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Us</a>
+
+            <button
+              type="submit"
+              class="btn btn-gold"
+              id="enqSubmit"
+              style="flex:1;justify-content:center">
+
+              <i class="fas fa-paper-plane" aria-hidden="true"></i>
+              Send Enquiry
+            </button>
+
+            <a
+              href="https://wa.me/919103269575?text=Hi!%20I%20want%20to%20plan%20a%20Kashmir%20trip."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-wa"
+              style="flex:1;justify-content:center">
+
+              <i class="fab fa-whatsapp" aria-hidden="true"></i>
+              WhatsApp Us
+            </a>
+
           </div>
-          <p id="enqErr" style="color:#ef4444;font-size:12px;margin-top:6px;display:none" role="alert">Please enter your name and phone number.</p>
-          <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:7px">Your details are 100% private &amp; secure</p>
+
+          <p
+            id="enqErr"
+            style="color:#ef4444;font-size:12px;margin-top:6px;display:none"
+            role="alert">
+
+            Please enter your name and phone number.
+          </p>
+
+          <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:7px">
+            Your details are 100% private &amp; secure
+          </p>
+
         </form>
-        <div style="display:none;text-align:center;padding:32px 16px" id="enqOk" role="status">
-          <i class="fas fa-check-circle" style="font-size:48px;color:#25D366;display:block;margin-bottom:12px" aria-hidden="true"></i>
-          <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:8px">Enquiry Sent!</h3>
-          <p style="color:var(--text2);font-size:14px;margin-bottom:18px">Our Kashmir expert will call you within 2 hours.</p>
-          <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-            <a href="https://wa.me/919103269575" target="_blank" rel="noopener noreferrer" class="btn btn-wa btn-sm"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Now</a>
-            <a href="tours.html" class="btn btn-og btn-sm">View Packages</a>
-          </div>
-        </div>
+        <!-- FORM END -->
+
       </div>
+
     </div>
   </div>
 </section>
